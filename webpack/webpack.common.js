@@ -39,6 +39,28 @@ const commonConfig = {
                         limit: 8192 // 小于 8kb 的图片转换为 base64 编码
                     }
                 }]
+            },
+            {
+                test: /\.css$/i,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
+                    // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: '[folder]__[local]--[hash:5]'
+                        }
+                    }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: ['postcss-preset-env']
+                        }
+                    }
+                }]
             }
         ]
     }

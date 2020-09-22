@@ -1,0 +1,11 @@
+.avatar {
+    width: 100px;
+}
+
+.logo {
+    width: 150px;
+}
+
+.title {
+    display: flex;
+}
