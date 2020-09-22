@@ -13,6 +13,12 @@ const commonConfig = {
         filename: 'bundle.js'
     },
 
+    resolve: {
+        alias: {
+            '@': srcPath
+        }
+    },
+
     module: {
         rules: [{
             test: /\.js$/,
