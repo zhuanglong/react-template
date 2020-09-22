@@ -41,7 +41,7 @@ const commonConfig = {
                 }]
             },
             {
-                test: /\.css$/i,
+                test: /\.less$/i,
                 use: [{
                     loader: 'style-loader'
                 }, {
@@ -60,6 +60,8 @@ const commonConfig = {
                             plugins: ['postcss-preset-env']
                         }
                     }
+                }, {
+                    loader: 'less-loader'
                 }]
             }
         ]
