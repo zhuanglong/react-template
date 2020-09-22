@@ -24,7 +24,9 @@ const devConfig = {
 
     resolve: {
         alias: {
-            'react-dom': '@hot-loader/react-dom' // 去除控制台"React-Hot-Loader:..."警告
+            // 去除控制台"React-Hot-Loader:..."警告
+            // https://github.com/gaearon/react-hot-loader/issues/1227#issuecomment-482139583
+            'react-dom': '@hot-loader/react-dom'
         }
     },
 
