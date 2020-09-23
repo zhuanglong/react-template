@@ -63,6 +63,28 @@ const commonConfig = {
                 }, {
                     loader: 'less-loader'
                 }]
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            localIdentName: '[folder]__[local]--[hash:5]'
+                        }
+                    }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: ['postcss-preset-env']
+                        }
+                    }
+                }, {
+                    loader: 'sass-loader'
+                }]
             }
         ]
     }

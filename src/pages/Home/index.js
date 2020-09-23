@@ -1,18 +1,18 @@
 import React from 'react';
 
 import logo from '@/assets/logo.jpg';
-import style from './style.less';
+import styles from './styles.less';
 
 class Home extends React.Component {
     render() {
         return (
             <div>
-                <div className={style.title}>
+                <div className={styles.title}>
                     hello
-                    <span className={style.subTitle}> React</span>
+                    <span className={styles.subTitle}> React</span>
                 </div>
-                <p><img className={style.avatar} src={require('@/assets/avatar.jpg').default} alt="" /></p>
-                <p><img className={style.logo} src={logo} alt="" /></p>
+                <p><img className={styles.avatar} src={require('@/assets/avatar.jpg').default} alt="" /></p>
+                <p><img className={styles.logo} src={logo} alt="" /></p>
             </div>
         );
     }
