@@ -1,4 +1,5 @@
 import React from 'react';
+import { hot } from 'react-hot-loader/root';
 
 class CounterState extends React.Component {
     constructor(props) {
@@ -21,4 +22,4 @@ class CounterState extends React.Component {
     }
 }
 
-export default CounterState;
+export default hot(CounterState);

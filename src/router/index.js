@@ -1,9 +1,10 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Home from '../pages/Home';
-import About from '../pages/About';
-import CounterState from '../pages/CounterState';
+import asyncComponent from './asyncComponent';
+import Home from '@/pages/Home';
+import About from '@/pages/About';
+const CounterState = asyncComponent(() => import(/* webpackChunkName: "CounterState" */'@/pages/CounterState'));
 
 function getRouter() {
     return (

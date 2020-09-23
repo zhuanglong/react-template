@@ -10,7 +10,8 @@ const commonConfig = {
 
     output: {
         path: distPath,
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        chunkFilename: '[name].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
     },
 
     resolve: {

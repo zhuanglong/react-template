@@ -10,6 +10,8 @@ const devConfig = {
     // none，不使用 webpack 的默认配置
     mode: 'none',
 
+    devtool: 'inline-source-map',
+
     entry: {
         app: [
             path.join(srcPath, 'index.js'),
