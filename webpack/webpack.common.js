@@ -1,5 +1,7 @@
 const path = require('path');
-const { srcPath, distPath } = require('./paths');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const { srcPath, distPath, publicPath } = require('./paths');
 
 const commonConfig = {
     entry: {
@@ -10,9 +12,17 @@ const commonConfig = {
 
     output: {
         path: distPath,
-        filename: 'bundle.js',
-        chunkFilename: '[name].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
+        filename: '[name].[hash].js', // name 是入口名称
+        chunkFilename: '[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
     },
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'react-template',
+            filename: 'index.html',
+            template: path.join(publicPath, 'index.html')
+        })
+    ],
 
     resolve: {
         alias: {
