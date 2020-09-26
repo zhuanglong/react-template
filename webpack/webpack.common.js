@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { srcPath, distPath, publicPath } = require('./paths');
@@ -21,7 +22,8 @@ const commonConfig = {
             title: 'react-template',
             filename: 'index.html',
             template: path.join(publicPath, 'index.html')
-        })
+        }),
+        new webpack.HashedModuleIdsPlugin()
     ],
 
     resolve: {
@@ -98,7 +100,22 @@ const commonConfig = {
                 }]
             }
         ]
-    }
+    },
+
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                verdor: {
+                    test: /[\\/]node_modules[\\/]/, // 这样写也可以 path.join(process.cwd(), 'node_modules')
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        },
+        runtimeChunk: {
+            name: 'runtime'
+        }
+    },
 };
 
 module.exports = commonConfig;

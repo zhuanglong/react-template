@@ -6,6 +6,8 @@ import getRouter from '@/router';
 
 renderWithHotReload(getRouter());
 
+console.log();
+
 if (module.hot) {
     module.hot.accept('@/router', () => {
         const getNextRouter = require('@/router').default;
