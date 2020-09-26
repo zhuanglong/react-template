@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const { srcPath, distPath, publicPath } = require('./paths');
 
@@ -18,12 +19,23 @@ const commonConfig = {
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            // https://www.cnblogs.com/usebtf/p/9912413.html
+            'process.env': {
+                PUBLIC_PATH: JSON.stringify('/')
+            }
+        }),
         new HtmlWebpackPlugin({
             title: 'react-template',
             filename: 'index.html',
             template: path.join(publicPath, 'index.html')
         }),
-        new webpack.HashedModuleIdsPlugin()
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: path.join(publicPath, 'favicon.ico'),
+                to: path.join(distPath, 'favicon.ico')
+            }]
+        })
     ],
 
     resolve: {
@@ -115,7 +127,7 @@ const commonConfig = {
         runtimeChunk: {
             name: 'runtime'
         }
-    },
+    }
 };
 
 module.exports = commonConfig;
