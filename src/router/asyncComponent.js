@@ -6,11 +6,8 @@ function Loading() {
 
 export default function asyncComponent(importComponent) {
     return class extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                component: null
-            }
+        state = {
+            component: null
         }
 
         componentDidMount() {
