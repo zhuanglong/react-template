@@ -75,6 +75,7 @@ const commonConfig = {
                 }]
             },
             {
+                // https://webpack.docschina.org/loaders/css-loader/#pure-css-css-modules-and-postcss
                 test: /\.less$/i,
                 use: [{
                     loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
@@ -127,6 +128,11 @@ const commonConfig = {
         // named 对应旧的 new webpack.NamedModulesPlugin() // 当开启 HMR 的时候，该插件会显示模块的相对路径
         // hashed 对应旧的 new webpack.HashedModuleIdsPlugin()
         moduleIds: isDev ? 'named' : 'hashed',
+
+        // 压缩 js
+        // mode: 'production' 会默认开启压缩，所以这里无需重复配置
+        // minimize: isDev,
+
         splitChunks: {
             cacheGroups: {
                 verdor: {

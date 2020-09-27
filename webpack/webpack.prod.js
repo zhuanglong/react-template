@@ -1,11 +1,13 @@
 const merge = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 const commonConfig = require('./webpack.common');
 
 const prodConfig = {
-    devtool: false, // 'cheap-module-source-map'
+    devtool: false, // 'source-map'
 
     plugins: [
         new MiniCssExtractPlugin({
@@ -13,7 +15,12 @@ const prodConfig = {
             chunkFilename: '[name].[chunkhash].css'
         }),
         new CleanWebpackPlugin()
-    ]
+    ],
+
+    optimization: {
+        // 压缩 css
+        minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsWebpackPlugin({})]
+    }
 };
 
 module.exports = merge(commonConfig, prodConfig);
