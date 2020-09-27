@@ -1,13 +1,13 @@
 import React from 'react';
-import './styles.scss';
+import styles from  './styles.scss';
 
 class About extends React.Component {
     render() {
         return (
             <div>
-                <div className="title">
+                <div className={styles.title}>
                     Hello
-                    <span className="subTitle"> Sass</span>
+                    <span className={styles.subTitle}> Sass</span>
                 </div>
             </div>
         );

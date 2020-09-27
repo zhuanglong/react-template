@@ -5,7 +5,15 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const { srcPath, distPath, publicPath } = require('./paths');
 
+// https://webpack.docschina.org/guides/production/#specify-the-mode
+// https://github.com/webpack/webpack/issues/2537
+// https://github.com/niexias/niexias.github.io/issues/7
+const isDev = process.env.NODE_ENV === 'development';
+
 const commonConfig = {
+    // https://webpack.docschina.org/configuration/mode/
+    mode: process.env.NODE_ENV,
+
     entry: {
         app: [
             path.join(srcPath, 'index.js')
@@ -115,6 +123,9 @@ const commonConfig = {
     },
 
     optimization: {
+        // named 对应旧的 new webpack.NamedModulesPlugin() // 当开启 HMR 的时候，该插件会显示模块的相对路径
+        // hashed 对应旧的 new webpack.HashedModuleIdsPlugin()
+        moduleIds: isDev ? 'named' : 'hashed',
         splitChunks: {
             cacheGroups: {
                 verdor: {

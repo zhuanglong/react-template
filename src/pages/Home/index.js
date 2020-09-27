@@ -3,6 +3,8 @@ import React from 'react';
 import logo from '@/assets/logo.jpg';
 import styles from './styles.less';
 
+// import test from '@/test';
+
 class Home extends React.Component {
     render() {
         return (

@@ -6,10 +6,6 @@ const { distPath, srcPath } = require('./paths');
 const commonConfig = require('./webpack.common');
 
 const devConfig = {
-    // https://webpack.docschina.org/configuration/mode/
-    // none，不使用 webpack 的默认配置
-    mode: 'none',
-
     devtool: 'inline-source-map',
 
     entry: {
@@ -20,7 +16,6 @@ const devConfig = {
     },
 
     plugins: [
-        new webpack.NamedModulesPlugin(), // 当开启 HMR 的时候，该插件会显示模块的相对路径
         new webpack.HotModuleReplacementPlugin()
     ],
 
