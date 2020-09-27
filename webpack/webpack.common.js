@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { srcPath, distPath, publicPath } = require('./paths');
 
@@ -76,7 +77,7 @@ const commonConfig = {
             {
                 test: /\.less$/i,
                 use: [{
-                    loader: 'style-loader'
+                    loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
                 }, {
                     // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
                     // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
@@ -100,7 +101,7 @@ const commonConfig = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [{
-                    loader: 'style-loader'
+                    loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
                 }, {
                     loader: 'css-loader',
                     options: {
