@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import styles from './styles.less';
 
+@hot
 class CounterState extends React.Component {
     constructor(props) {
         super(props);
@@ -27,4 +28,4 @@ class CounterState extends React.Component {
     }
 }
 
-export default hot(CounterState);
+export default CounterState;
