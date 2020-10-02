@@ -5,7 +5,7 @@ class About extends React.Component {
   render() {
     return (
       <div>
-        <div className={styles.title} >
+        <div className={styles.title}  >
           Hello
           <span className={styles.subTitle}> Sass</span>
         </div>
