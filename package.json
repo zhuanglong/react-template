@@ -6,9 +6,15 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js --progress --color",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
-    "lint": "eslint --ext .js src webpack",
-    "lint:fix": "eslint --fix --ext .js src webpack",
-    "lint:style": "stylelint --fix src/**/*.{less,scss}"
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint--fix": "npm run lint:js--fix && npm run lint:style--fix",
+    "lint:js": "eslint --ext .js src webpack",
+    "lint:js--fix": "eslint --fix --ext .js src webpack",
+    "lint:style": "stylelint src/**/*.{less,scss}",
+    "lint:style--fix": "stylelint --fix src/**/*.{less,scss}",
+    "precommit": "lint-staged",
+    "lint-staged:js": "eslint",
+    "lint-staged:style": "stylelint"
   },
   "author": "",
   "license": "ISC",
@@ -41,8 +47,10 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.5.0",
+    "husky": "^4.3.0",
     "less": "^3.12.2",
     "less-loader": "^7.0.1",
+    "lint-staged": "^10.4.0",
     "mini-css-extract-plugin": "^0.11.2",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^4.0.2",
@@ -67,5 +75,14 @@
     "Chrome > 31",
     "ff > 31",
     "ie >= 8"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "(src|webpack)/**/*.js": "npm run lint-staged:js",
+    "src/**/*.{less,scss}": "npm run lint-staged:style"
+  }
 }
