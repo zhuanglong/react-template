@@ -23,8 +23,8 @@ const commonConfig = {
 
   output: {
     path: distPath,
-    filename: '[name].[hash].js', // name 是入口名称
-    chunkFilename: '[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
+    filename: 'static/js/[name].[hash].js', // name 是入口名称
+    chunkFilename: 'static/js/[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
   },
 
   plugins: [
@@ -66,11 +66,12 @@ const commonConfig = {
         }]
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|svg)$/i,
         use: [{
           loader: 'url-loader',
           options: {
-            limit: 8192 // 小于 8kb 的图片转换为 base64 编码
+            limit: 8192, // 小于 8kb 的图片转换为 base64 编码
+            outputPath: 'static/image'
           }
         }]
       },

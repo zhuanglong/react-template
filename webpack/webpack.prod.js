@@ -12,8 +12,8 @@ const prodConfig = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[name].[chunkhash].css'
+      filename: 'static/css/[name].[hash].css',
+      chunkFilename: 'static/css/[name].[chunkhash].css'
     }),
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({
@@ -28,7 +28,13 @@ const prodConfig = {
     // minimize: true,
 
     // 压缩 css
-    minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsWebpackPlugin({})]
+    minimizer: [new TerserJSPlugin({
+      terserOptions: {
+        compress: {
+          drop_console: true // 清除 console
+        }
+      }
+    }), new OptimizeCssAssetsWebpackPlugin({})]
   }
 };
 
