@@ -129,10 +129,6 @@ const commonConfig = {
     // hashed 对应旧的 new webpack.HashedModuleIdsPlugin()
     moduleIds: isDev ? 'named' : 'hashed',
 
-    // 压缩 js
-    // mode: 'production' 会默认开启压缩，所以这里无需重复配置
-    // minimize: isDev,
-
     splitChunks: {
       cacheGroups: {
         verdor: {

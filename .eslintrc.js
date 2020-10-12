@@ -13,12 +13,11 @@ module.exports = {
   ],
 
   // JS 语言选项
-  // parserOptions: {
-  //     ecmaFeatures: {
-  //         // 支持 JSX 语法
-  //         jsx: true
-  //     }
-  // },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true // 支持 JSX 语法
+    }
+  },
 
   // 解决警告"Parsing error: Unexpected character '@'"
   parser: 'babel-eslint',

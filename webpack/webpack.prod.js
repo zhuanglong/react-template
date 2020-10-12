@@ -23,6 +23,10 @@ const prodConfig = {
   ],
 
   optimization: {
+    // 压缩 js
+    // mode 为 'production' 会默认开启压缩，这里无需重复配置
+    // minimize: true,
+
     // 压缩 css
     minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsWebpackPlugin({})]
   }
