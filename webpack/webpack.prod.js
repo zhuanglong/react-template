@@ -27,14 +27,18 @@ const prodConfig = {
     // mode 为 'production' 会默认开启压缩，这里无需重复配置
     // minimize: true,
 
-    // 压缩 css
-    minimizer: [new TerserJSPlugin({
-      terserOptions: {
-        compress: {
-          drop_console: true // 清除 console
+    minimizer: [
+      new TerserJSPlugin({
+        terserOptions: {
+          compress: {
+            drop_debugger: true, // 删除 debugger
+            drop_console: true // 删除 console
+          }
         }
-      }
-    }), new OptimizeCssAssetsWebpackPlugin({})]
+      }),
+      // 压缩 css
+      new OptimizeCssAssetsWebpackPlugin({})
+    ]
   }
 };
 

@@ -71,7 +71,8 @@ const commonConfig = {
           loader: 'url-loader',
           options: {
             limit: 8192, // 小于 8kb 的图片转换为 base64 编码
-            outputPath: 'static/image'
+            name: '[name].[hash:8].[ext]',
+            outputPath: 'static/image/'
           }
         }]
       },
@@ -86,7 +87,7 @@ const commonConfig = {
           loader: 'css-loader',
           options: {
             modules: {
-              localIdentName: '[folder]__[local]--[hash:5]'
+              localIdentName: '[folder]__[local]--[hash:8]'
             }
           }
         }, {
@@ -108,7 +109,7 @@ const commonConfig = {
           loader: 'css-loader',
           options: {
             modules: {
-              localIdentName: '[folder]__[local]--[hash:5]'
+              localIdentName: '[folder]__[local]--[hash:8]'
             }
           }
         }, {
@@ -137,6 +138,14 @@ const commonConfig = {
           name: 'vendor',
           chunks: 'all'
         }
+        // styles: {
+        //   test: /\.(scss|css)$/,
+        //   name: 'vendor',
+        //   chunks: 'all',
+        //   minChunks: 1,
+        //   reuseExistingChunk: true,
+        //   enforce: true
+        // }
       }
     },
     runtimeChunk: {
