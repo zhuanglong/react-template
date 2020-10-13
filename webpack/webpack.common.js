@@ -138,14 +138,6 @@ const commonConfig = {
           name: 'vendor',
           chunks: 'all'
         }
-        // styles: {
-        //   test: /\.(scss|css)$/,
-        //   name: 'vendor',
-        //   chunks: 'all',
-        //   minChunks: 1,
-        //   reuseExistingChunk: true,
-        //   enforce: true
-        // }
       }
     },
     runtimeChunk: {
