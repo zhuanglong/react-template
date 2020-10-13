@@ -11,7 +11,7 @@
       "import",
       {
         "libraryName": "antd",
-        "style": true
+        "style": true // true 为项目编译阶段，可以对引入的 antd 样式文件进行编译
       }
     ]
   ]

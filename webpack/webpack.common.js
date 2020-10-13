@@ -115,9 +115,8 @@ const commonConfig = {
           options: {
             lessOptions: {
               modifyVars: {
-                'primary-color': '#1DA57A',
-                'link-color': '#1DA57A',
-                'border-radius-base': '2px'
+                // https://ant.design/docs/react/customize-theme-cn
+                'primary-color': '#1DA57A'
               },
               javascriptEnabled: true // 在 less 中使用 JavaScript 表达式
             }
@@ -161,14 +160,6 @@ const commonConfig = {
           name: 'vendor',
           chunks: 'all'
         }
-        // styles: {
-        //   test: /\.(scss|css)$/,
-        //   name: 'vendor',
-        //   chunks: 'all',
-        //   minChunks: 1,
-        //   reuseExistingChunk: true,
-        //   enforce: true
-        // }
       }
     },
     runtimeChunk: {
