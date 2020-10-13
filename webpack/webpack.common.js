@@ -79,6 +79,7 @@ const commonConfig = {
       {
         // https://webpack.docschina.org/loaders/css-loader/#pure-css-css-modules-and-postcss
         test: /\.less$/i,
+        exclude: [/antd/],
         use: [{
           loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
         }, {
@@ -99,6 +100,28 @@ const commonConfig = {
           }
         }, {
           loader: 'less-loader'
+        }]
+      },
+      {
+        // 处理 antd 的样式
+        test: /\.less$/i,
+        include: [/antd/],
+        use: [{
+          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+        }, {
+          loader: 'css-loader'
+        }, {
+          loader: 'less-loader',
+          options: {
+            lessOptions: {
+              modifyVars: {
+                'primary-color': '#1DA57A',
+                'link-color': '#1DA57A',
+                'border-radius-base': '2px'
+              },
+              javascriptEnabled: true // 在 less 中使用 JavaScript 表达式
+            }
+          }
         }]
       },
       {
