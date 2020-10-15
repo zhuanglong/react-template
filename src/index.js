@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'mobx-react';
 
 import getRouter from '@/router';
+import stores from '@/stores';
 
 function renderWithHotReload(RootElement) {
   ReactDom.render(
     <AppContainer>
-      {RootElement}
+      <Provider {...stores}>
+        {RootElement}
+      </Provider>
     </AppContainer>,
     document.getElementById('app')
   );
