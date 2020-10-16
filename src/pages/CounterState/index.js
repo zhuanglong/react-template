@@ -16,7 +16,7 @@ class CounterState extends React.Component {
     return (
       <div>
         <div className={styles.title}>
-          State
+          State 计数：
           <span className={styles.count}>{this.state.count}</span>
         </div>
         <button type="button" onClick={() => this.setState((state) => ({ count: state.count - 1 }))}>-</button>

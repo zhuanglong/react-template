@@ -10,8 +10,8 @@ const devConfig = {
 
   entry: {
     app: [
-      path.join(srcPath, 'index.js'),
-      'react-hot-loader/patch'
+      // 'react-hot-loader/patch' // 貌似没什么作用
+      path.join(srcPath, 'index.js')
     ]
   },
 
