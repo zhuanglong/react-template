@@ -1,19 +1,29 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-import { inject, observer } from 'mobx-react';
+import { inject, Observer } from 'mobx-react';
 
 @hot
 @inject('counterStore')
-@observer
 class CounterMobx extends React.Component {
+  state = {
+    count: 0
+  };
+
   render() {
     const { counterStore } = this.props;
     return (
       <div>
         <div>
-          Count
-          <span>{counterStore.count}</span>
+          State 计数：
+          <span>{this.state.count}</span>
+        </div>
+        <button type="button" onClick={() => this.setState((state) => ({ count: state.count - 1 }))}>-</button>
+        <button type="button" onClick={() => this.setState((state) => ({ count: state.count + 1 }))}>+</button>
+        <button type="button" onClick={() => this.setState({ count: 0 })}>reset</button>
+        <br />
+        <div>
+          Mobx 计数：
+          <Observer>{() => <span>{counterStore.count}</span>}</Observer>
         </div>
         <button type="button" onClick={() => counterStore.decrement()}>-</button>
         <button type="button" onClick={() => counterStore.increment()}>+</button>

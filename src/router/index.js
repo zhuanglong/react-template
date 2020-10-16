@@ -5,11 +5,12 @@ import {
 
 import Home from '@/pages/Home';
 import About from '@/pages/About';
-import CounterMobx from '@/pages/CounterMobx';
+// import CounterState from '@/pages/CounterState';
+// import CounterMobx from '@/pages/CounterMobx';
 import asyncComponent from './asyncComponent';
 
 const CounterState = asyncComponent(() => import(/* webpackChunkName: "CounterState" */'@/pages/CounterState'));
-// const CounterMobx = asyncComponent(() => import(/* webpackChunkName: "CounterMobx" */'@/pages/CounterMobx'));
+const CounterMobx = asyncComponent(() => import(/* webpackChunkName: "CounterMobx" */'@/pages/CounterMobx'));
 
 function getRouter() {
   return (
