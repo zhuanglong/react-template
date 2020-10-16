@@ -40,7 +40,7 @@ module.exports = {
     'react/state-in-constructor': 0, // state 初始化应该在构造函数中
     'react/jsx-filename-extension': [1, { extensions: ['.js'] }], // 允许扩展名为".js"的使用"JSX"
     // 'react/jsx-wrap-multilines': 0, // 将多行 JSX 包装在括号中可以提高可读性
-    // 'react/prop-types': 0, // 防止在 React 组件定义中丢失 props 验证
+    'react/prop-types': 0, // 防止在 React 组件定义中丢失 props 验证
     // 'react/forbid-prop-types': [2, { forbid: ['any'] }], // 禁止某些 propTypes
     // 'react/jsx-one-expression-per-line': 0, // 将 JSX 中的每一行限制为一个表达式
 
