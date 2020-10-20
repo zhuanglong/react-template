@@ -21,10 +21,11 @@
   "repository": "https://github.com/zhuanglong/react-template",
   "dependencies": {
     "axios": "^0.20.0",
+    "dva": "^2.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-hot-loader": "^4.12.21"
+    "react-hot-loader": "^4.12.21",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
