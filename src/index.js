@@ -8,11 +8,11 @@ import stores from '@/stores';
 
 function renderWithHotReload(RootElement) {
   ReactDom.render(
-    <Provider {...stores}>
-      <AppContainer>
+    <AppContainer>
+      <Provider {...stores}>
         {RootElement}
-      </AppContainer>
-    </Provider>,
+      </Provider>
+    </AppContainer>,
     document.getElementById('app')
   );
 }
