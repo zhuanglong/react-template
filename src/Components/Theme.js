@@ -16,12 +16,16 @@ export const ThemeContext = React.createContext({
   toggleTheme: () => null
 });
 
-export const ThemeToggleButton = () => (
-  <ThemeContext.Consumer>
-    {({ theme, toggleTheme }) => (
-      <button type="button" onClick={toggleTheme}>
-        {theme.mode === 'light' ? '暗黑' : '高亮'}主题
-      </button>
-    )}
-  </ThemeContext.Consumer>
+export const withTheme = (Component) => (
+  (props) => (
+    <ThemeContext.Consumer>
+      {(contextProps) => <Component {...props} {...contextProps} />}
+    </ThemeContext.Consumer>
+  )
 );
+
+export const ThemeToggleButton = withTheme(({ theme, toggleTheme }) => (
+  <button type="button" onClick={toggleTheme}>
+    {theme.mode === 'light' ? '暗黑' : '高亮'}主题
+  </button>
+));

@@ -1,9 +1,11 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 
+import { withTheme } from '@/components/Theme';
 import styles from './styles.less';
 
 @hot
+@withTheme
 class CounterState extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class CounterState extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ background: this.props.theme.background }}>
         <div className={styles.title}>
           State 计数：
           <span className={styles.count}>{this.state.count}</span>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ThemeContext } from '@/Components/Theme';
+import { ThemeContext } from '@/components/Theme';
 import logo from '@/assets/logo.jpg';
 import styles from './styles.less';
 

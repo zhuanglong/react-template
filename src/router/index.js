@@ -3,7 +3,7 @@ import {
   HashRouter as Router, Switch, Route, Link
 } from 'react-router-dom';
 
-import { ThemeContext, ThemeToggleButton, themes } from '@/Components/Theme';
+import { ThemeContext, ThemeToggleButton, themes } from '@/components/Theme';
 
 import Home from '@/pages/Home';
 import About from '@/pages/About';
