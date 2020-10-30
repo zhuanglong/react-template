@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 export const themes = {
   light: {
@@ -16,13 +16,19 @@ export const ThemeContext = React.createContext({
   toggleTheme: () => null
 });
 
-export const withTheme = (Component) => (
-  (props) => (
-    <ThemeContext.Consumer>
-      {(contextProps) => <Component {...props} {...contextProps} />}
-    </ThemeContext.Consumer>
-  )
-);
+// export const withTheme = (Component) => (
+//   (props) => (
+//     <ThemeContext.Consumer>
+//       {(contextProps) => <Component {...props} {...contextProps} />}
+//     </ThemeContext.Consumer>
+//   )
+// );
+
+// 用 hook useContext 也能实现
+export const withTheme = (Component) => (props) => {
+  const contextProps = useContext(ThemeContext);
+  return <Component {...props} {...contextProps} />;
+};
 
 export const ThemeToggleButton = withTheme(({ theme, toggleTheme }) => (
   <button type="button" onClick={toggleTheme}>
