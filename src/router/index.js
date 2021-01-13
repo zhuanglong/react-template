@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  HashRouter as Router, Switch, Route, Link
+  HashRouter as Router, Link
 } from 'react-router-dom';
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 
 import Home from '@/pages/Home';
 import About from '@/pages/About';
@@ -19,11 +20,11 @@ function getRouter() {
           <li><Link to="/counterState">CounterState</Link></li>
         </ul>
         <hr />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/counterState" component={CounterState} />
-        </Switch>
+        <CacheSwitch>
+          <CacheRoute path="/" exact component={Home} />
+          <CacheRoute path="/about" component={About} />
+          <CacheRoute path="/counterState" component={CounterState} />
+        </CacheSwitch>
       </div>
     </Router>
   );
