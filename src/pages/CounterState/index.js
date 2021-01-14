@@ -1,9 +1,6 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
-
 import styles from './styles.less';
 
-@hot
 class CounterState extends React.Component {
   constructor(props) {
     super(props);
