@@ -103,7 +103,8 @@ const commonConfig = {
           options: {
             lessOptions: {
               plugins: [new LessPluginFunctions()]
-            }
+            },
+            additionalData: "@import '@/utils/hotcss/px2rem.less';"
           }
         }]
       },
@@ -126,7 +127,10 @@ const commonConfig = {
             }
           }
         }, {
-          loader: 'sass-loader'
+          loader: 'sass-loader',
+          options: {
+            additionalData: "@import '@/utils/hotcss/px2rem.scss';"
+          }
         }]
       }
     ]

@@ -1,6 +1,4 @@
 import '@/utils/hotcss/hotcss';
-// import '@/utils/hotcss/px2rem.scss';
-// import '@/utils/hotcss/px2rem.less';
 
 import React from 'react';
 import ReactDom from 'react-dom';
