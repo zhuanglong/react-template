@@ -11,10 +11,7 @@
     "lint:js": "eslint --ext .js src webpack",
     "lint:js--fix": "eslint --fix --ext .js src webpack",
     "lint:style": "stylelint src/**/*.{less,scss}",
-    "lint:style--fix": "stylelint --fix src/**/*.{less,scss}",
-    "precommit": "lint-staged",
-    "lint-staged:js": "eslint",
-    "lint-staged:style": "stylelint"
+    "lint:style--fix": "stylelint --fix src/**/*.{less,scss}"
   },
   "author": "",
   "license": "ISC",
@@ -78,11 +75,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
-  },
-  "lint-staged": {
-    "(src|webpack)/**/*.js": "npm run lint-staged:js",
-    "src/**/*.{less,scss}": "npm run lint-staged:style"
   }
 }
