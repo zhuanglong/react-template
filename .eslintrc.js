@@ -23,9 +23,9 @@ module.exports = {
   parser: 'babel-eslint',
 
   // 忽略检查的全局变量
-  // globals: {
-  //   process: true
-  // },
+  globals: {
+    hotcss: true
+  },
 
   // 自定义规则
   rules: {

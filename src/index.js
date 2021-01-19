@@ -6,6 +6,8 @@ import { AppContainer } from 'react-hot-loader';
 
 import getRouter from '@/router';
 
+hotcss.designWidth = 375;
+
 function renderWithHotReload(RootElement) {
   ReactDom.render(
     <AppContainer>
