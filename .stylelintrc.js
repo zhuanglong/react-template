@@ -6,5 +6,7 @@ module.exports = {
   ],
 
   // 自定义规则
-  rules: {}
+  rules: {
+    'property-no-unknown': null
+  }
 };
