@@ -10,8 +10,8 @@ const devConfig = {
 
   entry: {
     app: [
-      path.join(srcPath, 'index.js'),
-      'react-hot-loader/patch'
+      // 'react-hot-loader/patch' // 貌似没什么作用
+      path.join(srcPath, 'index.js')
     ]
   },
 
@@ -33,7 +33,15 @@ const devConfig = {
     open: false, // 自动打开浏览器
     compress: true, // 启用 gzip 压缩
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      // http://localhost:7001/api/getList => http://localhost:7001/getList
+      '/api': {
+        target: 'http://localhost:7001',
+        pathRewrite: { '^/api': '' },
+        changeOrigin: true // target 是域名的话，需要这个参数
+      }
+    }
   }
 };
 
