@@ -42,7 +42,7 @@ module.exports = {
     // 'react/jsx-wrap-multilines': 0, // 将多行 JSX 包装在括号中可以提高可读性
     'react/prop-types': 0, // 防止在 React 组件定义中丢失 props 验证
     // 'react/forbid-prop-types': [2, { forbid: ['any'] }], // 禁止某些 propTypes
-    // 'react/jsx-one-expression-per-line': 0, // 将 JSX 中的每一行限制为一个表达式
+    'react/jsx-one-expression-per-line': 0, // 将 JSX 中的每一行限制为一个表达式
 
     'import/no-extraneous-dependencies': [2, { optionalDependencies: true }], // 检查项目 import 的依赖是否符合 devDependencies 或 dependencies
     'import/no-unresolved': [2, { ignore: ['^@/'] }] // 路径别名

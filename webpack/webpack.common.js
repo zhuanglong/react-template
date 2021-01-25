@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LessPluginFunctions = require('less-plugin-functions');
 
 const { srcPath, distPath, publicPath } = require('./paths');
 
@@ -98,7 +99,12 @@ const commonConfig = {
             }
           }
         }, {
-          loader: 'less-loader'
+          loader: 'less-loader',
+          options: {
+            lessOptions: {
+              plugins: [new LessPluginFunctions()]
+            }
+          }
         }]
       },
       {
