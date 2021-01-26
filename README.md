@@ -2,23 +2,25 @@
 
 [我的项目实例](https://github.com/zhuanglong/react-template/tree/rem-layout)
 
-移动端布局可以用 [hotcss](https://github.com/imochen/hotcss)。
+移动端布局推荐 [hotcss](https://github.com/imochen/hotcss)
+
+## 用法
 
 **下载后放在 utils 目录**
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210118181432.png)
 
-**根据设计稿设置**
+**根据 UI 稿设置**
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210118181602.png)
 
-**Less 使用**
+**Less 用法**
 
 >注意：如果使用 less，则需要引入 less-plugin-functions，普通的 less 编译工具无法正常编译。
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210118181952.png)
 
-**Sass 使用**
+**Sass 用法**
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210118182200.png)
 
@@ -34,4 +36,16 @@
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210118184718.png)
 
-这样就可以不用 import px2rem.less 也能够使用 px2rem() 函数。
+这样就可以不用 import px2rem 也能够使用 px2rem() 函数。
+
+**在 JS 中调用**
+
+src\index.js
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210119104045.png)
+
+```
+style={{ width: `${hotcss.px2rem(150)}rem` }}
+```
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210119104730.png)
