@@ -10,7 +10,7 @@ class Home extends React.Component {
     return (
       <div>
         <div className={styles.title}>
-          Hello Hello
+          Hello
           <span className={styles.subTitle}> React</span>
         </div>
         <p><img className={styles.avatar} src={require('@/assets/avatar.jpg').default} alt="" /></p>
