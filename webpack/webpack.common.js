@@ -32,7 +32,7 @@ const commonConfig = {
     new webpack.DefinePlugin({
       // https://www.cnblogs.com/usebtf/p/9912413.html
       'process.env': {
-        PUBLIC_PATH: JSON.stringify('/')
+        PUBLIC_PATH: JSON.stringify('./')
       }
     }),
     new HtmlWebpackPlugin({
