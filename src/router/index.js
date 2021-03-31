@@ -8,6 +8,7 @@ import About from '@/pages/About';
 import asyncComponent from './asyncComponent';
 
 const CounterState = asyncComponent(() => import(/* webpackChunkName: "CounterState" */'@/pages/CounterState'));
+const Animation = asyncComponent(() => import(/* webpackChunkName: "Animation" */'@/pages/Animation'));
 
 function getRouter() {
   return (
@@ -17,12 +18,14 @@ function getRouter() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/counterState">CounterState</Link></li>
+          <li><Link to="/animation">Animation</Link></li>
         </ul>
         <hr />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/counterState" component={CounterState} />
+          <Route path="/animation" component={Animation} />
         </Switch>
       </div>
     </Router>

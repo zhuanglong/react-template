@@ -128,6 +128,14 @@ const commonConfig = {
         }, {
           loader: 'sass-loader'
         }]
+      },
+      {
+        test: /animate.css/,
+        use: [{
+          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+        }, {
+          loader: 'css-loader'
+        }]
       }
     ]
   },
