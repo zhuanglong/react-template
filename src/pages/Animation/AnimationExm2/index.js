@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 import styles from './styles.less';
@@ -6,33 +6,26 @@ import styles from './styles.less';
 function AnimationExm2() {
   const [count, setCount] = useState(0);
   const [type, setType] = useState();
-  const typeRef = useRef();
-
-  typeRef.current = type;
-
-  useEffect(() => {
-    const latestType = typeRef.current;
-    console.log(type, latestType);
-  }, [type]);
 
   const decrement = () => {
-    if (!type || type === 'fadeI') {
-      setType('fadeD');
-    } else {
+    setType('fadeD');
+    setTimeout(() => {
       setCount(count - 1);
-    }
+    });
   };
 
   const increment = () => {
-    if (!type || type === 'fadeD') {
-      setType('fadeI');
-    } else {
+    setType('fadeI');
+    setTimeout(() => {
       setCount(count + 1);
-    }
+    });
   };
 
   const reset = () => {
-    setCount(0);
+    setTimeout(() => {
+      setType(type === 'fadeD' ? 'fadeI' : 'fadeD');
+      setCount(0);
+    });
   };
 
   return (
