@@ -1,0 +1,56 @@
+.count {
+  width: 50px;
+  color: red;
+}
+
+// 加
+.fadeI-enter {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.fadeI-enter-active {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.fadeI-exit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.fadeI-exit-active {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.fadeI-enter-active,
+.fadeI-exit-active {
+  transition: opacity 500ms, transform 500ms;
+}
+
+// 减
+.fadeD-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.fadeD-enter-active {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.fadeD-exit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.fadeD-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.fadeD-enter-active,
+.fadeD-exit-active {
+  transition: opacity 500ms, transform 500ms;
+}

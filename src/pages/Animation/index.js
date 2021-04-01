@@ -1,12 +1,21 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import 'animate.css';
 
-// import styles from './styles.less';
+import AnimationExm1 from './AnimationExm1';
+import AnimationExm2 from './AnimationExm2';
 
 function Animation() {
   return (
-    <div>null</div>
+    <div style={{ marginLeft: '50px' }}>
+      <ul type="circle">
+        <li><Link to="/animation/animation-exm1">Exm1</Link></li>
+        <li><Link to="/animation/animation-exm2">Exm2</Link></li>
+      </ul>
+      <div style={{ height: '1px', background: 'blue', margin: '10px 0' }} />
+      <Route path="/animation/animation-exm1" component={AnimationExm1} />
+      <Route path="/animation/animation-exm2" component={AnimationExm2} />
+    </div>
   );
 }
 
