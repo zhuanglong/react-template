@@ -31,7 +31,7 @@ function AnimationExm2() {
   return (
     <div>
       <div>
-        计数：
+        Count:
         <SwitchTransition mode="out-in">
           <CSSTransition
             key={count}
