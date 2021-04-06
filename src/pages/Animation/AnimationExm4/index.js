@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import 'animate.css';
 
 import styles from './styles.less';
 
 const uuid = () => String(Math.random()).slice(2);
 
-function AnimationExm3() {
+function AnimationExm4() {
   const [items, setItems] = useState([
     { id: uuid(), text: 'Buy eggs' },
     { id: uuid(), text: 'Pay bills' },
@@ -35,11 +36,14 @@ function AnimationExm3() {
           <CSSTransition
             key={item.id}
             timeout={500}
+            className="animate__animated"
             classNames={{
               enter: styles['item-enter'],
-              enterActive: styles['item-enter-active'],
+              enterActive: 'animate__lightSpeedInLeft',
+              enterDone: 'animate__jello',
               exit: styles['item-exit'],
-              exitActive: styles['item-exit-active']
+              exitActive: 'animate__jello',
+              exitDone: 'animate__slideInLeft'
             }}
           >
             <div style={{ width: '200px' }}>
@@ -54,4 +58,4 @@ function AnimationExm3() {
   );
 }
 
-export default AnimationExm3;
+export default AnimationExm4;
