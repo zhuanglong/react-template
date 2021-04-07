@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Ranchers-Regular';
+  src: url('@/assets/fonts/Ranchers-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'algers';
+  src: url('@/assets/fonts/alger.ttf') format('truetype');
+}
+
 .function {
   .blue-font() {
     return: blue;
@@ -23,8 +33,10 @@
 .title {
   display: flex;
   font-size: 18px;
+  font-family: 'Ranchers-Regular', sans-serif;
 
   .subTitle {
     color: blue-font();
+    font-family: 'algers', sans-serif;
   }
 }

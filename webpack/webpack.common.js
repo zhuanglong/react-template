@@ -78,6 +78,16 @@ const commonConfig = {
         }]
       },
       {
+        test: /.(woff|woff2|eot|ttf|otf)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash:8].[ext]',
+            outputPath: 'static/fonts/'
+          }
+        }]
+      },
+      {
         // https://webpack.docschina.org/loaders/css-loader/#pure-css-css-modules-and-postcss
         test: /\.less$/i,
         use: [{
