@@ -35,6 +35,7 @@
     - <a href="#支持装饰器">支持装饰器</a>
     - <a href="#解决在 class 中定义静态属性的问题">解决在 class 中定义静态属性的问题</a>
     - <a href="#Webpack 配置全局变量">Webpack 配置全局变量</a>
+    - <a href="#分离 CSS 文件导致资源路径错误">分离 CSS 文件导致资源路径错误</a>
  
 ## <a id="init 项目">init 项目</a>
 
@@ -1002,6 +1003,8 @@ webpack.common.js rules 添加规则项，这里复制 less 进行修改，完�
 }
 ```
 
+> tips: `loader` 的执行的顺序是右到左的，sass-loader -> postcss-loader -> css-loader -> style-loader
+
 新建 src\pages\About\styles.scss，
 
 ```css
@@ -1752,6 +1755,31 @@ plugins: [
 
 后续编写模块就不需要引入而直接使用。
 
+#### <a id="分离 CSS 文件导致资源路径错误">分离 CSS 文件导致资源路径错误</a>
+
+文档[看这里](https://webpack.docschina.org/plugins/mini-css-extract-plugin/#publicpath)
+
+当打包后，资源 url 是相对于 CSS 文件的路径，也就是 static/css，所以导致资源不存在
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210407181511.png)
+
+**解决：**
+
+修改资源的路径到 dist 目录
+
+```
+...(!isDev && {
+    options: {
+      publicPath: '../../'
+    }
+  })
+```
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210407181651.png)
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210407182312.png)
+
 ## 参考
 
 - [从零搭建React全家桶框架教程](https://github.com/brickspert/blog/issues/1)
+- [从0到1开始学习webpack](https://github.com/yangfan-coder/webpack-tutorial)
