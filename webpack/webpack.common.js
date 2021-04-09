@@ -78,10 +78,25 @@ const commonConfig = {
         }]
       },
       {
+        test: /.(woff|woff2|eot|ttf|otf)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash:8].[ext]',
+            outputPath: 'static/fonts/'
+          }
+        }]
+      },
+      {
         // https://webpack.docschina.org/loaders/css-loader/#pure-css-css-modules-and-postcss
         test: /\.less$/i,
         use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          ...(!isDev && {
+            options: {
+              publicPath: '../../'
+            }
+          })
         }, {
           // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
           // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
@@ -110,7 +125,12 @@ const commonConfig = {
       {
         test: /\.s[ac]ss$/i,
         use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          ...(!isDev && {
+            options: {
+              publicPath: '../../'
+            }
+          })
         }, {
           loader: 'css-loader',
           options: {
