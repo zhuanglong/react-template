@@ -36,7 +36,7 @@
     - <a href="#解决在 class 中定义静态属性的问题">解决在 class 中定义静态属性的问题</a>
     - <a href="#Webpack 配置全局变量">Webpack 配置全局变量</a>
     - <a href="#分离 CSS 文件导致资源路径错误">分离 CSS 文件导致资源路径错误</a>
- 
+
 ## <a id="init 项目">init 项目</a>
 
 运行 `npm init`，然后得到一个 `package.json` 文件。
@@ -511,7 +511,7 @@ function renderWithHotReload(RootElement) {
 
 运行查看效果，现在修改页面不会重置 state 了。
 
-控制台可能会出现该警告 <font style="background: #FFFBE5">React-Hot-Loader: react-🔥-dom patch is not detected. React 16.6+ features may not work. </font>  
+控制台可能会出现该警告 <font style="background: #FFFBE5">React-Hot-Loader: react-🔥-dom patch is not detected. React 16.6+ features may not work. </font>
 
 **去除控制台"React-Hot-Loader:..."警告**
 
@@ -527,7 +527,7 @@ resolve: {
 }
 ```
 
-这样就能解决了。 
+这样就能解决了。
 
 参考：
 
@@ -677,7 +677,7 @@ export default Home;
 
 安装 `npm i -D file-loader url-loader`
 
-> file-loader 可以把 import/require 导入的文件解析为 url。  
+> file-loader 可以把 import/require 导入的文件解析为 url。
 > url-loader 可以把文件转换为 base64。
 
 webpack.common.js rules 添加，
@@ -747,7 +747,7 @@ export default Home;
 
 安装 `npm i -D style-loader css-loader`
 
-> style-loader 编译时将样式是打包进 js 中，会以嵌入的方式把样式插入到页面。  
+> style-loader 编译时将样式是打包进 js 中，会以嵌入的方式把样式插入到页面。
 > css-loader 使你能够使用 @import 和 url() 的方式实现 require() 功能。
 
 webpack.common.js rules 添加，
@@ -765,7 +765,7 @@ webpack.common.js rules 添加，
 
 ## <a id="CSS 模块化">CSS 模块化</a>
 
->从上一节来看，如果别的页面也有个相同的 .logo 样式类，那么样式就会覆盖或被覆盖了。  
+>从上一节来看，如果别的页面也有个相同的 .logo 样式类，那么样式就会覆盖或被覆盖了。
 >CSS 模块化是什么？其实就是样式命名唯一，避免冲突。
 
 文档[看这里](https://webpack.docschina.org/loaders/css-loader/)
@@ -818,6 +818,20 @@ export default Home;
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20200922161609.png)
 
 样式类名是以“文件名__类名--hash”组成的。
+
+**某个样式类不想模块化？**
+
+`:global(.className)` 可以用来声明一个明确的全局选择器。
+
+```css
+:global(.global-class-name) {
+  color: blue;
+}
+```
+
+参考：
+
+- https://webpack.docschina.org/loaders/css-loader/#scope
 
 **写好多的 styles.xxx 很烦怎么办？**
 
@@ -1069,7 +1083,7 @@ devServer: {
 
 ## <a id="按需加载">按需加载</a>
 
->为什么需要按需加载？  
+>为什么需要按需加载？
 >
 >webpack 把所有页面打包成一个 bundle.js，这样首屏加载需要更多的时间。
 >
@@ -1656,7 +1670,7 @@ webpack@4.x 有着比 dll 更好的打包性能，所以不推荐使用。
 
 **thread-loader**
 
-类似 happypack。 
+类似 happypack。
 
 测试了一下，没有什么提升，反而多了2秒，可能大项目才能看出效果。
 
