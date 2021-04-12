@@ -58,10 +58,11 @@ renderWithHotReload(getRouter());
 .babelrc，新增
 
 ```
-"plugins": [
-    "react-refresh/babel"
-    ...
-  ]
+"env": {
+    "development": {
+      "plugins": ["react-refresh/babel"]
+    }
+  }
 ```
 
 webpack\webpack.dev.js，新增
