@@ -18,7 +18,8 @@ export default function asyncComponent(importComponent) {
 
     render() {
       const C = this.state.component;
-      return C ? <C {...this.props} /> : <Loading />;
+      // 因为路由动画，所以需要 div 包裹
+      return <div>{C ? <C {...this.props} /> : <Loading />}</div>;
     }
   };
 }

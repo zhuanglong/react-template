@@ -1,10 +1,12 @@
-@timeout: 1000ms;
+@timeout: 500ms;
 
-.box {
-  width: 300px;
-  height: 400px;
-  overflow: hidden;
-  background: #eee;
+.comp-box {
+  > div {
+    position: absolute;
+    top: 105px;
+    width: 200px;
+    height: 370px;
+  }
 }
 
 .fade-enter {
@@ -13,16 +15,18 @@
 
 .fade-enter-active {
   transform: translateX(0);
-  transition: transform @timeout ease;
+  transition: all @timeout ease;
 }
 
 .fade-exit {
   transform: translateX(0);
+  opacity: 1;
 }
 
 .fade-exit-active {
   transform: translateX(-100%);
-  transition: transform @timeout ease;
+  opacity: 0;
+  transition: all @timeout ease;
 }
 
 .refade-enter {
@@ -31,14 +35,32 @@
 
 .refade-enter-active {
   transform: translateX(0%);
-  transition: transform @timeout ease;
+  transition: all @timeout ease;
 }
 
 .refade-exit {
   transform: translateX(0%);
+  opacity: 1;
 }
 
 .refade-exit-active {
   transform: translateX(100%);
-  transition: transform @timeout ease;
+  opacity: 0;
+  transition: all @timeout ease;
+}
+
+.normal-enter {
+  //
+}
+
+.normal-enter-active {
+  //
+}
+
+.normal-exit {
+  opacity: 1;
+}
+
+.normal-exit-active {
+  opacity: 0;
 }
