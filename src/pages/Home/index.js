@@ -15,6 +15,7 @@ class Home extends React.Component {
         </div>
         <p><img className={styles.avatar} src={require('@/assets/avatar.jpg').default} alt="" /></p>
         <p><img style={{ width: `${hotcss.px2rem(150)}rem` }} className={styles.logo} src={logo} alt="" /></p>
+        <p><span className={styles.bgImage} /></p>
       </div>
     );
   }

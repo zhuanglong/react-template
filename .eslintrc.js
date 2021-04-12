@@ -29,6 +29,7 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'dot-notation': 0,
     'comma-dangle': ['error', 'never'], // 不允许尾随逗号
     'linebreak-style': 0,
     'max-len': 0, // 行最大长度
