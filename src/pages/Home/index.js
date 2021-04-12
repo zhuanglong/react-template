@@ -17,6 +17,7 @@ class Home extends React.Component {
         <p><Button type="primary">Antd Design Button</Button></p>
         <p><img className={styles.avatar} src={require('@/assets/avatar.jpg').default} alt="" /></p>
         <p><img className={styles.logo} src={logo} alt="" /></p>
+        <p><span className={styles.bgImage} /></p>
       </div>
     );
   }
