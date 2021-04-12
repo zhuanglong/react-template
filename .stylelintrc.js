@@ -7,6 +7,7 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'selector-pseudo-class-no-unknown': null,
     'property-no-unknown': null
   }
 };
