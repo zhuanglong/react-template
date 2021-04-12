@@ -1,0 +1,44 @@
+@timeout: 1000ms;
+
+.box {
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.fade-enter {
+  transform: translateX(100%);
+}
+
+.fade-enter-active {
+  transform: translateX(0);
+  transition: transform @timeout ease;
+}
+
+.fade-exit {
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  transform: translateX(-100%);
+  transition: transform @timeout ease;
+}
+
+.refade-enter {
+  transform: translateX(-100%);
+}
+
+.refade-enter-active {
+  transform: translateX(0%);
+  transition: transform @timeout ease;
+}
+
+.refade-exit {
+  transform: translateX(0%);
+}
+
+.refade-exit-active {
+  transform: translateX(100%);
+  transition: transform @timeout ease;
+}

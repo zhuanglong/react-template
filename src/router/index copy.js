@@ -6,12 +6,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Home from '@/pages/Home';
 import About from '@/pages/About';
-import CounterState from '@/pages/CounterState';
-// import asyncComponent from './asyncComponent';
+import asyncComponent from './asyncComponent';
 
 import styles from './styles.less';
 
-// const CounterState = asyncComponent(() => import(/* webpackChunkName: "CounterState" */'@/pages/CounterState'));
+const CounterState = asyncComponent(() => import(/* webpackChunkName: "CounterState" */'@/pages/CounterState'));
 
 const ANIMATION_MAP = {
   PUSH: 'fade',
@@ -25,12 +24,11 @@ const AnimatedSwitch = withRouter((props) => {
     <Route
       render={({ location }) => (
         <TransitionGroup
-          className={styles.box}
           childFactory={(child) => (
             React.cloneElement(child, {
               classNames: {
                 enter: styles[`${ANIMATION_MAP[action]}-enter`],
-                enterActive: styles[`${ANIMATION_MAP[action]}-enter-active`],
+                enterActive: styles[`${ANIMATION_MAP[action]}-enter-enter`],
                 exit: styles[`${ANIMATION_MAP[action]}-exit`],
                 exitActive: styles[`${ANIMATION_MAP[action]}-exit-active`]
               }
@@ -41,17 +39,17 @@ const AnimatedSwitch = withRouter((props) => {
             key={location.pathname}
             timeout={1000}
             // classNames={{
-              // enter: styles['fade-enter'],
-              // enterActive: styles['fade-enter-active'],
-              // exit: styles['fade-exit'],
-              // exitActive: styles['fade-exit-active']
-              // enter: styles['fadeInRight'],
-              // exit: styles['fadeOutLeft']
+            //   // enter: styles['fade-enter'],
+            //   // enterActive: styles['fade-enter-active'],
+            //   // exit: styles['fade-exit'],
+            //   // exitActive: styles['fade-exit-active']
+            //   // enter: styles['fadeInRight'],
+            //   // exit: styles['fadeOutLeft']
 
-              // enter: styles[`${ANIMATION_MAP[action]}-enter`],
-              // enterActive: styles[`${ANIMATION_MAP[action]}-enter-active`],
-              // exit: styles[`${ANIMATION_MAP[action]}-exit`],
-              // exitActive: styles[`${ANIMATION_MAP[action]}-exit-active`]
+            //   // enter: styles[`${ANIMATION_MAP[action]}-enter`],
+            //   // enterActive: styles[`${ANIMATION_MAP[action]}-enter-enter`],
+            //   // exit: styles[`${ANIMATION_MAP[action]}-exit`],
+            //   // exitActive: styles[`${ANIMATION_MAP[action]}-exit-active`]
             // }}
           >
             <Switch location={location}>{props.children}</Switch>
