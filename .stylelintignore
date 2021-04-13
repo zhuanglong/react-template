@@ -1,3 +1,4 @@
 /dist
 src/utils/hotcss
+src/utils/reset.scss
 README.md

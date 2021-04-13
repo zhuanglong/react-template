@@ -1,10 +1,10 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 
-import styles from './styles.less';
+import styles from './styles.scss';
 
 @hot
-class CounterState extends React.Component {
+class My extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,4 +27,4 @@ class CounterState extends React.Component {
   }
 }
 
-export default CounterState;
+export default My;

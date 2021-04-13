@@ -35,6 +35,7 @@ module.exports = {
     'max-len': 0, // 行最大长度
     'global-require': 0, // require() 可以在代码中的任何地方调用
 
+    'react/no-array-index-key': 0, // 不能用 index 来作为唯一 key
     'react/destructuring-assignment': 0, // 使用析构状态赋值
     'react/prefer-stateless-function': 0, // 组件应该写成纯函数
     'react/jsx-props-no-spreading': 0, // 不用给组件传递 {...this.props}
@@ -44,6 +45,9 @@ module.exports = {
     'react/prop-types': 0, // 防止在 React 组件定义中丢失 props 验证
     // 'react/forbid-prop-types': [2, { forbid: ['any'] }], // 禁止某些 propTypes
     'react/jsx-one-expression-per-line': 0, // 将 JSX 中的每一行限制为一个表达式
+
+    'jsx-a11y/click-events-have-key-events': 0, // AT兼容性和屏幕阅读器
+    'jsx-a11y/no-static-element-interactions': 0, // AT兼容性和屏幕阅读器
 
     'import/no-extraneous-dependencies': [2, { optionalDependencies: true }], // 检查项目 import 的依赖是否符合 devDependencies 或 dependencies
     'import/no-unresolved': [2, { ignore: ['^@/'] }] // 路径别名

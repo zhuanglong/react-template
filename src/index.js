@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
+import '@/utils/reset.scss';
 import getRouter from '@/router';
 
 hotcss.designWidth = 375;
