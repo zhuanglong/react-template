@@ -1,12 +1,12 @@
 import React from 'react';
 // import styles from './styles.scss';
 
-function DiscoverChild() {
+function Product() {
   return (
     <div>
-      DiscoverChild
+      Product
     </div>
   );
 }
 
-export default DiscoverChild;
+export default Product;

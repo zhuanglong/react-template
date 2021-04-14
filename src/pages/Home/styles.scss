@@ -8,12 +8,6 @@
   src: url('@/assets/fonts/alger.ttf') format('truetype');
 }
 
-.function {
-  .blue-font() {
-    return: blue;
-  }
-}
-
 .avatar {
   width: 100px;
 }
@@ -24,8 +18,8 @@
 
 .bgImage {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: px2rem(200);
+  height: px2rem(200);
   background-image: url('@/assets/20210407170253.jpg');
   background-size: cover;
 }
@@ -36,7 +30,7 @@
   font-family: 'Ranchers-Regular', sans-serif;
 
   .subTitle {
-    color: blue-font();
+    color: blue;
     font-family: 'algers', sans-serif;
   }
 }

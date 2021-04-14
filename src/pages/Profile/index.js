@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './styles.scss';
 
-function MyChild() {
+function Profile() {
   return (
     <div>
       <div className={styles.title}>
-        MyChild
+        Profile
       </div>
     </div>
   );
 }
 
-export default MyChild;
+export default Profile;

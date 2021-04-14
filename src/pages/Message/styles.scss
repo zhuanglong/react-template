@@ -1,0 +1,31 @@
+@import '@/utils/mixins.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 px2rem(20);
+}
+
+.item {
+  margin-bottom: px2rem(15);
+  padding: px2rem(20);
+  background: #fff;
+  border-radius: px2rem(10);
+
+  &:first-child {
+    margin-top: px2rem(15);
+  }
+}
+
+.title {
+  font-weight: bold;
+  font-size: px2rem(18);
+  @include ellipsis-text(1);
+}
+
+.content {
+  margin-top: px2rem(5);
+  color: #999;
+  font-size: px2rem(18);
+  @include ellipsis-text(2);
+}

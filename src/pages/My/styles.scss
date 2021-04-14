@@ -1,7 +1,87 @@
-.title {
+@mixin box() {
+  position: relative;
   display: flex;
+  flex-direction: column;
+  margin-top: px2rem(20);
+  padding: px2rem(20);
+  background-color: #fff;
+  border-radius: px2rem(10);
+}
 
-  .count {
-    color: red;
+.container {
+  padding: 0 px2rem(20);
+}
+
+.avatarBox {
+  @include box();
+  align-items: center;
+}
+
+.setting {
+  position: absolute;
+  top: px2rem(10);
+  right: px2rem(10);
+  color: #52c41a;
+}
+
+.avatar {
+  width: px2rem(60);
+  border-radius: 50%;
+  animation: ani 2s linear infinite;
+}
+
+.name {
+  margin-top: px2rem(10);
+  font-weight: bold;
+  font-size: px2rem(24);
+}
+
+.funcBox {
+  @include box();
+  padding-top: px2rem(10);
+  padding-bottom: px2rem(10);
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: px2rem(15) 0;
+  border-bottom: px2rem(1) solid #ccc;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemTitle {
+  font-size: px2rem(22);
+}
+
+.itemIcon {
+  color: #bbb;
+  font-size: px2rem(16);
+}
+
+@keyframes ani {
+  0% {
+    box-shadow: 0 0 0 #ff8329;
+  }
+
+  25% {
+    box-shadow: 0 0 10px #ff8329;
+  }
+
+  50% {
+    box-shadow: 0 0 20px #ff8329;
+  }
+
+  75% {
+    box-shadow: 0 0 10px #ff8329;
+  }
+
+  100% {
+    box-shadow: 0 0 0 #ff8329;
   }
 }

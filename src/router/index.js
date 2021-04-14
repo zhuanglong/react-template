@@ -4,35 +4,34 @@ import {
 } from 'react-router-dom';
 
 import TabBar from '@/components/TabBar';
-// import styles from './styles.scss';
 
 import NotFound from '@/pages/NotFound';
 import Home from '@/pages/Home';
-import HomeChild from '@/pages/HomeChild';
-import Discover from '@/pages/Discover';
-import DiscoverChild from '@/pages/DiscoverChild';
+import Product from '@/pages/Product';
+import Message from '@/pages/Message';
+import MessageDetail from '@/pages/MessageDetail';
 import asyncComponent from './asyncComponent';
 
+import styles from './styles.scss';
+
 const My = asyncComponent(() => import(/* webpackChunkName: "My" */'@/pages/My'));
-const MyChild = asyncComponent(() => import(/* webpackChunkName: "MyChild" */'@/pages/MyChild'));
+const Profile = asyncComponent(() => import(/* webpackChunkName: "Profile" */'@/pages/Profile'));
 
 function getRouter() {
   return (
     <Router>
-      <div>
+      <div className={styles.container}>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/home/home-child" component={HomeChild} />
-          <Route>
-            <Route path="/discover" exact component={Discover} />
-            <Route path="/discover/discover-child" component={DiscoverChild} />
-          </Route>
+          <Route path="/product" component={Product} />
+          <Route path="/message" component={Message} />
+          <Route path="/message-detail" component={MessageDetail} />
           <Route path="/my" component={My} />
-          <Route path="/my/my-child" component={MyChild} />
+          <Route path="/profile" component={Profile} />
           <Route path="*" component={NotFound} />
         </Switch>
+        <TabBar />
       </div>
-      <TabBar />
     </Router>
   );
 }
