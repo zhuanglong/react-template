@@ -4,7 +4,8 @@ import { hot } from 'react-hot-loader/root';
 
 import styles from './styles.scss';
 
-function My() {
+function My(props) {
+  const avatar = 'https://img0.baidu.com/it/u=3376612412,3331842818&fm=26&fmt=auto&gp=0.jpg';
   const funcList = [{
     title: '手机号'
   }, {
@@ -13,16 +14,21 @@ function My() {
     title: '关于'
   }];
 
+  const pushPage = () => {
+    props.history.push('/profile');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.avatarBox}>
         <SettingOutlined className={styles.setting} />
-        <img className={styles.avatar} src={require('@/assets/20210407170253.jpg').default} alt="" />
-        <div className={styles.name}>代码不止</div>
+        <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
+        {/* <div className={styles.avatar} style={{ backgroundImage: `url(${require('@/assets/20210407170253.jpg').default})` }} /> */}
+        <div className={styles.name}>Long</div>
       </div>
       <div className={styles.funcBox}>
         {funcList.map((item, index) => (
-          <div key={index} className={styles.item}>
+          <div key={index} className={styles.item} onClick={pushPage}>
             <div className={styles.itemTitle}>{item.title}</div>
             <RightOutlined className={styles.itemIcon} />
           </div>

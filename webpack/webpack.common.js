@@ -125,6 +125,7 @@ const commonConfig = {
       },
       {
         test: /\.s[ac]ss$/i,
+        exclude: [/swiper/],
         use: [{
           loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           ...(!isDev && {
@@ -151,6 +152,22 @@ const commonConfig = {
           options: {
             additionalData: "@import '@/utils/hotcss/px2rem.scss';"
           }
+        }]
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        include: [/swiper/],
+        use: [{
+          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          ...(!isDev && {
+            options: {
+              publicPath: '../../'
+            }
+          })
+        }, {
+          loader: 'css-loader'
+        }, {
+          loader: 'sass-loader'
         }]
       }
     ]

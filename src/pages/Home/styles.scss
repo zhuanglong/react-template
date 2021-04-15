@@ -1,36 +1,44 @@
-@font-face {
-  font-family: 'Ranchers-Regular';
-  src: url('@/assets/fonts/Ranchers-Regular.ttf') format('truetype');
+.container {
+  padding: 0 px2rem(20);
 }
 
-@font-face {
-  font-family: 'algers';
-  src: url('@/assets/fonts/alger.ttf') format('truetype');
-}
-
-.avatar {
-  width: 100px;
-}
-
-.logo {
-  width: 150px;
-}
-
-.bgImage {
-  display: block;
-  width: px2rem(200);
-  height: px2rem(200);
-  background-image: url('@/assets/20210407170253.jpg');
-  background-size: cover;
-}
-
-.title {
+.funcBox {
+  position: relative;
   display: flex;
-  font-size: px2rem(28);
-  font-family: 'Ranchers-Regular', sans-serif;
+  flex-direction: column;
+  margin-top: px2rem(20);
+  margin-bottom: px2rem(20);
+  padding: px2rem(10) px2rem(20);
+  background-color: #fff;
+  border-radius: px2rem(10);
 
-  .subTitle {
-    color: blue;
-    font-family: 'algers', sans-serif;
+  & {
+    .item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: px2rem(15) 0;
+      border-bottom: px2rem(1) solid #ccc;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .itemTitle {
+      width: px2rem(200);
+      height: px2rem(30);
+      font-size: px2rem(22);
+      background-color: #eee;
+    }
+
+    .itemIcon {
+      width: px2rem(50);
+      height: px2rem(30);
+      color: #bbb;
+      font-size: px2rem(16);
+      background-color: #eee;
+    }
   }
 }
