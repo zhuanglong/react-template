@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  HashRouter as Router, Switch, Route
+  HashRouter as Router, Switch, Route, Redirect
 } from 'react-router-dom';
 
 import TabBar from '@/components/TabBar';
@@ -22,15 +22,27 @@ function getRouter() {
     <Router>
       <div className={styles.container}>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/product" component={Product} />
-          <Route path="/message" component={Message} />
-          <Route path="/message-detail" component={MessageDetail} />
-          <Route path="/my" component={My} />
-          <Route path="/profile" component={Profile} />
-          <Route path="*" component={NotFound} />
+          <Route>
+            <Redirect to="/tabbar" />
+            <Route
+              path="/tabbar"
+              render={() => (
+                <>
+                  <TabBar>
+                    <Redirect to="/tabbar/home" />
+                    <Route path="/tabbar/home" component={Home} />
+                    <Route path="/tabbar/message" component={Message} />
+                    <Route path="/tabbar/my" component={My} />
+                  </TabBar>
+                </>
+              )}
+            />
+            <Route path="/product" component={Product} />
+            <Route path="/message-detail" component={MessageDetail} />
+            <Route path="/profile" component={Profile} />
+            <Route path="*" component={NotFound} />
+          </Route>
         </Switch>
-        <TabBar />
       </div>
     </Router>
   );

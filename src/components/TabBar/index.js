@@ -1,39 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import styles from './styles.scss';
 
 const list = [{
   name: '首页',
-  path: '/'
+  path: '/tabbar/home'
 }, {
   name: '消息',
-  path: '/message'
+  path: '/tabbar/message'
 }, {
   name: '我的',
-  path: '/my'
+  path: '/tabbar/my'
 }];
 
 function TabBar(props) {
   console.log(props);
   const { location: { pathname } } = props;
-  const [active, setActive] = useState(pathname);
 
   const onTab = (index) => {
-    setActive(list[index].path);
     props.history.replace(list[index].path);
   };
 
-  const isTabBar = list.findIndex((item) => item.path === pathname) >= 0;
+  // const isTabBar = list.findIndex((item) => item.path === pathname) >= 0;
 
-  return (isTabBar && (
+  return ((
     <>
+      {props.children}
       <div className={styles.fill} />
       <div className={styles.container}>
         {list.map((item, index) => (
           <div
             key={index}
-            className={classnames(styles.tabItem, item.path === active && styles.tabItemActive)}
+            className={classnames(styles.tabItem, item.path === pathname && styles.tabItemActive)}
             onClick={() => onTab(index)}
           >
             {item.name}
