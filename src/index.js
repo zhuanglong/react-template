@@ -1,9 +1,9 @@
-import '@/utils/hotcss/hotcss';
-
 import React from 'react';
 import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
+import '@/utils/hotcss/hotcss';
+import '@/utils/setPageTitle';
 import '@/utils/reset.scss';
 import getRouter from '@/router';
 

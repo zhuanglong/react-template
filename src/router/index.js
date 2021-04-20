@@ -18,18 +18,18 @@ function getRouter() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={() => <Redirect to="/index" />} />
+        <Route path="/" exact render={() => <Redirect to="/index" />} />
         <Route
           path="/index"
           render={() => (
             <>
               <MainLayout>
                 <Switch>
-                  <Route path="/index" exact component={() => <Redirect to="/index/home" />} />
+                  <Route path="/index" exact render={() => <Redirect to="/index/home" />} />
                   <Route path="/index/home" component={Home} />
                   <Route path="/index/message" component={Message} />
                   <Route path="/index/my" component={My} />
-                  <Route path="/index/*" component={() => <Redirect to="/404" />} />
+                  <Route path="/index/*" render={() => <Redirect to="/404" />} />
                 </Switch>
               </MainLayout>
             </>
@@ -39,7 +39,7 @@ function getRouter() {
         <Route path="/message-detail" component={MessageDetail} />
         <Route path="/profile" component={Profile} />
         <Route path="/404" component={NotFound} />
-        <Route path="*" component={() => <Redirect to="/404" />} />
+        <Route path="*" render={() => <Redirect to="/404" />} />
       </Switch>
     </Router>
   );
