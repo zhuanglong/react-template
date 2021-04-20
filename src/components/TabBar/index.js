@@ -1,46 +1,56 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
+
 import styles from './styles.scss';
 
-const list = [{
-  name: '首页',
-  path: '/tabbar/home'
-}, {
-  name: '消息',
-  path: '/tabbar/message'
-}, {
-  name: '我的',
-  path: '/tabbar/my'
-}];
-
 function TabBar(props) {
-  console.log(props);
-  const { location: { pathname } } = props;
-
-  const onTab = (index) => {
-    props.history.replace(list[index].path);
-  };
-
-  // const isTabBar = list.findIndex((item) => item.path === pathname) >= 0;
-
-  return ((
-    <>
+  return (
+    <div className={classnames(styles.tabBar, props.className)}>
       {props.children}
-      <div className={styles.fill} />
-      <div className={styles.container}>
-        {list.map((item, index) => (
-          <div
-            key={index}
-            className={classnames(styles.tabItem, item.path === pathname && styles.tabItemActive)}
-            onClick={() => onTab(index)}
-          >
-            {item.name}
-          </div>
-        ))}
-      </div>
-    </>
-  ));
+    </div>
+  );
 }
 
-export default withRouter(TabBar);
+function Item(props) {
+  const {
+    title, selected, icon, onPress
+  } = props;
+  return (
+    <div
+      className={classnames(styles.tabBarItem, selected && styles.active)}
+      onClick={onPress}
+    >
+      {icon}
+      {title}
+    </div>
+  );
+}
+
+TabBar.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element)
+};
+
+TabBar.defaultProps = {
+  className: '',
+  children: []
+};
+
+Item.propTypes = {
+  title: PropTypes.string,
+  selected: PropTypes.bool,
+  icon: PropTypes.element,
+  onPress: PropTypes.func
+};
+
+Item.defaultProps = {
+  title: '',
+  selected: false,
+  icon: null,
+  onPress: () => null
+};
+
+TabBar.Item = Item;
+
+export default TabBar;

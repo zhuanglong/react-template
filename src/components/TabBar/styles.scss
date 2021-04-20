@@ -1,10 +1,4 @@
-.fill {
-  height: px2rem(70);
-}
-
-.container {
-  position: fixed;
-  bottom: 0;
+.tabBar {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -12,16 +6,19 @@
   height: px2rem(70);
   background: #fff;
   border-top: px2rem(1) solid grey;
-}
 
-.tabItem {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 px2rem(20);
-  font-size: px2rem(24);
-}
+  & {
+    .tabBarItem {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 0 px2rem(20);
+      font-size: px2rem(22);
+    }
 
-.tabItemActive {
-  color: aqua;
+    .active {
+      color: #108ee9;
+    }
+  }
 }

@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  // 不进行模块化处理
+  & :global {
+    .content {
+      color: #333;
+      font-size: px2rem(28);
+    }
+
+    .botton {
+      margin-top: px2rem(10);
+      padding: px2rem(10) px2rem(30);
+      color: #fff;
+      font-size: px2rem(22);
+      background-color: #108ee9;
+      border-radius: px2rem(4);
+    }
+  }
+}

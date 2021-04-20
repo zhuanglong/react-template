@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getURLSearchParams } from '@/utils/tools';
 
 function MessageDetail(props) {

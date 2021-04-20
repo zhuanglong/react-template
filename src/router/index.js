@@ -3,7 +3,7 @@ import {
   HashRouter as Router, Switch, Route, Redirect
 } from 'react-router-dom';
 
-import BasicLayout from '@/layouts/BasicLayout';
+import MainLayout from '@/layouts/MainLayout';
 import NotFound from '@/pages/NotFound';
 import Home from '@/pages/Home';
 import Product from '@/pages/Product';
@@ -23,7 +23,7 @@ function getRouter() {
           path="/index"
           render={() => (
             <>
-              <BasicLayout>
+              <MainLayout>
                 <Switch>
                   <Route path="/index" exact component={() => <Redirect to="/index/home" />} />
                   <Route path="/index/home" component={Home} />
@@ -31,7 +31,7 @@ function getRouter() {
                   <Route path="/index/my" component={My} />
                   <Route path="/index/*" component={() => <Redirect to="/404" />} />
                 </Switch>
-              </BasicLayout>
+              </MainLayout>
             </>
           )}
         />
