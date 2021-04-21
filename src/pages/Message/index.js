@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import NavBar from '@/components/NavBar';
 import styles from './styles.scss';
 
 function Message(props) {
@@ -26,14 +27,17 @@ function Message(props) {
   };
 
   return (
-    <div className={styles.container}>
-      {messageList.map((item, index) => (
-        <div key={index} className={styles.item} onClick={() => go(item.id)}>
-          <div className={styles.title}>{item.title}</div>
-          <div className={styles.content}>{item.content}</div>
-        </div>
-      ))}
-    </div>
+    <>
+      <NavBar title="首页" showBack={false} />
+      <div className={styles.container}>
+        {messageList.map((item, index) => (
+          <div key={index} className={styles.item} onClick={() => go(item.id)}>
+            <div className={styles.title}>{item.title}</div>
+            <div className={styles.content}>{item.content}</div>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 

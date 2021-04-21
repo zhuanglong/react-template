@@ -68,7 +68,7 @@
 			designWidth = parseInt(hotcss.designWidth , 10);
 		}
 
-		return parseInt(px,10)*320/designWidth/20;
+		return parseInt(px,10)*320/designWidth/20 + 'rem';
 	}
 
 	hotcss.rem2px = function( rem , designWidth ){
@@ -77,7 +77,7 @@
 			designWidth = parseInt(hotcss.designWidth , 10);
 		}
 		//rem可能为小数，这里不再做处理了
-		return rem*20*designWidth/320;
+		return rem*20*designWidth/320 + 'px';
 	}
 
 	hotcss.mresize = function(){

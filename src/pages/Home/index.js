@@ -22,7 +22,7 @@ function Home(props) {
 
   return (
     <div className={styles.container}>
-      <div style={{ marginTop: `${hotcss.px2rem(20)}rem` }}>
+      <div style={{ marginTop: hotcss.px2rem(20) }}>
         <Slide imgs={imgs} />
       </div>
       <div className={styles.funcBox}>

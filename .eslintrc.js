@@ -29,6 +29,7 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'object-curly-newline': 0, // 该规则要求或不允许在{与它的后续标记之间，以及在}与它的对象文字或解构赋值之间的前一个换行符之间进行换行
     'dot-notation': 0,
     'comma-dangle': ['error', 'never'], // 不允许尾随逗号
     'linebreak-style': 0,

@@ -1,0 +1,69 @@
+$navBarBgColor: #fff;
+$navBarTextColor: #000;
+$lrPadding: px2rem(15);
+
+.container {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  background-color: $navBarBgColor;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    height: inherit;
+    color: $navBarTextColor;
+    font-size: px2rem(26);
+  }
+
+  .text {
+    display: flex;
+    align-items: center;
+    height: inherit;
+    color: $navBarTextColor;
+    font-size: px2rem(20);
+  }
+
+  & {
+    .leftView,
+    .rightView {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      height: inherit;
+    }
+
+    .leftView {
+      justify-content: flex-start;
+      padding-left: $lrPadding;
+
+      & {
+        .icon {
+          @extend .icon;
+          padding-right: px2rem(10);
+        }
+      }
+    }
+
+    .middleView {
+      height: inherit;
+
+      & .title {
+        @extend .text;
+        justify-content: center;
+        font-weight: bold;
+        font-size: px2rem(22);
+      }
+    }
+
+    .rightView {
+      justify-content: flex-end;
+      padding-right: $lrPadding;
+    }
+  }
+}

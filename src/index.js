@@ -7,8 +7,6 @@ import '@/utils/setPageTitle';
 import '@/utils/reset.scss';
 import getRouter from '@/router';
 
-hotcss.designWidth = 375;
-
 function renderWithHotReload(RootElement) {
   ReactDom.render(
     <AppContainer>
