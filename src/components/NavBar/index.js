@@ -13,13 +13,13 @@ function NavBar(props) {
         <NavBarMiddleView {...props} />
         <NavBarRightView {...props} />
       </div>
-      <NavBarFillView />
+      {props.navBarInsets && <div style={{ height: NavBar.height }} /> }
     </>
   );
 }
 
 function NavBarLeftView(props) {
-  const { showBack, onBack = () => props.history.goBack(), leftView, leftViewStyle } = props;
+  const { showBack, leftView, leftViewStyle, onBack = () => props.history.goBack() } = props;
   return (
     <div style={leftViewStyle} className={styles.leftView}>
       {showBack && (
@@ -40,17 +40,13 @@ function NavBarMiddleView(props) {
 }
 
 function NavBarRightView(props) {
-  const { rightView, rightViewStyle } = props;
+  const { rightView, onRightView, rightViewStyle } = props;
   return (
     <div style={rightViewStyle} className={styles.rightView}>
-      {typeof rightView === 'string' ? <div className={styles.text}>{rightView}</div> : rightView}
+      {typeof rightView === 'string'
+        ? <div className={styles.text} onClick={onRightView}>{rightView}</div>
+        : rightView}
     </div>
-  );
-}
-
-function NavBarFillView() {
-  return (
-    <div style={{ height: NavBar.height }} />
   );
 }
 
@@ -59,14 +55,16 @@ NavBar.propTypes = {
 
 NavBar.defaultProps = {
   showBack: true,
-  onBack: null,
+  navBarInsets: true,
   leftView: '',
   title: '',
   rightView: '',
   style: null,
   leftViewStyle: null,
   middleViewStyle: null,
-  rightViewStyle: null
+  rightViewStyle: null,
+  onBack: undefined,
+  onRightView: undefined
 };
 
 NavBar.styles = {

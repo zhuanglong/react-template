@@ -1,12 +1,16 @@
 import React from 'react';
 
+import NavBar from '@/components/NavBar';
 // import styles from './styles.scss';
 
 function Product() {
   return (
-    <div>
-      Product
-    </div>
+    <>
+      <NavBar />
+      <div>
+        Product
+      </div>
+    </>
   );
 }
 

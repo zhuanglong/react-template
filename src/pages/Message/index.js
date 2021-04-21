@@ -28,7 +28,12 @@ function Message(props) {
 
   return (
     <>
-      <NavBar title="首页" showBack={false} />
+      <NavBar
+        title="消息"
+        showBack={false}
+        rightView="清除未读"
+        onRightView={() => alert('已清除')}
+      />
       <div className={styles.container}>
         {messageList.map((item, index) => (
           <div key={index} className={styles.item} onClick={() => go(item.id)}>

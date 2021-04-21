@@ -10,22 +10,21 @@ $lrPadding: px2rem(15);
   align-items: center;
   width: 100%;
   overflow: hidden;
+  color: $navBarTextColor;
   background-color: $navBarBgColor;
 
   .icon {
     display: flex;
     align-items: center;
     height: inherit;
-    color: $navBarTextColor;
-    font-size: px2rem(26);
+    font-size: px2rem(22);
   }
 
   .text {
     display: flex;
     align-items: center;
     height: inherit;
-    color: $navBarTextColor;
-    font-size: px2rem(20);
+    font-size: px2rem(16);
   }
 
   & {
@@ -45,7 +44,7 @@ $lrPadding: px2rem(15);
       & {
         .icon {
           @extend .icon;
-          padding-right: px2rem(10);
+          padding-right: px2rem(15);
         }
       }
     }

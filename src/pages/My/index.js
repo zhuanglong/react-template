@@ -2,6 +2,7 @@ import React from 'react';
 import { SettingOutlined, RightOutlined } from '@ant-design/icons';
 import { hot } from 'react-hot-loader/root';
 
+import NavBar from '@/components/NavBar';
 import styles from './styles.scss';
 
 function My(props) {
@@ -19,22 +20,25 @@ function My(props) {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.avatarBox}>
-        <SettingOutlined className={styles.setting} />
-        <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
-        {/* <div className={styles.avatar} style={{ backgroundImage: `url(${require('@/assets/20210407170253.jpg').default})` }} /> */}
-        <div className={styles.name}>Long</div>
+    <>
+      <NavBar title="我的" showBack={false} />
+      <div className={styles.container}>
+        <div className={styles.avatarBox}>
+          <SettingOutlined className={styles.setting} />
+          <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
+          {/* <div className={styles.avatar} style={{ backgroundImage: `url(${require('@/assets/20210407170253.jpg').default})` }} /> */}
+          <div className={styles.name}>Long</div>
+        </div>
+        <div className={styles.funcBox}>
+          {funcList.map((item, index) => (
+            <div key={index} className={styles.item} onClick={pushPage}>
+              <div className={styles.itemTitle}>{item.title}</div>
+              <RightOutlined className={styles.itemIcon} />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className={styles.funcBox}>
-        {funcList.map((item, index) => (
-          <div key={index} className={styles.item} onClick={pushPage}>
-            <div className={styles.itemTitle}>{item.title}</div>
-            <RightOutlined className={styles.itemIcon} />
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 

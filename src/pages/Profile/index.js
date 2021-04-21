@@ -1,14 +1,16 @@
 import React from 'react';
 
+import NavBar from '@/components/NavBar';
 import styles from './styles.scss';
 
 function Profile() {
   return (
-    <div>
+    <>
+      <NavBar />
       <div className={styles.title}>
         Profile
       </div>
-    </div>
+    </>
   );
 }
 
