@@ -5,35 +5,54 @@ import classnames from 'classnames';
 import styles from './styles.scss';
 
 function TabBar(props) {
+  const { style, tabBarInsets, children } = props;
   return (
-    <div className={classnames(styles.tabBar, props.className)}>
-      {props.children}
-    </div>
+    <>
+      {tabBarInsets && <div style={{ height: TabBar.height }} />}
+      <div
+        className={styles.tabBar}
+        style={{ height: TabBar.height, ...style }}
+      >
+        {children}
+      </div>
+    </>
   );
 }
 
 function Item(props) {
-  const {
-    title, selected, icon, onPress
-  } = props;
+  const { title, selected, icon, onPress } = props;
   return (
     <div
       className={classnames(styles.tabBarItem, selected && styles.active)}
       onClick={onPress}
     >
-      {icon}
-      {title}
+      {icon && icon}
+      {title && title}
+      <Badge {...props} />
     </div>
   );
 }
 
+function Badge(props) {
+  const { badge, dot } = props;
+  let elem = null;
+  if (dot) {
+    elem = <div className={styles.badgeDot} />;
+  } else {
+    elem = <div className={styles.badge}>{badge}</div>;
+  }
+  return elem;
+}
+
 TabBar.propTypes = {
-  className: PropTypes.string,
+  tabBarInsets: PropTypes.bool,
+  style: PropTypes.shape([PropTypes.object]),
   children: PropTypes.arrayOf(PropTypes.element)
 };
 
 TabBar.defaultProps = {
-  className: '',
+  tabBarInsets: true,
+  style: null,
   children: []
 };
 
@@ -52,5 +71,6 @@ Item.defaultProps = {
 };
 
 TabBar.Item = Item;
+TabBar.height = hotcss.px2rem(70);
 
 export default TabBar;

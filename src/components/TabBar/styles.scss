@@ -1,20 +1,49 @@
 .tabBar {
+  position: fixed;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  height: px2rem(70);
+  overflow: hidden;
   background: #fff;
   border-top: px2rem(1) solid grey;
 
   & {
     .tabBarItem {
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       height: 100%;
       padding: 0 px2rem(20);
       font-size: px2rem(22);
+
+      & .badge {
+        position: absolute;
+        top: px2rem(5);
+        right: 0;
+        min-width: px2rem(13);
+        height: px2rem(23);
+        padding: 0 px2rem(5);
+        color: #fff;
+        font-size: px2rem(16);
+        line-height: px2rem(23);
+        white-space: nowrap;
+        text-align: center;
+        background-color: #ff5b05;
+        border-radius: px2rem(23);
+      }
+
+      & .badgeDot {
+        position: absolute;
+        top: px2rem(5);
+        right: 0;
+        width: px2rem(10);
+        height: px2rem(10);
+        background-color: #ff5b05;
+        border-radius: 50%;
+      }
     }
 
     .active {

@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { HomeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 
 import TabBar from '@/components/TabBar';
-import styles from './styles.scss';
 
 function MainLayout(props) {
   // eslint-disable-next-line no-console
@@ -12,15 +11,18 @@ function MainLayout(props) {
   const tabBarlist = [{
     title: '首页',
     path: '/index/home',
-    icon: <HomeOutlined />
+    icon: <HomeOutlined />,
+    badge: 'new'
   }, {
     title: '消息',
     path: '/index/message',
-    icon: <MessageOutlined />
+    icon: <MessageOutlined />,
+    badge: 2
   }, {
     title: '我的',
     path: '/index/my',
-    icon: <UserOutlined />
+    icon: <UserOutlined />,
+    dot: true
   }];
 
   const { location: { pathname } } = props;
@@ -32,20 +34,19 @@ function MainLayout(props) {
   return (
     <>
       {props.children}
-      <div className={styles.fill} />
-      <div className={styles.tabBarWrap}>
-        <TabBar className={styles.fill}>
-          {tabBarlist.map((item, index) => (
-            <TabBar.Item
-              key={index}
-              title={item.title}
-              icon={item.icon}
-              selected={item.path === pathname}
-              onPress={() => onTab(item.path)}
-            />
-          ))}
-        </TabBar>
-      </div>
+      <TabBar>
+        {tabBarlist.map((item, index) => (
+          <TabBar.Item
+            key={index}
+            title={item.title}
+            icon={item.icon}
+            badge={item.badge}
+            dot={item.dot}
+            selected={item.path === pathname}
+            onPress={() => onTab(item.path)}
+          />
+        ))}
+      </TabBar>
     </>
   );
 }
