@@ -12,7 +12,7 @@ import styles from './styles.scss';
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 function Slide(props) {
-  const { imgs = [] } = props;
+  const { imgs = [], ...rest } = props;
   return (
     <Swiper
       className={styles.swiper}
@@ -21,8 +21,9 @@ function Slide(props) {
       loop
       autoplay={{ disableOnInteraction: false }}
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
+      {...rest}
+      // onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log('slide change')}
     >
       {imgs.map((item, index) => (
         <SwiperSlide key={index}>

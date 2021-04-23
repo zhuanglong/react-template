@@ -14,53 +14,45 @@ $lrPadding: px2rem(15);
   background-color: $navBarBgColor;
 
   .icon {
-    display: flex;
-    align-items: center;
-    height: inherit;
     font-size: px2rem(22);
   }
 
   .text {
-    display: flex;
-    align-items: center;
-    height: inherit;
     font-size: px2rem(16);
   }
 
   & {
     .leftView,
+    .middleView,
     .rightView {
       display: flex;
-      flex: 1;
       flex-direction: row;
       align-items: center;
       height: inherit;
     }
 
     .leftView {
+      flex: 1;
       justify-content: flex-start;
       padding-left: $lrPadding;
 
       & {
         .icon {
           @extend .icon;
-          padding-right: px2rem(15);
         }
       }
     }
 
     .middleView {
-      height: inherit;
-
       & .title {
         @extend .text;
-        justify-content: center;
         font-weight: bold;
         font-size: px2rem(22);
       }
     }
 
     .rightView {
+      flex: 1;
       justify-content: flex-end;
       padding-right: $lrPadding;
     }

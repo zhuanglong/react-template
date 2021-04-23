@@ -8,7 +8,7 @@ import styles from './styles.scss';
 function NavBar(props) {
   return (
     <>
-      <div style={{ ...props.style, height: NavBar.height }} className={styles.container}>
+      <div style={{ height: NavBar.height, ...props.style }} className={styles.container}>
         <NavBarLeftView {...props} />
         <NavBarMiddleView {...props} />
         <NavBarRightView {...props} />
@@ -19,13 +19,18 @@ function NavBar(props) {
 }
 
 function NavBarLeftView(props) {
-  const { showBack, leftView, leftViewStyle, onBack = () => props.history.goBack() } = props;
+  const {
+    showBack, leftView, leftViewStyle,
+    onLeftView, onBack = () => props.history.goBack()
+  } = props;
   return (
     <div style={leftViewStyle} className={styles.leftView}>
       {showBack && (
         <LeftOutlined className={styles.icon} onClick={onBack} />
       )}
-      {typeof leftView === 'string' ? <div className={styles.text}>{leftView}</div> : leftView}
+      {typeof leftView === 'string'
+        ? leftView && <div className={styles.text} onClick={onLeftView}>{leftView}</div>
+        : leftView}
     </div>
   );
 }
@@ -34,17 +39,17 @@ function NavBarMiddleView(props) {
   const { title, middleViewStyle } = props;
   return (
     <div style={middleViewStyle} className={styles.middleView}>
-      {typeof title === 'string' ? <div className={styles.title}>{title}</div> : title}
+      {typeof title === 'string' ? title && <div className={styles.title}>{title}</div> : title}
     </div>
   );
 }
 
 function NavBarRightView(props) {
-  const { rightView, onRightView, rightViewStyle } = props;
+  const { rightView, rightViewStyle, onRightView } = props;
   return (
     <div style={rightViewStyle} className={styles.rightView}>
       {typeof rightView === 'string'
-        ? <div className={styles.text} onClick={onRightView}>{rightView}</div>
+        ? rightView && <div className={styles.text} onClick={onRightView}>{rightView}</div>
         : rightView}
     </div>
   );
@@ -64,6 +69,7 @@ NavBar.defaultProps = {
   middleViewStyle: null,
   rightViewStyle: null,
   onBack: undefined,
+  onLeftView: undefined,
   onRightView: undefined
 };
 
