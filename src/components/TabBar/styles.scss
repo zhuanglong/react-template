@@ -11,42 +11,62 @@
 
   & {
     .tabBarItem {
-      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       height: 100%;
       padding: 0 px2rem(20);
-      font-size: px2rem(22);
 
-      & .badge {
-        position: absolute;
-        top: px2rem(5);
-        right: 0;
-        min-width: px2rem(13);
-        height: px2rem(23);
-        padding: 0 px2rem(5);
-        color: #fff;
-        font-size: px2rem(16);
-        line-height: px2rem(23);
-        white-space: nowrap;
-        text-align: center;
-        background-color: #ff5b05;
-        border-radius: px2rem(23);
-      }
+      & {
+        .icon,
+        .title {
+          display: flex;
+          justify-content: center;
+        }
 
-      & .badgeDot {
-        position: absolute;
-        top: px2rem(5);
-        right: 0;
-        width: px2rem(10);
-        height: px2rem(10);
-        background-color: #ff5b05;
-        border-radius: 50%;
+        .icon {
+          font-size: px2rem(30);
+        }
+
+        .title {
+          font-size: px2rem(16);
+        }
+
+        // .spacer {
+        //   height: px2rem(3);
+        // }
+
+        .badge {
+          position: absolute;
+          top: - px2rem(6);
+          right: - px2rem(15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: px2rem(15);
+          height: px2rem(25);
+          padding: 0 px2rem(5);
+          color: #fff;
+          font-size: px2rem(16);
+          white-space: nowrap;
+          text-align: center;
+          background-color: #ff5b05;
+          border-radius: px2rem(25);
+        }
+
+        .badgeDot {
+          position: absolute;
+          top: - px2rem(2);
+          right: 0;
+          width: px2rem(12);
+          height: px2rem(12);
+          background-color: #ff5b05;
+          border-radius: 50%;
+        }
       }
     }
 
-    .active {
+    .tabBarItemActive {
       color: #108ee9;
     }
   }

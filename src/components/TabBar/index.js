@@ -23,12 +23,15 @@ function Item(props) {
   const { title, selected, icon, onPress } = props;
   return (
     <div
-      className={classnames(styles.tabBarItem, selected && styles.active)}
+      className={classnames(styles.tabBarItem, selected && styles.tabBarItemActive)}
       onClick={onPress}
     >
-      {icon && icon}
-      {title && title}
-      <Badge {...props} />
+      <div style={{ position: 'relative' }}>
+        {icon && <div className={styles.icon}>{icon}</div>}
+        {icon && title && <div className={styles.spacer} />}
+        {title && <div className={styles.title}>{title}</div>}
+        <Badge {...props} />
+      </div>
     </div>
   );
 }
@@ -71,6 +74,6 @@ Item.defaultProps = {
 };
 
 TabBar.Item = Item;
-TabBar.height = hotcss.px2rem(70);
+TabBar.height = hotcss.px2rem(75);
 
 export default TabBar;
