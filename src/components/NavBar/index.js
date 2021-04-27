@@ -1,8 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 
+import { findTitleOfRoutes } from '@/router/routes';
 import styles from './styles.scss';
 
 function NavBar(props) {
@@ -36,7 +36,10 @@ function NavBarLeftView(props) {
 }
 
 function NavBarMiddleView(props) {
-  const { title, middleViewStyle } = props;
+  const { middleViewStyle } = props;
+  let { title } = props;
+  // 如果没有设置 title 则默认使用路由 title
+  title = title === undefined ? findTitleOfRoutes(props.location.pathname) : title;
   return (
     <div style={middleViewStyle} className={styles.middleView}>
       {typeof title === 'string' ? title && <div className={styles.title}>{title}</div> : title}
@@ -62,7 +65,7 @@ NavBar.defaultProps = {
   showBack: true,
   navBarInsets: true,
   leftView: '',
-  title: '',
+  title: undefined,
   rightView: '',
   style: null,
   leftViewStyle: null,

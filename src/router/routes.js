@@ -66,6 +66,7 @@ const config = [
       },
       {
         path: '/message-detail',
+        title: '', // 空字符串用于组件内部设置标题
         component: MessageDetail
       },
       {
@@ -87,16 +88,16 @@ const config = [
 ];
 
 // 找到路由中的标题
-export function findTitleOfRoutes(currentPath, routes = config) {
+export function findTitleOfRoutes(pathname, routes = config) {
   let title = '';
   for (let index = 0; index < routes.length; index++) {
     const item = routes[index];
-    if (currentPath.split('?')[0] === item.path) {
-      title = item.title || '';
+    if (pathname === item.path) {
+      title = item.title;
       break;
     }
     if (item.children) {
-      title = findTitleOfRoutes(currentPath, item.children);
+      title = findTitleOfRoutes(pathname, item.children);
     }
   }
   return title;

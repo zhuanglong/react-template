@@ -29,7 +29,6 @@ function Message(props) {
   return (
     <>
       <NavBar
-        title="消息"
         showBack={false}
         rightView="清除未读"
         onRightView={() => alert('已清除')}

@@ -21,7 +21,7 @@ function My(props) {
 
   return (
     <>
-      <NavBar title="我的" showBack={false} />
+      <NavBar showBack={false} />
       <div className={styles.container}>
         <div className={styles.avatarBox}>
           <SettingOutlined className={styles.setting} />

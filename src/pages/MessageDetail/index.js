@@ -6,10 +6,11 @@ import { getURLSearchParams } from '@/utils/tools';
 
 function MessageDetail(props) {
   const { id } = getURLSearchParams(props.location.search);
+  document.title = id;
   return (
     <>
       <NavBar
-        title="消息内容"
+        title={id}
         rightView={<EllipsisOutlined className={NavBar.styles.icon} onClick={() => alert('菜单')} />}
         style={{
           color: '#fff',
