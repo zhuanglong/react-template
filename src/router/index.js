@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 
 import BasicLayout from '@/layouts/BasicLayout';
+import BlankLayout from '@/layouts/BlankLayout';
 import MainLayout from '@/layouts/MainLayout';
 
 import NotFound from '@/pages/NotFound';
@@ -19,32 +20,38 @@ const Profile = asyncComponent(() => import(/* webpackChunkName: "Profile" */'@/
 function getRouter() {
   return (
     <Router>
-      <BasicLayout>
-        <Switch>
-          <Route path="/" exact render={() => <Redirect to="/index" />} />
-          <Route
-            path="/index"
-            render={() => (
-              <>
-                <MainLayout>
-                  <Switch>
-                    <Route path="/index" exact render={() => <Redirect to="/index/home" />} />
-                    <Route path="/index/home" component={Home} />
-                    <Route path="/index/message" component={Message} />
-                    <Route path="/index/my" component={My} />
-                    <Route path="/index/*" render={() => <Redirect to="/404" />} />
-                  </Switch>
-                </MainLayout>
-              </>
-            )}
-          />
-          <Route path="/product" component={Product} />
-          <Route path="/message-detail" component={MessageDetail} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/404" component={NotFound} />
-          <Route path="*" render={() => <Redirect to="/404" />} />
-        </Switch>
-      </BasicLayout>
+      <Switch>
+        <Route path="/">
+          <BasicLayout>
+            <Switch>
+              <Route path="/" exact render={() => <Redirect to="/index" />} />
+              <Route
+                path="/index"
+                render={() => (
+                  <BlankLayout>
+                    <Switch>
+                      <MainLayout>
+                        <Switch>
+                          <Route path="/index" exact render={() => <Redirect to="/index/home" />} />
+                          <Route path="/index/home" component={Home} />
+                          <Route path="/index/message" component={Message} />
+                          <Route path="/index/my" component={My} />
+                          <Route path="/index/*" render={() => <Redirect to="/404" />} />
+                        </Switch>
+                      </MainLayout>
+                    </Switch>
+                  </BlankLayout>
+                )}
+              />
+              <Route path="/product" component={Product} />
+              <Route path="/message-detail" component={MessageDetail} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/404" component={NotFound} />
+              <Route path="*" render={() => <Redirect to="/404" />} />
+            </Switch>
+          </BasicLayout>
+        </Route>
+      </Switch>
     </Router>
   );
 }
