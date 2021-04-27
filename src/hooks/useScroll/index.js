@@ -23,7 +23,6 @@ function useScroll(target) {
         throw new Error('The "target" parameter must be Element');
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.warn(error);
       return;
     }

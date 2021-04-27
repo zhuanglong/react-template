@@ -3,54 +3,49 @@ import {
   HashRouter as Router, Switch, Route, Redirect
 } from 'react-router-dom';
 
-import BasicLayout from '@/layouts/BasicLayout';
-import BlankLayout from '@/layouts/BlankLayout';
-import MainLayout from '@/layouts/MainLayout';
+import routes from './routes';
 
-import NotFound from '@/pages/NotFound';
-import Home from '@/pages/Home';
-import Product from '@/pages/Product';
-import Message from '@/pages/Message';
-import MessageDetail from '@/pages/MessageDetail';
-import asyncComponent from './asyncComponent';
-
-const My = asyncComponent(() => import(/* webpackChunkName: "My" */'@/pages/My'));
-const Profile = asyncComponent(() => import(/* webpackChunkName: "Profile" */'@/pages/Profile'));
+function RouteWithSubRoutes(props) {
+  const { component, path, exact, redirect, children } = props;
+  const routeView = {};
+  if (component) { // 是否为组件
+    routeView.component = component;
+  } else if (redirect) { // 是否为重定向，是则去掉组件，因为重定向就没必要有组件
+    delete routeView.component;
+    routeView.render = () => <Redirect to={redirect} />;
+  } else { // 都没有返回空
+    return null;
+  }
+  // 如果存在子节点就必须要有组件，这样才能包裹
+  if (children && routeView.component) {
+    return (
+      <Route
+        path={path}
+        exact={exact}
+        render={() => (
+          <routeView.component>
+            <Switch>
+              {children.map((route, index) => (
+                <RouteWithSubRoutes key={index} {...route} />
+              ))}
+            </Switch>
+          </routeView.component>
+        )}
+      />
+    );
+  }
+  return (
+    <Route path={path} exact={exact} {...routeView} />
+  );
+}
 
 function getRouter() {
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <BasicLayout>
-            <Switch>
-              <Route path="/" exact render={() => <Redirect to="/index" />} />
-              <Route
-                path="/index"
-                render={() => (
-                  <BlankLayout>
-                    <Switch>
-                      <MainLayout>
-                        <Switch>
-                          <Route path="/index" exact render={() => <Redirect to="/index/home" />} />
-                          <Route path="/index/home" component={Home} />
-                          <Route path="/index/message" component={Message} />
-                          <Route path="/index/my" component={My} />
-                          <Route path="/index/*" render={() => <Redirect to="/404" />} />
-                        </Switch>
-                      </MainLayout>
-                    </Switch>
-                  </BlankLayout>
-                )}
-              />
-              <Route path="/product" component={Product} />
-              <Route path="/message-detail" component={MessageDetail} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/404" component={NotFound} />
-              <Route path="*" render={() => <Redirect to="/404" />} />
-            </Switch>
-          </BasicLayout>
-        </Route>
+        {routes.map((route, index) => (
+          <RouteWithSubRoutes key={index} {...route} />
+        ))}
       </Switch>
     </Router>
   );

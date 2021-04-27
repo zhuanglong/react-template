@@ -1,4 +1,4 @@
-> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/rem-layout)。
+> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/react-template)。
 
 [我的项目实例](https://github.com/zhuanglong/react-template/tree/h5)
 
