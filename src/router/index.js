@@ -22,8 +22,8 @@ function RouteWithSubRoutes(props) {
       <Route
         path={path}
         exact={exact}
-        render={() => (
-          <routeView.component>
+        render={(routeProps) => (
+          <routeView.component {...routeProps}>
             <Switch>
               {children.map((route, index) => (
                 <RouteWithSubRoutes key={index} {...route} />

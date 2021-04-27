@@ -1,12 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import { HomeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
 
 import TabBar from '@/components/TabBar';
 
 function MainLayout(props) {
   // eslint-disable-next-line no-console
-  console.log(props);
+  // console.log(props);
 
   const tabBarlist = [{
     title: '首页',
@@ -51,4 +50,4 @@ function MainLayout(props) {
   );
 }
 
-export default withRouter(MainLayout);
+export default MainLayout;

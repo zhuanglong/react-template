@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import '@/utils/hotcss/hotcss';
-import '@/utils/onRouteChange';
 import '@/utils/reset.scss';
 import getRouter from '@/router';
 
