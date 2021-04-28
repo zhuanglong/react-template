@@ -29,6 +29,7 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'no-param-reassign': 0,
     'no-plusplus': 0,
     'no-console': [1, { allow: ['warn', 'error'] }],
     'consistent-return': 0, // 要求return语句始终或从不指定值（一致返回）

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import NavBar from '@/components/NavBar';
 import history from '@/router/history';
+import request from '@/utils/request';
 import styles from './styles.scss';
 
 function Message() {
@@ -27,12 +28,26 @@ function Message() {
     history.push(`/message-detail?id=${id}`);
   };
 
+  const onPress = () => {
+    request({
+      url: '/api/user/userinfo',
+      method: 'post',
+      data: {
+        uu: '123'
+      }
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   return (
     <>
       <NavBar
         showBack={false}
         rightView="清除未读"
-        onRightView={() => alert('已清除')}
+        onRightView={onPress}
       />
       <div className={styles.container}>
         {messageList.map((item, index) => (
