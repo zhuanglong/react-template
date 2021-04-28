@@ -30,11 +30,8 @@ function Message() {
 
   const onPress = () => {
     request({
-      url: '/api/user/userinfo',
-      method: 'post',
-      data: {
-        uu: '123'
-      }
+      url: '/api/message/demo',
+      method: 'post'
     }).then((res) => {
       console.log(res);
     }).catch((err) => {

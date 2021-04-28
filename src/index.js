@@ -6,7 +6,7 @@ import '@/utils/hotcss/hotcss';
 import '@/utils/reset.scss';
 import getRouter from '@/router';
 
-import '../mock/users';
+import '../mock';
 
 function renderWithHotReload(RootElement) {
   ReactDom.render(

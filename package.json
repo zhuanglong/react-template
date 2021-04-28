@@ -8,8 +8,8 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
     "lint": "npm run lint:js && npm run lint:style",
     "lint--fix": "npm run lint:js--fix && npm run lint:style--fix",
-    "lint:js": "eslint --ext .js src webpack",
-    "lint:js--fix": "eslint --fix --ext .js src webpack",
+    "lint:js": "eslint --ext .js src webpack mock",
+    "lint:js--fix": "eslint --fix --ext .js src webpack mock",
     "lint:style": "stylelint src/**/*.{less,scss}",
     "lint:style--fix": "stylelint --fix src/**/*.{less,scss}"
   },
