@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  HashRouter as Router, Switch, Route, Redirect
+  Router, Switch, Route, Redirect
 } from 'react-router-dom';
 
+import history from './history';
 import routes from './routes';
 
 function RouteWithSubRoutes(props) {
@@ -41,7 +42,7 @@ function RouteWithSubRoutes(props) {
 
 function getRouter() {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
         {routes.map((route, index) => (
           <RouteWithSubRoutes key={index} {...route} />

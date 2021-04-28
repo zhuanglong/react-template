@@ -1,7 +1,7 @@
 // 对应的手动版
 import React from 'react';
 import {
-  HashRouter as Router, Switch, Route, Redirect
+  Router, Switch, Route, Redirect
 } from 'react-router-dom';
 
 import BasicLayout from '@/layouts/BasicLayout';
@@ -13,6 +13,8 @@ import Home from '@/pages/Home';
 import Product from '@/pages/Product';
 import Message from '@/pages/Message';
 import MessageDetail from '@/pages/MessageDetail';
+
+import history from './history';
 import asyncComponent from './asyncComponent';
 
 const My = asyncComponent(() => import(/* webpackChunkName: "My" */'@/pages/My'));
@@ -20,7 +22,7 @@ const Profile = asyncComponent(() => import(/* webpackChunkName: "Profile" */'@/
 
 function getRouter() {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
         <Route
           path="/"

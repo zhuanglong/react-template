@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 import NavBar from '@/components/NavBar';
+import history from '@/router/history';
 import styles from './styles.scss';
 
-function Message(props) {
+function Message() {
   const [messageList] = useState([
     {
       id: '0x111',
@@ -23,7 +24,7 @@ function Message(props) {
   ]);
 
   const go = (id) => {
-    props.history.push(`/message-detail?id=${id}`);
+    history.push(`/message-detail?id=${id}`);
   };
 
   return (
