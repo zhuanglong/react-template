@@ -1,42 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import NavBar from '@/components/NavBar';
 import history from '@/router/history';
-import request from '@/utils/request';
+import * as messageApi from '@/services/message';
 import styles from './styles.scss';
 
 function Message() {
-  const [messageList] = useState([
-    {
-      id: '0x111',
-      title: '【红包福利】摇一摇分好礼',
-      content: '最高xx元现金洪波要出来，活动期间红包可累积'
-    },
-    {
-      id: '0x112',
-      title: '家务红包最低xx元起，立即领取>>>',
-      content: '洗衣洗鞋、日常保洁、家电清洗......统统折上折'
-    },
-    {
-      id: '0x113',
-      title: '【教育充电节】直播钜惠',
-      content: 'xx元抢报班优惠，限时底价不要错过'
-    }
-  ]);
+  const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    messageApi.getMessageList().then((res) => {
+      if (res.code === 0) {
+        setMessageList(res.data);
+      } else {
+        //
+      }
+    });
+  }, []);
 
   const go = (id) => {
     history.push(`/message-detail?id=${id}`);
-  };
-
-  const onPress = () => {
-    request({
-      url: '/api/message/demo',
-      method: 'post'
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
-    });
   };
 
   return (
@@ -44,7 +27,7 @@ function Message() {
       <NavBar
         showBack={false}
         rightView="清除未读"
-        onRightView={onPress}
+        onRightView={() => alert('已清除')}
       />
       <div className={styles.container}>
         {messageList.map((item, index) => (

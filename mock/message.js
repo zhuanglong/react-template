@@ -8,6 +8,17 @@ setup({
   timeout: '200-1000'
 });
 
+mock('/api/message/list', 'post', {
+  code: 0,
+  'data|5-10': [{
+    id: '@id',
+    title: '@ctitle',
+    content: '@cparagraph',
+    image: "@image('200x100', '#4A7BF7', 'Hello')",
+    date: '@datetime'
+  }]
+});
+
 mock('/api/message/demo', 'post', {
   code: 0,
   // 属性 data 的值是一个数组，其中含有 5 到 10 个元素

@@ -29,6 +29,7 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'arrow-body-style': 0,
     'no-param-reassign': 0,
     'no-plusplus': 0,
     'no-console': [1, { allow: ['warn', 'error'] }],

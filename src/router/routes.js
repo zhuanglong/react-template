@@ -7,6 +7,7 @@ import Home from '@/pages/Home';
 import Product from '@/pages/Product';
 import Message from '@/pages/Message';
 import MessageDetail from '@/pages/MessageDetail';
+import Login from '@/pages/Login';
 import asyncComponent from './asyncComponent';
 
 const My = asyncComponent(() => import(/* webpackChunkName: "My" */'@/pages/My'));
@@ -73,6 +74,11 @@ const config = [
         path: '/profile',
         title: '个人信息',
         component: Profile
+      },
+      {
+        path: '/login',
+        title: '登录',
+        component: Login
       },
       {
         path: '/404',

@@ -21,9 +21,7 @@ mock('/api/user/logout', 'post', {
 });
 
 // 用户信息
-mock('/api/user/userinfo', 'post', (options) => {
-  // eslint-disable-next-line no-console
-  console.log(options);
+mock('/api/user/userinfo', 'post', () => {
   return {
     code: 0,
     data: {
