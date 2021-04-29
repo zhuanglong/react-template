@@ -3,16 +3,27 @@ import {
   Router, Switch, Route, Redirect
 } from 'react-router-dom';
 
+import { tokenStorage } from '@/storage';
 import history from './history';
 import routes from './routes';
 
+// 登录状态鉴权路由
+function RouteAuth(props) {
+  const { isAuth, ...rest } = props;
+  const isLogined = !!tokenStorage.get();
+  const Comp = <Route {...rest} />;
+  if (isAuth === false) {
+    return Comp;
+  }
+  return isLogined ? Comp : <Redirect to="/login" />;
+}
+
 function RouteWithSubRoutes(props) {
-  const { component, path, exact, redirect, children } = props;
+  const { component, path, exact, redirect, isAuth, children } = props;
   const routeView = {};
   if (component) { // 是否为组件
     routeView.component = component;
   } else if (redirect) { // 是否为重定向，是则去掉组件，因为重定向就没必要有组件
-    delete routeView.component;
     routeView.render = () => <Redirect to={redirect} />;
   } else { // 都没有返回空
     return null;
@@ -36,7 +47,7 @@ function RouteWithSubRoutes(props) {
     );
   }
   return (
-    <Route path={path} exact={exact} {...routeView} />
+    <RouteAuth path={path} exact={exact} isAuth={isAuth} {...routeView} />
   );
 }
 

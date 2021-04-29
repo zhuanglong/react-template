@@ -78,11 +78,13 @@ const config = [
       {
         path: '/login',
         title: '登录',
+        isAuth: false,
         component: Login
       },
       {
         path: '/404',
         title: '404',
+        isAuth: false,
         component: NotFound
       },
       {
