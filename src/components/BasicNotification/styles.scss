@@ -1,0 +1,7 @@
+:global {
+  $prefixCls: 'sru-BasicNotification';
+
+  .#{$prefixCls} {
+    position: fixed;
+  }
+}
