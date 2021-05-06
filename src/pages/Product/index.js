@@ -8,15 +8,31 @@ let basicNotification = null;
 BasicNotification.newInstance({}, (bn) => {
   basicNotification = bn;
 });
-console.log(basicNotification);
 
 function Product() {
+  const onNotice = () => {
+    basicNotification.notice({
+      content: 'haha...',
+      duration: 2000,
+      onClose() {
+        console.log('closed callback');
+      }
+    });
+  };
+
+  const onNotice2 = () => {
+    basicNotification.notice({ content: 'xixixi...' });
+  };
+
   return (
     <>
       <NavBar />
-      <div>
-        Product
-      </div>
+      <span onClick={onNotice}>
+        add
+      </span> |
+      <span onClick={onNotice2}>
+        add2
+      </span>
     </>
   );
 }

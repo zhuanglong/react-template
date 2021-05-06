@@ -21,6 +21,7 @@
     "axios": "^0.20.0",
     "classnames": "^2.3.1",
     "prop-types": "^15.7.2",
+    "rc-notification": "^4.5.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
@@ -79,10 +80,5 @@
     "Chrome > 31",
     "ff > 31",
     "ie >= 8"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  }
+  ]
 }
