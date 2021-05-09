@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import NavBar from '@/components/NavBar';
+import Toast from '@/components/Toast';
 import history from '@/router/history';
 import * as messageApi from '@/services/message';
 import styles from './styles.scss';
@@ -27,7 +28,7 @@ function Message() {
       <NavBar
         showBack={false}
         rightView="清除未读"
-        onRightView={() => alert('已清除')}
+        onRightView={() => Toast.show({ content: '已清除' })}
       />
       <div className={styles.container}>
         {messageList.map((item, index) => (

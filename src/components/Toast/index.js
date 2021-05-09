@@ -1,16 +1,19 @@
 import React from 'react';
 import classnames from 'classnames';
 import Notification from 'rc-notification';
+import InfoCircleOutlined from '@ant-design/icons/InfoCircleOutlined';
+import CheckCircleOutlined from '@ant-design/icons/CheckCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons/CloseCircleOutlined';
+import LoadingOutlined from '@ant-design/icons/LoadingOutlined';
 
 import './styles.scss';
 
 const prefixCls = 'sru-Toast';
-
 const messageKey = 'messageKey';
 let messageInstance = null;
 
 let config = {
-  duration: 3,
+  duration: 2,
   mask: true
 };
 
@@ -37,11 +40,11 @@ function notice(props) {
     onClose = () => null
   } = props;
 
-  const iconType = {
-    info: '',
-    success: 'success',
-    fail: 'fail',
-    loading: 'loading'
+  const IconElement = {
+    info: InfoCircleOutlined,
+    success: CheckCircleOutlined,
+    fail: CloseCircleOutlined,
+    loading: LoadingOutlined
   }[icon];
 
   getMessageInstance(mask, (notification) => {
@@ -56,8 +59,13 @@ function notice(props) {
       key: messageKey,
       duration,
       content: (
-        <div className={`${prefixCls}-text`}>
-          {content}
+        <div className={`${prefixCls}-body`}>
+          {IconElement && <IconElement className={`${prefixCls}-body-icon`} /> }
+          {content && (
+            <div className={`${prefixCls}-body-text`}>
+              {content}
+            </div>
+          )}
         </div>
       ),
       onClose() {
@@ -68,7 +76,19 @@ function notice(props) {
 }
 
 export default {
-  show({ content, duration, mask, onClose }) {
+  show(props) {
+    const { icon, content, duration, mask, onClose } = props || {};
+    notice({
+      icon,
+      content,
+      duration,
+      mask,
+      onClose
+    });
+  },
+
+  info(props) {
+    const { content, duration, mask, onClose } = props || {};
     notice({
       icon: 'info',
       content,
@@ -78,17 +98,8 @@ export default {
     });
   },
 
-  info({ content, duration, mask, onClose }) {
-    notice({
-      icon: 'info',
-      content,
-      duration,
-      mask,
-      onClose
-    });
-  },
-
-  success({ content, duration, mask, onClose }) {
+  success(props) {
+    const { content, duration, mask, onClose } = props || {};
     notice({
       icon: 'success',
       content,
@@ -98,9 +109,10 @@ export default {
     });
   },
 
-  fail({ content, duration, mask, onClose }) {
+  fail(props) {
+    const { content, duration, mask, onClose } = props || {};
     notice({
-      icon: 'success',
+      icon: 'fail',
       content,
       duration,
       mask,
@@ -108,7 +120,8 @@ export default {
     });
   },
 
-  loading({ content, duration = null, mask, onClose }) {
+  loading(props) {
+    const { content = 'loading...', duration = null, mask, onClose } = props || {};
     notice({
       icon: 'loading',
       content,

@@ -1,9 +1,3 @@
-@mixin fade-effect() {
-  animation-duration: 0.3s;
-  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  animation-fill-mode: both;
-}
-
 :global {
   $prefixCls: 'sru-Toast';
 
@@ -30,16 +24,27 @@
       pointer-events: none;
     }
 
-    &-text {
+    &-body {
       min-width: px2rem(60);
       padding: px2rem(10);
-      color: #fff;
-      font-size: px2rem(18);
       text-align: center;
       word-break: break-word;
       background-color: rgba(58, 58, 58, 0.9);
       border-radius: px2rem(3);
       pointer-events: auto;
+
+      & {
+        &-icon {
+          margin-bottom: px2rem(5);
+          color: #fff;
+          font-size: px2rem(46);
+        }
+
+        &-text {
+          color: #fff;
+          font-size: px2rem(18);
+        }
+      }
     }
 
     // 动画 fade

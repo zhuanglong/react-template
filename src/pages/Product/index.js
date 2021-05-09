@@ -6,7 +6,8 @@ import Toast from '@/components/Toast';
 
 function Product() {
   const onNotice = () => {
-    Toast.success({
+    Toast.show({
+      icon: <div>da1</div>,
       content: 'success',
       duration: 1,
       mask: false,
@@ -25,7 +26,7 @@ function Product() {
   };
 
   const onNotice3 = () => {
-    Toast.loading({ content: 'loading...' });
+    Toast.loading();
   };
 
   const onNotice4 = () => {
