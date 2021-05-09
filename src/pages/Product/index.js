@@ -1,19 +1,15 @@
 import React from 'react';
 
 import NavBar from '@/components/NavBar';
-import BasicNotification from '@/components/BasicNotification';
+import Toast from '@/components/Toast';
 // import styles from './styles.scss';
-
-let basicNotification = null;
-BasicNotification.newInstance({}, (bn) => {
-  basicNotification = bn;
-});
 
 function Product() {
   const onNotice = () => {
-    basicNotification.notice({
-      content: 'haha...',
-      duration: 2000,
+    Toast.success({
+      content: 'success',
+      duration: 1,
+      mask: false,
       onClose() {
         console.log('closed callback');
       }
@@ -21,7 +17,19 @@ function Product() {
   };
 
   const onNotice2 = () => {
-    basicNotification.notice({ content: 'xixixi...' });
+    Toast.fail({
+      content: 'fail',
+      // duration: null,
+      mask: false
+    });
+  };
+
+  const onNotice3 = () => {
+    Toast.loading({ content: 'loading...' });
+  };
+
+  const onNotice4 = () => {
+    Toast.hide();
   };
 
   return (
@@ -31,7 +39,13 @@ function Product() {
         add
       </span> |
       <span onClick={onNotice2}>
-        add2
+        add2 |
+      </span>
+      <span onClick={onNotice3}>
+        add3 |
+      </span>
+      <span onClick={onNotice4}>
+        close
       </span>
     </>
   );

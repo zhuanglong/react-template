@@ -1,0 +1,107 @@
+@mixin fade-effect() {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-fill-mode: both;
+}
+
+:global {
+  $prefixCls: 'sru-Toast';
+
+  .#{$prefixCls} {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      max-width: 50%;
+    }
+
+    &-mask {
+      pointer-events: auto;
+    }
+
+    &-nomask {
+      pointer-events: none;
+    }
+
+    &-text {
+      min-width: px2rem(60);
+      padding: px2rem(10);
+      color: #fff;
+      font-size: px2rem(18);
+      text-align: center;
+      word-break: break-word;
+      background-color: rgba(58, 58, 58, 0.9);
+      border-radius: px2rem(3);
+      pointer-events: auto;
+    }
+
+    // 动画 fade
+    &-fade-appear {
+      opacity: 0;
+    }
+
+    &-fade-appear-active {
+      opacity: 1;
+      transition: opacity 0.3s ease-in;
+    }
+
+    &-fade-leave {
+      opacity: 1;
+    }
+
+    &-fade-leave-active {
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
+    }
+
+    // 动画 zoom
+    &-zoom-appear {
+      :local {
+        animation-name: zoomIn;
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+      }
+    }
+
+    &-zoom-leave {
+      :local {
+        animation-name: zoomOut;
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomOut {
+      from {
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
