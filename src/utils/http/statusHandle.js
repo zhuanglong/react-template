@@ -1,15 +1,18 @@
 /* eslint-disable no-console */
+import toast from '@/components/Toast';
 
 export function showLoading(config = {}) {
   // 不传递默认开启 loading
   if (!config.hideLoading) {
     console.log('show loading');
+    toast.loading();
   }
 }
 
 export function hideLoading(config = {}) {
   if (!config.hideLoading) {
     console.log('hide loading');
+    toast.hide();
   }
 }
 

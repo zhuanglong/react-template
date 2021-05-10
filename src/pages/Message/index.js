@@ -10,9 +10,7 @@ function Message() {
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
-    toast.loading();
     messageApi.getMessageList().then((res) => {
-      toast.hide();
       if (res.code === 0) {
         setMessageList(res.data);
       } else {

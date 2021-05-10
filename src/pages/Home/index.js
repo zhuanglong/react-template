@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 import NavBar from '@/components/NavBar';
 import Slide from '@/components/Slide';
@@ -7,14 +7,13 @@ import styles from './styles.scss';
 
 function Home(props) {
   const { top } = useScroll(document);
-
-  const imgs = [{
+  const [imgs] = useState([{
     url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1393347426,1800905021&fm=26&gp=0.jpg'
   }, {
     url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2216046132,2701662030&fm=26&gp=0.jpg'
   }, {
     url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1049504560,1303436644&fm=26&gp=0.jpg'
-  }];
+  }]);
 
   const pushPage = () => {
     props.history.push('/product');
@@ -25,24 +24,25 @@ function Home(props) {
   };
 
   // 渐变处理
+  const thatTop = String(top).split('.')[0];
   let opacity = 0;
   let height = hotcss.px2rem(35);
-  if (String(top).length === 2) {
-    if (top > 40) {
-      opacity = `0.${top}`;
+  if (thatTop.length === 2) {
+    if (thatTop > '40') {
+      opacity = `0.${thatTop}`;
       height = hotcss.px2rem(45);
     }
-  } else if (String(top).length > 2) {
+  } else if (thatTop.length > 2) {
     opacity = 1;
     height = NavBar.height;
   }
 
   // 拿到实例
-  const onSwiper = (instance) => {
+  const onSwiper = useCallback((instance) => {
     instance.on('tap', (ev) => {
       console.log(ev.realIndex);
     });
-  };
+  }, []);
 
   return (
     <>

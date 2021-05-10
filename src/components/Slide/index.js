@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -36,4 +36,4 @@ function Slide(props) {
   );
 }
 
-export default Slide;
+export default memo(Slide);
