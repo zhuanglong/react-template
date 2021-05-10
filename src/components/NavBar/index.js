@@ -3,12 +3,14 @@ import { withRouter } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 
 import { findTitleOfRoutes } from '@/router/routes';
-import styles from './styles.scss';
+import './styles.scss';
+
+const prefixCls = 'sru-NavBar';
 
 function NavBar(props) {
   return (
     <>
-      <div style={{ height: NavBar.height, ...props.style }} className={styles.container}>
+      <div style={{ height: NavBar.height, ...props.style }} className={prefixCls}>
         <NavBarLeftView {...props} />
         <NavBarMiddleView {...props} />
         <NavBarRightView {...props} />
@@ -19,40 +21,43 @@ function NavBar(props) {
 }
 
 function NavBarLeftView(props) {
+  const leftViewPrefixCls = `${prefixCls}-leftView`;
   const {
     showBack, leftView, leftViewStyle,
     onLeftView, onBack = () => props.history.goBack()
   } = props;
   return (
-    <div style={leftViewStyle} className={styles.leftView}>
+    <div style={leftViewStyle} className={leftViewPrefixCls}>
       {showBack && (
-        <LeftOutlined className={styles.icon} onClick={onBack} />
+        <LeftOutlined className={`${leftViewPrefixCls}-icon`} onClick={onBack} />
       )}
       {typeof leftView === 'string'
-        ? leftView && <div className={styles.text} onClick={onLeftView}>{leftView}</div>
+        ? leftView && <div className={`${leftViewPrefixCls}-text`} onClick={onLeftView}>{leftView}</div>
         : leftView}
     </div>
   );
 }
 
 function NavBarMiddleView(props) {
+  const middleViewPrefixCls = `${prefixCls}-middleView`;
   const { middleViewStyle } = props;
   let { title } = props;
   // 如果没有设置 title 则默认使用路由 title
   title = title === undefined ? findTitleOfRoutes(props.location.pathname) : title;
   return (
-    <div style={middleViewStyle} className={styles.middleView}>
-      {typeof title === 'string' ? title && <div className={styles.title}>{title}</div> : title}
+    <div style={middleViewStyle} className={middleViewPrefixCls}>
+      {typeof title === 'string' ? title && <div className={`${middleViewPrefixCls}-title`}>{title}</div> : title}
     </div>
   );
 }
 
 function NavBarRightView(props) {
+  const rightViewPrefixCls = `${prefixCls}-rightView`;
   const { rightView, rightViewStyle, onRightView } = props;
   return (
-    <div style={rightViewStyle} className={styles.rightView}>
+    <div style={rightViewStyle} className={rightViewPrefixCls}>
       {typeof rightView === 'string'
-        ? rightView && <div className={styles.text} onClick={onRightView}>{rightView}</div>
+        ? rightView && <div className={`${prefixCls}-text`} onClick={onRightView}>{rightView}</div>
         : rightView}
     </div>
   );
@@ -77,9 +82,9 @@ NavBar.defaultProps = {
 };
 
 NavBar.styles = {
-  text: styles.text,
-  title: styles.title,
-  icon: styles.icon
+  text: `${prefixCls}-text`,
+  title: `${prefixCls}-middleView-title`,
+  icon: `${prefixCls}-icon`
 };
 
 NavBar.height = hotcss.px2rem(55);

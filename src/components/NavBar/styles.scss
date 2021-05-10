@@ -1,57 +1,56 @@
-$navBarBgColor: #fff;
-$navBarTextColor: #000;
-$lrPadding: px2rem(15);
+:global {
+  $prefixCls: 'sru-NavBar';
+  $navBarBgColor: #fff;
+  $navBarTextColor: #000;
+  $lrPadding: px2rem(15);
 
-.container {
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  overflow: hidden;
-  color: $navBarTextColor;
-  background-color: $navBarBgColor;
+  .#{$prefixCls} {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    color: $navBarTextColor;
+    background-color: $navBarBgColor;
 
-  .icon {
-    font-size: px2rem(22);
-  }
+    &-icon {
+      font-size: px2rem(22);
+    }
 
-  .text {
-    font-size: px2rem(16);
-  }
+    &-text {
+      font-size: px2rem(16);
+    }
 
-  & {
-    .leftView,
-    .middleView,
-    .rightView {
+    &-leftView,
+    &-middleView,
+    &-rightView {
       display: flex;
       flex-direction: row;
       align-items: center;
       height: inherit;
     }
 
-    .leftView {
+    &-leftView {
       flex: 1;
       justify-content: flex-start;
       padding-left: $lrPadding;
 
-      & {
-        .icon {
-          @extend .icon;
-        }
+      &-icon {
+        @extend .#{$prefixCls}-icon;
       }
     }
 
-    .middleView {
-      & .title {
-        @extend .text;
+    &-middleView {
+      &-title {
+        @extend .#{$prefixCls}-text;
         font-weight: bold;
         font-size: px2rem(22);
       }
     }
 
-    .rightView {
+    &-rightView {
       flex: 1;
       justify-content: flex-end;
       padding-right: $lrPadding;

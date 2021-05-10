@@ -6,7 +6,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.scss';
 
-import styles from './styles.scss';
+import './styles.scss';
+
+const prefixCls = 'sru-Slide';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
@@ -15,7 +17,7 @@ function Slide(props) {
   const { imgs = [], ...rest } = props;
   return (
     <Swiper
-      className={styles.swiper}
+      className={prefixCls}
       spaceBetween={0}
       slidesPerView={1}
       loop
@@ -27,7 +29,7 @@ function Slide(props) {
     >
       {imgs.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className={styles.bannerImg} style={{ backgroundImage: `url(${item.url})` }} />
+          <div className={`${prefixCls}-bannerImg`} style={{ backgroundImage: `url(${item.url})` }} />
         </SwiperSlide>
       ))}
     </Swiper>

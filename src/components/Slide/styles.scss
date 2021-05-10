@@ -1,15 +1,19 @@
-.swiper {
-  width: 100%;
-  height: px2rem(120);
-  background-color: #fff;
-  border-radius: px2rem(10);
-  box-shadow: 0 px2rem(5) px2rem(10) px2rem(2) #ccc;
+:global {
+  $prefixCls: 'sru-Slide';
 
-  & .bannerImg {
+  .#{$prefixCls} {
     width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    height: px2rem(120);
+    background-color: #fff;
+    border-radius: px2rem(10);
+    box-shadow: 0 px2rem(5) px2rem(10) px2rem(2) #ccc;
+
+    &-bannerImg {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
   }
 }

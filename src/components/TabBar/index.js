@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import styles from './styles.scss';
+import './styles.scss';
+
+const prefixCls = 'sru-TabBar';
 
 function TabBar(props) {
   const { style, tabBarInsets, children } = props;
@@ -10,7 +12,7 @@ function TabBar(props) {
     <>
       {tabBarInsets && <div style={{ height: TabBar.height }} />}
       <div
-        className={styles.tabBar}
+        className={prefixCls}
         style={{ height: TabBar.height, ...style }}
       >
         {children}
@@ -23,13 +25,13 @@ function Item(props) {
   const { title, selected, icon, onPress } = props;
   return (
     <div
-      className={classnames(styles.tabBarItem, selected && styles.tabBarItemActive)}
+      className={classnames(`${prefixCls}-item`, selected && `${prefixCls}-item-active`)}
       onClick={onPress}
     >
       <div style={{ position: 'relative' }}>
-        {icon && <div className={styles.icon}>{icon}</div>}
-        {icon && title && <div className={styles.spacer} />}
-        {title && <div className={styles.title}>{title}</div>}
+        {icon && <div className={`${prefixCls}-item-icon`}>{icon}</div>}
+        {icon && title && <div className={`${prefixCls}-item-spacer`} />}
+        {title && <div className={`${prefixCls}-item-title`}>{title}</div>}
         <Badge {...props} />
       </div>
     </div>
@@ -40,9 +42,9 @@ function Badge(props) {
   const { badge, dot } = props;
   let elem = null;
   if (dot) {
-    elem = <div className={styles.badgeDot} />;
+    elem = <div className={`${prefixCls}-item-badgeDot`} />;
   } else {
-    elem = <div className={styles.badge}>{badge}</div>;
+    elem = <div className={`${prefixCls}-item-badge`}>{badge}</div>;
   }
   return elem;
 }
