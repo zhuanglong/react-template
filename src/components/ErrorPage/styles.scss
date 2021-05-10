@@ -1,0 +1,33 @@
+:global {
+  $prefixCls: 'sru-ErrorPage';
+
+  .#{$prefixCls} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    &-content {
+      color: #333;
+      font-size: px2rem(28);
+    }
+
+    &-bottonGroup {
+      display: flex;
+      margin-top: px2rem(10);
+    }
+
+    &-botton {
+      padding: px2rem(8) px2rem(15);
+      color: #fff;
+      font-size: px2rem(18);
+      background-color: #108ee9;
+      border-radius: px2rem(4);
+
+      &:last-child {
+        margin-left: px2rem(10);
+      }
+    }
+  }
+}
