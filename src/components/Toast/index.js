@@ -14,6 +14,7 @@ import './styles.scss';
 const prefixCls = 'sru-Toast';
 const messageKey = 'messageKey';
 let messageInstance = null;
+let timer = null;
 
 let config = {
   duration: 2,
@@ -50,6 +51,10 @@ function notice(props) {
     loading: LoadingOutlined
   }[icon];
 
+  if (timer) {
+    clearTimeout(timer);
+  }
+
   getRCNotificationInstance(mask, (notification) => {
     if (messageInstance) {
       messageInstance.destroy();
@@ -63,9 +68,9 @@ function notice(props) {
       duration,
       content: (
         <>
-          {IconElement && <IconElement className={`${prefixCls}-notice-content-icon`} /> }
+          {IconElement && <IconElement className={`${prefixCls}-icon`} /> }
           {content && (
-            <div className={`${prefixCls}-notice-content-text`}>
+            <div className={`${prefixCls}-text`}>
               {content}
             </div>
           )}
@@ -73,10 +78,11 @@ function notice(props) {
       ),
       onClose() {
         onClose();
-        setTimeout(() => {
+        timer = setTimeout(() => {
           if (messageInstance) {
             messageInstance.destroy();
             messageInstance = null;
+            timer = null;
           }
         }, 300);
       }
@@ -142,10 +148,11 @@ export default {
   hide() {
     if (messageInstance) {
       messageInstance.removeNotice(messageKey);
-      setTimeout(() => {
+      timer = setTimeout(() => {
         if (messageInstance) {
           messageInstance.destroy();
           messageInstance = null;
+          timer = null;
         }
       }, 300);
     }

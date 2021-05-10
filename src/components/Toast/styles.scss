@@ -32,19 +32,17 @@
       background-color: rgba(58, 58, 58, 0.9);
       border-radius: px2rem(3);
       pointer-events: auto;
+    }
 
-      & {
-        &-icon {
-          margin-bottom: px2rem(5);
-          color: #fff;
-          font-size: px2rem(46);
-        }
+    &-icon {
+      margin-bottom: px2rem(5);
+      color: #fff;
+      font-size: px2rem(46);
+    }
 
-        &-text {
-          color: #fff;
-          font-size: px2rem(18);
-        }
-      }
+    &-text {
+      color: #fff;
+      font-size: px2rem(18);
     }
 
     // 动画 fade
@@ -54,7 +52,7 @@
 
     &-fade-appear-active {
       opacity: 1;
-      transition: opacity 0.3s ease-in;
+      transition: opacity 300ms ease-in;
     }
 
     &-fade-leave {
@@ -63,14 +61,14 @@
 
     &-fade-leave-active {
       opacity: 0;
-      transition: opacity 0.3s ease-in;
+      transition: opacity 300ms ease-in;
     }
 
     // 动画 zoom
     &-zoom-appear {
       :local {
         animation-name: zoomIn;
-        animation-duration: 0.3s;
+        animation-duration: 300ms;
         animation-fill-mode: both;
       }
     }
@@ -78,7 +76,7 @@
     &-zoom-leave {
       :local {
         animation-name: zoomOut;
-        animation-duration: 0.3s;
+        animation-duration: 300ms;
         animation-fill-mode: both;
       }
     }

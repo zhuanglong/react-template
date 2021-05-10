@@ -21,18 +21,17 @@ function NavBar(props) {
 }
 
 function NavBarLeftView(props) {
-  const leftViewPrefixCls = `${prefixCls}-leftView`;
   const {
     showBack, leftView, leftViewStyle,
     onLeftView, onBack = () => props.history.goBack()
   } = props;
   return (
-    <div style={leftViewStyle} className={leftViewPrefixCls}>
+    <div style={leftViewStyle} className={`${prefixCls}-leftView`}>
       {showBack && (
-        <LeftOutlined className={`${leftViewPrefixCls}-icon`} onClick={onBack} />
+        <LeftOutlined className={`${prefixCls}-leftView-icon`} onClick={onBack} />
       )}
       {typeof leftView === 'string'
-        ? leftView && <div className={`${leftViewPrefixCls}-text`} onClick={onLeftView}>{leftView}</div>
+        ? leftView && <div className={`${prefixCls}-text`} onClick={onLeftView}>{leftView}</div>
         : leftView}
     </div>
   );
@@ -46,7 +45,7 @@ function NavBarMiddleView(props) {
   title = title === undefined ? findTitleOfRoutes(props.location.pathname) : title;
   return (
     <div style={middleViewStyle} className={middleViewPrefixCls}>
-      {typeof title === 'string' ? title && <div className={`${middleViewPrefixCls}-title`}>{title}</div> : title}
+      {typeof title === 'string' ? title && <div className={`${prefixCls}-title`}>{title}</div> : title}
     </div>
   );
 }
@@ -83,7 +82,7 @@ NavBar.defaultProps = {
 
 NavBar.styles = {
   text: `${prefixCls}-text`,
-  title: `${prefixCls}-middleView-title`,
+  title: `${prefixCls}-title`,
   icon: `${prefixCls}-icon`
 };
 

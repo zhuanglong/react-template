@@ -23,6 +23,12 @@
       font-size: px2rem(16);
     }
 
+    &-title {
+      @extend .#{$prefixCls}-text;
+      font-weight: bold;
+      font-size: px2rem(22);
+    }
+
     &-leftView,
     &-middleView,
     &-rightView {
@@ -42,13 +48,8 @@
       }
     }
 
-    &-middleView {
-      &-title {
-        @extend .#{$prefixCls}-text;
-        font-weight: bold;
-        font-size: px2rem(22);
-      }
-    }
+    // &-middleView {
+    // }
 
     &-rightView {
       flex: 1;

@@ -29,9 +29,9 @@ function Item(props) {
       onClick={onPress}
     >
       <div style={{ position: 'relative' }}>
-        {icon && <div className={`${prefixCls}-item-icon`}>{icon}</div>}
-        {icon && title && <div className={`${prefixCls}-item-spacer`} />}
-        {title && <div className={`${prefixCls}-item-title`}>{title}</div>}
+        {icon && <div className={`${prefixCls}-icon`}>{icon}</div>}
+        {icon && title && <div className={`${prefixCls}-spacer`} />}
+        {title && <div className={`${prefixCls}-title`}>{title}</div>}
         <Badge {...props} />
       </div>
     </div>
@@ -42,9 +42,9 @@ function Badge(props) {
   const { badge, dot } = props;
   let elem = null;
   if (dot) {
-    elem = <div className={`${prefixCls}-item-badgeDot`} />;
+    elem = <div className={`${prefixCls}-badgeDot`} />;
   } else {
-    elem = <div className={`${prefixCls}-item-badge`}>{badge}</div>;
+    elem = <div className={`${prefixCls}-badge`}>{badge}</div>;
   }
   return elem;
 }
