@@ -1,3 +1,6 @@
+// Toast 简单封装
+// 推荐更强大的 https://github.com/fkhadra/react-toastify
+
 import React from 'react';
 import classnames from 'classnames';
 import Notification from 'rc-notification';
@@ -17,7 +20,7 @@ let config = {
   mask: true
 };
 
-function getMessageInstance(mask, callback = () => null) {
+function getRCNotificationInstance(mask, callback = () => null) {
   Notification.newInstance({
     style: {}, // 清除默认样式
     prefixCls,
@@ -47,7 +50,7 @@ function notice(props) {
     loading: LoadingOutlined
   }[icon];
 
-  getMessageInstance(mask, (notification) => {
+  getRCNotificationInstance(mask, (notification) => {
     if (messageInstance) {
       messageInstance.destroy();
       messageInstance = null;
@@ -59,27 +62,32 @@ function notice(props) {
       key: messageKey,
       duration,
       content: (
-        <div className={`${prefixCls}-body`}>
-          {IconElement && <IconElement className={`${prefixCls}-body-icon`} /> }
+        <>
+          {IconElement && <IconElement className={`${prefixCls}-notice-content-icon`} /> }
           {content && (
-            <div className={`${prefixCls}-body-text`}>
+            <div className={`${prefixCls}-notice-content-text`}>
               {content}
             </div>
           )}
-        </div>
+        </>
       ),
       onClose() {
         onClose();
+        setTimeout(() => {
+          if (messageInstance) {
+            messageInstance.destroy();
+            messageInstance = null;
+          }
+        }, 300);
       }
     });
   });
 }
 
 export default {
-  show(props) {
-    const { icon, content, duration, mask, onClose } = props || {};
+  show(content, props) {
+    const { duration, mask, onClose } = props || {};
     notice({
-      icon,
       content,
       duration,
       mask,
@@ -87,8 +95,8 @@ export default {
     });
   },
 
-  info(props) {
-    const { content, duration, mask, onClose } = props || {};
+  info(content, props) {
+    const { duration, mask, onClose } = props || {};
     notice({
       icon: 'info',
       content,
@@ -98,8 +106,8 @@ export default {
     });
   },
 
-  success(props) {
-    const { content, duration, mask, onClose } = props || {};
+  success(content, props) {
+    const { duration, mask, onClose } = props || {};
     notice({
       icon: 'success',
       content,
@@ -109,8 +117,8 @@ export default {
     });
   },
 
-  fail(props) {
-    const { content, duration, mask, onClose } = props || {};
+  fail(content, props) {
+    const { duration, mask, onClose } = props || {};
     notice({
       icon: 'fail',
       content,
@@ -120,8 +128,8 @@ export default {
     });
   },
 
-  loading(props) {
-    const { content = 'loading...', duration = null, mask, onClose } = props || {};
+  loading(content = 'loading...', props) {
+    const { duration = null, mask, onClose } = props || {};
     notice({
       icon: 'loading',
       content,
@@ -134,6 +142,12 @@ export default {
   hide() {
     if (messageInstance) {
       messageInstance.removeNotice(messageKey);
+      setTimeout(() => {
+        if (messageInstance) {
+          messageInstance.destroy();
+          messageInstance = null;
+        }
+      }, 300);
     }
   },
 

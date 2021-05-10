@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import NavBar from '@/components/NavBar';
-import Toast from '@/components/Toast';
+import toast from '@/components/Toast';
 import history from '@/router/history';
 import * as messageApi from '@/services/message';
 import styles from './styles.scss';
@@ -10,7 +10,9 @@ function Message() {
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
+    toast.loading();
     messageApi.getMessageList().then((res) => {
+      toast.hide();
       if (res.code === 0) {
         setMessageList(res.data);
       } else {
@@ -28,7 +30,7 @@ function Message() {
       <NavBar
         showBack={false}
         rightView="清除未读"
-        onRightView={() => Toast.show({ content: '已清除' })}
+        onRightView={() => toast.show('已清除')}
       />
       <div className={styles.container}>
         {messageList.map((item, index) => (
