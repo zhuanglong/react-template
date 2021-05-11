@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { mergeWithCustomize, customizeObject } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -11,6 +12,51 @@ const { SRC_PATH, DIST_PATH, PUBLIC_PATH } = require('./paths');
 // https://github.com/webpack/webpack/issues/2537
 // https://github.com/niexias/niexias.github.io/issues/7
 const isDev = process.env.NODE_ENV === 'development';
+
+// 公共的样式 loader
+const styleLoaders = {
+  styleLoader: {
+    loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+    ...(!isDev && {
+      options: {
+        publicPath: '../../'
+      }
+    })
+  },
+  // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
+  // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
+  cssLoader: {
+    loader: 'css-loader',
+    options: {
+      modules: {
+        localIdentName: '[folder]__[local]--[hash:8]'
+      }
+    }
+  },
+  postcssLoader: {
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        plugins: ['postcss-preset-env']
+      }
+    }
+  },
+  sassLoader: {
+    loader: 'sass-loader',
+    options: {
+      additionalData: "@import '@/utils/hotcss/px2rem.scss';"
+    }
+  },
+  lessLoader: {
+    loader: 'less-loader',
+    options: {
+      lessOptions: {
+        plugins: [new LessPluginFunctions()]
+      },
+      additionalData: "@import '@/utils/hotcss/px2rem.less';"
+    }
+  }
+};
 
 const commonConfig = {
   // https://webpack.docschina.org/configuration/mode/
@@ -89,82 +135,35 @@ const commonConfig = {
       },
       {
         test: /\.css$/i,
-        use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          ...(!isDev && {
-            options: {
-              publicPath: '../../'
-            }
-          })
-        }, {
-          loader: 'css-loader'
-        }]
+        use: [
+          styleLoaders.styleLoader,
+          mergeWithCustomize({
+            customizeObject: customizeObject({
+              options: 'replace'
+            })
+          })(
+            styleLoaders.cssLoader, { options: {} }
+          )
+        ]
       },
       {
         // https://webpack.docschina.org/loaders/css-loader/#pure-css-css-modules-and-postcss
         test: /\.less$/i,
-        use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          ...(!isDev && {
-            options: {
-              publicPath: '../../'
-            }
-          })
-        }, {
-          // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
-          // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
-          loader: 'css-loader',
-          options: {
-            modules: {
-              localIdentName: '[folder]__[local]--[hash:8]'
-            }
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: ['postcss-preset-env']
-            }
-          }
-        }, {
-          loader: 'less-loader',
-          options: {
-            lessOptions: {
-              plugins: [new LessPluginFunctions()]
-            },
-            additionalData: "@import '@/utils/hotcss/px2rem.less';"
-          }
-        }]
+        use: [
+          styleLoaders.styleLoader,
+          styleLoaders.cssLoader,
+          styleLoaders.postcssLoader,
+          styleLoaders.lessLoader
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          ...(!isDev && {
-            options: {
-              publicPath: '../../'
-            }
-          })
-        }, {
-          loader: 'css-loader',
-          options: {
-            modules: {
-              localIdentName: '[folder]__[local]--[hash:8]'
-            }
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: ['postcss-preset-env']
-            }
-          }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            additionalData: "@import '@/utils/hotcss/px2rem.scss';"
-          }
-        }]
+        use: [
+          styleLoaders.styleLoader,
+          styleLoaders.cssLoader,
+          styleLoaders.postcssLoader,
+          styleLoaders.sassLoader
+        ]
       }
     ]
   },

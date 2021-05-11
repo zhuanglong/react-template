@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { mergeWithCustomize } = require('webpack-merge');
 
 const { DIST_PATH, SRC_PATH } = require('./paths');
 const commonConfig = require('./webpack.common');
@@ -45,7 +45,7 @@ const devConfig = {
   }
 };
 
-module.exports = merge({
+module.exports = mergeWithCustomize({
   customizeArray(a, b, key) {
     if (key === 'entry.app') { // entry.app 不合并，全替换
       return b;
