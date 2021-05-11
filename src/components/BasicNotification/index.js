@@ -1,5 +1,6 @@
-// eslint-disable-next-line max-classes-per-file
-import React from 'react';
+// 参考 https://github.com/react-component/notification
+
+import React, { useState, createRef, forwardRef, useImperativeHandle } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
@@ -13,85 +14,75 @@ function getUuid() {
   return `sruBasicNotification_${Date.now()}_${seed++}`;
 }
 
-class BasicNotification extends React.Component {
-  state = {
-    notices: []
-  }
+const BasicNotification = forwardRef((props, ref) => {
+  const [notices, setNotices] = useState([]);
 
-  add = (props) => {
-    const key = props.key || getUuid();
+  const remove = (noticeKey) => {
+    setNotices(notices.filter((item) => item.key !== noticeKey));
+  };
+
+  const add = (params) => {
+    const key = params.key || getUuid();
     const noticeProps = {
       key,
-      content: props.content,
-      duration: props.duration,
+      content: params.content,
+      duration: params.duration,
       onClose: () => {
-        this.remove(key);
-        if (props.onClose) {
-          props.onClose();
+        remove(key);
+        if (params.onClose) {
+          params.onClose();
         }
       }
     };
 
-    this.setState((prevState) => {
-      const { notices } = prevState;
-      const noticeIndex = notices.findIndex((item) => item.key === props.key);
-      const updateNotices = notices.concat();
-      if (noticeIndex !== -1) {
-        updateNotices.splice(noticeIndex, 1, noticeProps);
-      } else {
-        updateNotices.push(noticeProps);
-      }
-      return {
-        notices: updateNotices
-      };
-    });
-  }
+    const noticeIndex = notices.findIndex((item) => item.key === params.key);
+    const updateNotices = notices.concat();
+    if (noticeIndex !== -1) {
+      updateNotices.splice(noticeIndex, 1, noticeProps);
+    } else {
+      updateNotices.push(noticeProps);
+    }
+    setNotices(updateNotices);
+  };
 
-  remove = (noticeKey) => {
-    this.setState((prevState) => {
-      const { notices } = prevState;
-      return {
-        notices: notices.filter((item) => item.key !== noticeKey)
-      };
-    });
-  }
+  useImperativeHandle(ref, () => ({
+    add,
+    remove
+  }));
 
-  render() {
-    return (
-      <div
-        className={classnames({
-          [`${prefixCls}`]: true
-        })}
-      >
-        {this.state.notices.map((item) => (
-          <Notice
-            key={item.key}
-            content={item.content}
-            duration={item.duration}
-            onClose={item.onClose}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      className={classnames({
+        [`${prefixCls}`]: true
+      })}
+    >
+      {notices.map((item) => (
+        <Notice
+          key={item.key}
+          content={item.content}
+          duration={item.duration}
+          onClose={item.onClose}
+        />
+      ))}
+    </div>
+  );
+});
 
-BasicNotification.newInstance = (props, callback) => {
+BasicNotification.newInstance = (props) => {
+  const ref = createRef();
   const div = document.createElement('div');
   document.body.appendChild(div);
 
-  function ref(notificationRef) {
-    callback({
-      notice: (noticeProps) => {
-        notificationRef.add(noticeProps);
-      },
-      removeNotice: (key) => {
-        notificationRef.remove(key);
-      }
-    });
-  }
-
   ReactDOM.render(<BasicNotification {...props} ref={ref} />, div);
+
+  return {
+    notice: (noticeProps) => {
+      ref.current.add(noticeProps);
+    },
+    removeNotice: (key) => {
+      ref.current.remove(key);
+    }
+  };
 };
 
 export default BasicNotification;
