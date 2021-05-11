@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-const { distPath, srcPath } = require('./paths');
+const { DIST_PATH, SRC_PATH } = require('./paths');
 const commonConfig = require('./webpack.common');
 
 const devConfig = {
@@ -11,7 +11,7 @@ const devConfig = {
   entry: {
     app: [
       // 'react-hot-loader/patch' // 貌似没什么作用
-      path.join(srcPath, 'index.js')
+      path.join(SRC_PATH, 'index.js')
     ]
   },
 
@@ -28,7 +28,7 @@ const devConfig = {
   },
 
   devServer: {
-    contentBase: distPath,
+    contentBase: DIST_PATH,
     port: 8080,
     open: false, // 自动打开浏览器
     compress: true, // 启用 gzip 压缩

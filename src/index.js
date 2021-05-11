@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import '@/utils/hotcss/hotcss';
-import '@/utils/reset.scss';
+import '@/utils/reset.css';
 import getRouter from '@/router';
 
 import '../mock';

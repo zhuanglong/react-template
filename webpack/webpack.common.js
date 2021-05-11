@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LessPluginFunctions = require('less-plugin-functions');
 
-const { srcPath, distPath, publicPath } = require('./paths');
+const { SRC_PATH, DIST_PATH, PUBLIC_PATH } = require('./paths');
 
 // https://webpack.docschina.org/guides/production/#specify-the-mode
 // https://github.com/webpack/webpack/issues/2537
@@ -18,12 +18,12 @@ const commonConfig = {
 
   entry: {
     app: [
-      path.join(srcPath, 'index.js')
+      path.join(SRC_PATH, 'index.js')
     ]
   },
 
   output: {
-    path: distPath,
+    path: DIST_PATH,
     filename: 'static/js/[name].[hash].js', // name 是入口名称
     chunkFilename: 'static/js/[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
   },
@@ -38,19 +38,19 @@ const commonConfig = {
     new HtmlWebpackPlugin({
       title: 'react-template',
       filename: 'index.html',
-      template: path.join(publicPath, 'index.html')
+      template: path.join(PUBLIC_PATH, 'index.html')
     }),
     new CopyWebpackPlugin({
       patterns: [{
-        from: path.join(publicPath, 'favicon.ico'),
-        to: path.join(distPath, 'favicon.ico')
+        from: path.join(PUBLIC_PATH, 'favicon.ico'),
+        to: path.join(DIST_PATH, 'favicon.ico')
       }]
     })
   ],
 
   resolve: {
     alias: {
-      '@': srcPath
+      '@': SRC_PATH
     }
   },
 
@@ -58,7 +58,7 @@ const commonConfig = {
     rules: [
       {
         test: /\.js$/,
-        include: srcPath,
+        include: SRC_PATH,
         use: [{
           loader: 'babel-loader',
           options: {
@@ -85,6 +85,19 @@ const commonConfig = {
             name: '[name].[hash:8].[ext]',
             outputPath: 'static/fonts/'
           }
+        }]
+      },
+      {
+        test: /\.css$/i,
+        use: [{
+          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          ...(!isDev && {
+            options: {
+              publicPath: '../../'
+            }
+          })
+        }, {
+          loader: 'css-loader'
         }]
       },
       {
@@ -125,7 +138,6 @@ const commonConfig = {
       },
       {
         test: /\.s[ac]ss$/i,
-        exclude: [/swiper/],
         use: [{
           loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           ...(!isDev && {
@@ -152,22 +164,6 @@ const commonConfig = {
           options: {
             additionalData: "@import '@/utils/hotcss/px2rem.scss';"
           }
-        }]
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        include: [/swiper/],
-        use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          ...(!isDev && {
-            options: {
-              publicPath: '../../'
-            }
-          })
-        }, {
-          loader: 'css-loader'
-        }, {
-          loader: 'sass-loader'
         }]
       }
     ]
