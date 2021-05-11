@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const chalk = require('react-dev-utils/chalk');
 
 const commonConfig = require('./webpack.common');
 
@@ -11,6 +13,10 @@ const prodConfig = {
   devtool: false, // 'source-map'
 
   plugins: [
+    new ProgressBarPlugin({
+      format: `  build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
+      clear: false
+    }),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[hash].css',
       chunkFilename: 'static/css/[name].[chunkhash].css'

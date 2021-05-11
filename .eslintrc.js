@@ -29,6 +29,7 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'no-restricted-syntax': 0, // 禁止使用 for in
     'arrow-body-style': 0,
     'no-param-reassign': 0,
     'no-plusplus': 0,
