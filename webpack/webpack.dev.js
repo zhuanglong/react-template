@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const { mergeWithCustomize } = require('webpack-merge');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('react-dev-utils/chalk');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const { DIST_PATH, SRC_PATH } = require('./paths');
 const commonConfig = require('./webpack.common');
@@ -13,7 +14,6 @@ const devConfig = {
 
   entry: {
     app: [
-      // 'react-hot-loader/patch' // 貌似没什么作用
       path.join(SRC_PATH, 'index.js')
     ]
   },
@@ -32,16 +32,9 @@ const devConfig = {
       }
       /* eslint-enable no-console */
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshPlugin()
   ],
-
-  resolve: {
-    alias: {
-      // 去除控制台"React-Hot-Loader:..."警告
-      // https://github.com/gaearon/react-hot-loader/issues/1227#issuecomment-482139583
-      'react-dom': '@hot-loader/react-dom'
-    }
-  },
 
   devServer: {
     host: '0.0.0.0', // 可局域网访问

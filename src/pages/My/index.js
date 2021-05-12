@@ -1,6 +1,5 @@
 import React from 'react';
 import { SettingOutlined, RightOutlined } from '@ant-design/icons';
-import { hot } from 'react-hot-loader/root';
 
 import NavBar from '@/components/NavBar';
 import styles from './styles.scss';
@@ -42,4 +41,4 @@ function My(props) {
   );
 }
 
-export default hot(My);
+export default My;

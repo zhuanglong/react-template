@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
 
 import NavBar from '@/components/NavBar';
 import * as userApi from '@/services/user';
@@ -26,4 +25,4 @@ function Profile(props) {
   );
 }
 
-export default hot(Profile);
+export default Profile;
