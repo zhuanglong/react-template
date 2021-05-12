@@ -20,13 +20,13 @@ export default function asyncComponent(importComponent) {
   return class extends React.Component {
     state = {
       component: null,
-      show: false,
+      pastDelay: false,
       failed: false
     }
 
     componentDidMount() {
       this.timer = setTimeout(() => {
-        this.setState({ show: true });
+        this.setState({ pastDelay: true });
       }, 300);
       importComponent().then((cmp) => {
         clearTimeout(this.timer);
@@ -43,11 +43,11 @@ export default function asyncComponent(importComponent) {
     }
 
     render() {
-      const { component: C, show, failed } = this.state;
+      const { component: C, pastDelay, failed } = this.state;
       if (failed) {
         return <ErrorPage />;
       }
-      return C ? <C {...this.props} /> : show && <Loading />;
+      return C ? <C {...this.props} /> : pastDelay && <Loading />;
     }
   };
 }

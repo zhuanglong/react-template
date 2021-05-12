@@ -50,7 +50,7 @@ instance.interceptors.response.use(
       alert(matchHttpStatusCode(error.response.status));
     } else {
       // 断网或代码异常
-      alert('程序异常');
+      alert('网络异常');
     }
     return Promise.reject(error);
   }
