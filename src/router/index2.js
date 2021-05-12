@@ -13,6 +13,7 @@ import Home from '@/pages/Home';
 import Product from '@/pages/Product';
 import Message from '@/pages/Message';
 import MessageDetail from '@/pages/MessageDetail';
+import Login from '@/pages/Login';
 
 import history from './history';
 import asyncComponent from './asyncComponent';
@@ -51,6 +52,7 @@ function getRouter() {
                 <Route path="/product" component={Product} />
                 <Route path="/message-detail" component={MessageDetail} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/login" component={Login} />
                 <Route path="/404" component={NotFound} />
                 <Route path="*" render={() => <Redirect to="/404" />} />
               </Switch>

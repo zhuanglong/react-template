@@ -8,6 +8,7 @@ import Product from '@/pages/Product';
 import Message from '@/pages/Message';
 import MessageDetail from '@/pages/MessageDetail';
 import Login from '@/pages/Login';
+
 import asyncComponent from './asyncComponent';
 
 const My = asyncComponent(() => import(/* webpackChunkName: "My" */'@/pages/My'));

@@ -19,10 +19,6 @@ function Home(props) {
     props.history.push('/product');
   };
 
-  const pushPage2 = () => {
-    props.history.push('/profile');
-  };
-
   // 渐变处理
   const thatTop = String(top).split('.')[0];
   let opacity = 0;
@@ -71,7 +67,7 @@ function Home(props) {
         </div>
         <div className={styles.funcBox}>
           {Array(6).fill(null).map((item, index) => (
-            <div key={index} className={styles.item} onClick={pushPage2}>
+            <div key={index} className={styles.item} onClick={pushPage}>
               <div className={styles.itemIcon} />
               <div className={styles.itemTitle}>Y{index}</div>
             </div>
