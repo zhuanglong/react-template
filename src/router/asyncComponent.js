@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingOutlined from '@ant-design/icons/LoadingOutlined';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import ErrorPage from '@/components/ErrorPage';
 

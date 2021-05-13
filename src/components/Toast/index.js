@@ -4,10 +4,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import Notification from 'rc-notification';
-import InfoCircleOutlined from '@ant-design/icons/InfoCircleOutlined';
-import CheckCircleOutlined from '@ant-design/icons/CheckCircleOutlined';
-import CloseCircleOutlined from '@ant-design/icons/CloseCircleOutlined';
-import LoadingOutlined from '@ant-design/icons/LoadingOutlined';
+import {
+  InfoCircleOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  LoadingOutlined
+} from '@ant-design/icons';
 
 import './styles.scss';
 
@@ -18,7 +20,7 @@ let timer = null;
 
 let config = {
   duration: 2,
-  mask: true
+  mask: false
 };
 
 function getRCNotificationInstance(mask, callback = () => null) {
@@ -135,7 +137,7 @@ export default {
   },
 
   loading(content = 'loading...', props) {
-    const { duration = null, mask, onClose } = props || {};
+    const { duration = null, mask = true, onClose } = props || {};
     notice({
       icon: 'loading',
       content,
