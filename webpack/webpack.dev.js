@@ -37,9 +37,9 @@ const devConfig = {
   ],
 
   devServer: {
-    host: '0.0.0.0', // 可局域网访问
     contentBase: DIST_PATH,
     port: devServer.port,
+    host: '0.0.0.0', // 可局域网访问
     open: false, // 自动打开浏览器
     compress: true, // 启用 gzip 压缩
     hot: true,

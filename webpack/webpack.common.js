@@ -70,8 +70,8 @@ const commonConfig = {
 
   output: {
     path: DIST_PATH,
-    filename: 'static/js/[name].[hash].js', // name 是入口名称
-    chunkFilename: 'static/js/[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
+    filename: isDev ? 'static/js/[name].js' : 'static/js/[name].[contenthash:8].js', // name 是入口名称
+    chunkFilename: isDev ? 'static/js/[name].chunk.js' : 'static/js/[name].[contenthash:8].chunk.js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
   },
 
   plugins: [
@@ -119,7 +119,7 @@ const commonConfig = {
           options: {
             limit: 8192, // 小于 8kb 的图片转换为 base64 编码
             name: '[name].[hash:8].[ext]',
-            outputPath: 'static/image/'
+            outputPath: 'static/image'
           }
         }]
       },
@@ -129,7 +129,7 @@ const commonConfig = {
           loader: 'file-loader',
           options: {
             name: '[name].[hash:8].[ext]',
-            outputPath: 'static/fonts/'
+            outputPath: 'static/fonts'
           }
         }]
       },
@@ -183,7 +183,7 @@ const commonConfig = {
       }
     },
     runtimeChunk: {
-      name: 'runtime'
+      name: (entrypoint) => `runtime-${entrypoint.name}`
     }
   }
 };
