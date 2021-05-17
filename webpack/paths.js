@@ -1,11 +1,11 @@
 const path = require('path');
 
-const srcPath = path.join(process.cwd(), 'src');
-const distPath = path.join(process.cwd(), 'dist');
-const publicPath = path.join(process.cwd(), 'public');
+const SRC_PATH = path.join(process.cwd(), 'src');
+const DIST_PATH = path.join(process.cwd(), 'dist');
+const PUBLIC_PATH = path.join(process.cwd(), 'public');
 
 module.exports = {
-  srcPath,
-  distPath,
-  publicPath
+  SRC_PATH,
+  DIST_PATH,
+  PUBLIC_PATH
 };

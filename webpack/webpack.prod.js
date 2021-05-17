@@ -1,9 +1,11 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const chalk = require('react-dev-utils/chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const commonConfig = require('./webpack.common');
 
@@ -11,9 +13,13 @@ const prodConfig = {
   devtool: false, // 'source-map'
 
   plugins: [
+    new ProgressBarPlugin({
+      format: `  build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
+      clear: false
+    }),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[hash].css',
-      chunkFilename: 'static/css/[name].[chunkhash].css'
+      filename: 'static/css/[name].[contenthash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
     }),
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({
@@ -37,7 +43,7 @@ const prodConfig = {
         }
       }),
       // 压缩 css
-      new OptimizeCssAssetsWebpackPlugin({})
+      new OptimizeCSSAssetsPlugin({})
     ]
   }
 };
