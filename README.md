@@ -1574,8 +1574,8 @@ const prodConfig = {
     plugins: [
         ...
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].css',
-            chunkFilename: '[name].[chunkhash].css'
+            filename: 'static/css/[name].[contenthash:8].css',
+            chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
         })
     ],
 };
@@ -1643,13 +1643,13 @@ webpack.prod.js optimization 增加，
 
 ```js
 const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const prodConfig = {
     ...
     optimization: [
         ...
-        minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsWebpackPlugin({})]
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
     ],
 };
 ```
@@ -1821,7 +1821,7 @@ plugins: [
 
 新增 webpack\devServer.js，用来获取 IP；
 
-```
+```js
 const interfaces = require('os').networkInterfaces(); // 在开发环境中获取局域网中的本机iP地址
 
 let ipAdress = '';
@@ -1845,7 +1845,7 @@ module.exports = {
 
 修改 webpack.dev.js；
 
-```
+```js
 const chalk = require('react-dev-utils/chalk');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const devServer = require('./devServer');
@@ -1877,7 +1877,7 @@ devServer: {
 
 修改 webpack.prod.js；
 
-```
+```js
 const chalk = require('react-dev-utils/chalk');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 

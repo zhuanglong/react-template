@@ -66,8 +66,8 @@ const commonConfig = {
 
   output: {
     path: DIST_PATH,
-    filename: 'static/js/[name].[hash].js', // name 是入口名称
-    chunkFilename: 'static/js/[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
+    filename: isDev ? 'static/js/[name].js' : 'static/js/[name].[contenthash:8].js', // name 是入口名称
+    chunkFilename: isDev ? 'static/js/[name].chunk.js' : 'static/js/[name].[contenthash:8].chunk.js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
   },
 
   plugins: [
@@ -179,7 +179,7 @@ const commonConfig = {
       }
     },
     runtimeChunk: {
-      name: 'runtime'
+      name: (entrypoint) => `runtime-${entrypoint.name}`
     }
   }
 };
