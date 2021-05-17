@@ -146,5 +146,3 @@ export default CounterMobx;
 
 - https://github.com/tibotiber/mst-hmr-bug/blob/master/src/index.js
 - https://github.com/mobxjs/mobx-react/issues/500
-
-
