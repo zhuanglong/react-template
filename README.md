@@ -40,9 +40,13 @@
 
 **在 JS 中调用**
 
-src\index.js
+public\index.html
 
-![](https://gitee.com/zloooong/image_store/raw/master/img/20210119104045.png)
+```
+<meta name="hotcss" content="design-width=375" />
+```
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210517205325.png)
 
 ```
 style={{ width: `${hotcss.px2rem(150)}rem` }}

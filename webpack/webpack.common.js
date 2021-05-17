@@ -1,16 +1,62 @@
 const path = require('path');
 const webpack = require('webpack');
+const { mergeWithCustomize, customizeObject } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LessPluginFunctions = require('less-plugin-functions');
 
-const { srcPath, distPath, publicPath } = require('./paths');
+const { SRC_PATH, DIST_PATH, PUBLIC_PATH } = require('./paths');
 
 // https://webpack.docschina.org/guides/production/#specify-the-mode
 // https://github.com/webpack/webpack/issues/2537
 // https://github.com/niexias/niexias.github.io/issues/7
 const isDev = process.env.NODE_ENV === 'development';
+
+// 公共的样式 loader
+const styleLoaders = {
+  styleLoader: {
+    loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+    ...(!isDev && {
+      options: {
+        publicPath: '../../'
+      }
+    })
+  },
+  // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
+  // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
+  cssLoader: {
+    loader: 'css-loader',
+    options: {
+      modules: {
+        localIdentName: '[folder]__[local]--[hash:8]'
+      }
+    }
+  },
+  postcssLoader: {
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        plugins: ['postcss-preset-env']
+      }
+    }
+  },
+  sassLoader: {
+    loader: 'sass-loader',
+    options: {
+      additionalData: "@import '@/utils/hotcss/px2rem.scss';"
+    }
+  },
+  lessLoader: {
+    loader: 'less-loader',
+    options: {
+      lessOptions: {
+        plugins: [new LessPluginFunctions()]
+      },
+      additionalData: "@import '@/utils/hotcss/px2rem.less';"
+    }
+  }
+};
 
 const commonConfig = {
   // https://webpack.docschina.org/configuration/mode/
@@ -18,39 +64,39 @@ const commonConfig = {
 
   entry: {
     app: [
-      path.join(srcPath, 'index.js')
+      path.join(SRC_PATH, 'index.js')
     ]
   },
 
   output: {
-    path: distPath,
-    filename: 'static/js/[name].[hash].js', // name 是入口名称
-    chunkFilename: 'static/js/[name].[chunkhash].js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
+    path: DIST_PATH,
+    filename: isDev ? 'static/js/[name].js' : 'static/js/[name].[contenthash:8].js', // name 是入口名称
+    chunkFilename: isDev ? 'static/js/[name].chunk.js' : 'static/js/[name].[contenthash:8].chunk.js' // name 是从 /* webpackChunkName: "xxPage" */ 中取的
   },
 
   plugins: [
     new webpack.DefinePlugin({
       // https://www.cnblogs.com/usebtf/p/9912413.html
       'process.env': {
-        PUBLIC_PATH: JSON.stringify('./')
+        PUBLIC_PATH: JSON.stringify('')
       }
     }),
     new HtmlWebpackPlugin({
       title: 'react-template',
       filename: 'index.html',
-      template: path.join(publicPath, 'index.html')
+      template: path.join(PUBLIC_PATH, 'index.html')
     }),
     new CopyWebpackPlugin({
       patterns: [{
-        from: path.join(publicPath, 'favicon.ico'),
-        to: path.join(distPath, 'favicon.ico')
+        from: path.join(PUBLIC_PATH, 'favicon.ico'),
+        to: path.join(DIST_PATH, 'favicon.ico')
       }]
     })
   ],
 
   resolve: {
     alias: {
-      '@': srcPath
+      '@': SRC_PATH
     }
   },
 
@@ -58,7 +104,7 @@ const commonConfig = {
     rules: [
       {
         test: /\.js$/,
-        include: srcPath,
+        include: SRC_PATH,
         use: [{
           loader: 'babel-loader',
           options: {
@@ -73,7 +119,7 @@ const commonConfig = {
           options: {
             limit: 8192, // 小于 8kb 的图片转换为 base64 编码
             name: '[name].[hash:8].[ext]',
-            outputPath: 'static/image/'
+            outputPath: 'static/image'
           }
         }]
       },
@@ -83,75 +129,41 @@ const commonConfig = {
           loader: 'file-loader',
           options: {
             name: '[name].[hash:8].[ext]',
-            outputPath: 'static/fonts/'
+            outputPath: 'static/fonts'
           }
         }]
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          styleLoaders.styleLoader,
+          mergeWithCustomize({
+            customizeObject: customizeObject({
+              options: 'replace'
+            })
+          })(
+            styleLoaders.cssLoader, { options: {} }
+          )
+        ]
       },
       {
         // https://webpack.docschina.org/loaders/css-loader/#pure-css-css-modules-and-postcss
         test: /\.less$/i,
-        use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          ...(!isDev && {
-            options: {
-              publicPath: '../../'
-            }
-          })
-        }, {
-          // https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender
-          // https://github.com/rails/webpacker/issues/2197#issuecomment-517234086
-          loader: 'css-loader',
-          options: {
-            modules: {
-              localIdentName: '[folder]__[local]--[hash:8]'
-            }
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: ['postcss-preset-env']
-            }
-          }
-        }, {
-          loader: 'less-loader',
-          options: {
-            lessOptions: {
-              plugins: [new LessPluginFunctions()]
-            },
-            additionalData: "@import '@/utils/hotcss/px2rem.less';"
-          }
-        }]
+        use: [
+          styleLoaders.styleLoader,
+          styleLoaders.cssLoader,
+          styleLoaders.postcssLoader,
+          styleLoaders.lessLoader
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [{
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          ...(!isDev && {
-            options: {
-              publicPath: '../../'
-            }
-          })
-        }, {
-          loader: 'css-loader',
-          options: {
-            modules: {
-              localIdentName: '[folder]__[local]--[hash:8]'
-            }
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: ['postcss-preset-env']
-            }
-          }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            additionalData: "@import '@/utils/hotcss/px2rem.scss';"
-          }
-        }]
+        use: [
+          styleLoaders.styleLoader,
+          styleLoaders.cssLoader,
+          styleLoaders.postcssLoader,
+          styleLoaders.sassLoader
+        ]
       }
     ]
   },
@@ -171,7 +183,7 @@ const commonConfig = {
       }
     },
     runtimeChunk: {
-      name: 'runtime'
+      name: (entrypoint) => `runtime-${entrypoint.name}`
     }
   }
 };
