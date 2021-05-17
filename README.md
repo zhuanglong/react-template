@@ -2,7 +2,6 @@
 
 旨在学习 Webpack 相关配置及插件的使用，个人自用的 React 脚手架，基于该脚手架继续扩展 React 周边技术（分支可见）。
 
-
 [项目地址](https://github.com/zhuanglong/react-template)
 
 ## 目录
@@ -31,11 +30,12 @@
 - <a href="#生成环境构建">生成环境构建</a>
 - <a href="#打包优化">打包优化</a>
 - <a href="#扩展">扩展</a>
-    - <a href="#打包体积可视化分析">打包体积可视化分析</a>
-    - <a href="#支持装饰器">支持装饰器</a>
-    - <a href="#解决在 class 中定义静态属性的问题">解决在 class 中定义静态属性的问题</a>
-    - <a href="#Webpack 配置全局变量">Webpack 配置全局变量</a>
-    - <a href="#分离 CSS 文件导致资源路径错误">分离 CSS 文件导致资源路径错误</a>
+  - <a href="#打包体积可视化分析">打包体积可视化分析</a>
+  - <a href="#支持装饰器">支持装饰器</a>
+  - <a href="#解决在 class 中定义静态属性的问题">解决在 class 中定义静态属性的问题</a>
+  - <a href="#Webpack 配置全局变量">Webpack 配置全局变量</a>
+  - <a href="#分离 CSS 文件导致资源路径错误">分离 CSS 文件导致资源路径错误</a>
+  - <a href="#优化编译信息在控制台的显示效果">优化编译信息在控制台的显示效果</a>
 
 ## <a id="init 项目">init 项目</a>
 
@@ -43,7 +43,7 @@
 
 ## <a id="webpack">webpack</a>
 
-`npm i --save-dev webpack@4 webpack-cli webpack-merge`
+`npm i --save-dev webpack@4 webpack-cli webpack-merge@5`
 
 > webpack-merge 用于合并配置文件。
 
@@ -54,14 +54,14 @@ webpack\paths.js
 ```js
 const path = require('path');
 
-const srcPath = path.join(process.cwd(), 'src');
-const distPath = path.join(process.cwd(), 'dist');
-const publicPath = path.join(process.cwd(), 'public');
+const SRC_PATH = path.join(process.cwd(), 'src');
+const DIST_PATH = path.join(process.cwd(), 'dist');
+const PUBLIC_PATH = path.join(process.cwd(), 'public');
 
 module.exports = {
-    srcPath,
-    distPath,
-    publicPath
+    SRC_PATH,
+    DIST_PATH,
+    PUBLIC_PATH
 };
 ```
 
@@ -69,17 +69,17 @@ webpack\webpack.common.js
 
 ```js
 const path = require('path');
-const { srcPath, distPath } = require('./paths');
+const { SRC_PATH, DIST_PATH } = require('./paths');
 
 const commonConfig = {
     entry: {
         app: [
-            path.join(srcPath, 'index.js')
+            path.join(SRC_PATH, 'index.js')
         ]
     },
 
     output: {
-        path: distPath,
+        path: DIST_PATH,
         filename: 'bundle.js'
     }
 };
@@ -90,7 +90,7 @@ module.exports = commonConfig;
 webpack\webpack.dev.js
 
 ```js
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common');
 
 const devConfig = {
@@ -154,24 +154,24 @@ dist\index.html
 
 ```js
 const path = require('path');
-const { srcPath, distPath } = require('./paths');
+const { SRC_PATH, DIST_PATH } = require('./paths');
 
 const commonConfig = {
     entry: {
         app: [
-            path.join(srcPath, 'index.js')
+            path.join(SRC_PATH, 'index.js')
         ]
     },
 
     output: {
-        path: distPath,
+        path: DIST_PATH,
         filename: 'bundle.js'
     },
 
     module: {
         rules: [{
             test: /\.js$/,
-            include: srcPath,
+            include: SRC_PATH,
             use: [{
                 loader: 'babel-loader',
                 options: {
@@ -209,10 +209,6 @@ module.exports = commonConfig;
 ```
 
 然后删除 webpack.common.js 中的 presets: ['@babel/preset-env']。
-
-
-
-
 
 ## <a id="react">react</a>
 
@@ -345,7 +341,7 @@ webpack.dev.js 增加 devServer，
 
 ```js
 devServer: {
-    contentBase: distPath,
+    contentBase: DIST_PATH,
     port: 8080,
     open: true, // 自动打开浏览器
     compress: true, // 启用 gzip 压缩
@@ -538,9 +534,9 @@ resolve: {
 ```js
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { mergeWithCustomize } = require('webpack-merge');
 
-const { distPath, srcPath } = require('./paths');
+const { DIST_PATH, SRC_PATH } = require('./paths');
 const commonConfig = require('./webpack.common');
 
 const devConfig = {
@@ -550,7 +546,7 @@ const devConfig = {
 
     entry: {
         app: [
-            path.join(srcPath, 'index.js'),
+            path.join(SRC_PATH, 'index.js'),
             'react-hot-loader/patch'
         ]
     },
@@ -569,7 +565,7 @@ const devConfig = {
     },
 
     devServer: {
-        contentBase: distPath,
+        contentBase: DIST_PATH,
         port: 8080,
         open: false, // 自动打开浏览器
         compress: true, // 启用 gzip 压缩
@@ -578,7 +574,7 @@ const devConfig = {
     }
 };
 
-module.exports = merge({
+module.exports = mergeWithCustomize({
     customizeArray(a, b, key) {
         if (key === 'entry.app') { // entry.app 不合并，全替换
             return b;
@@ -595,7 +591,7 @@ webpack.common.js 增加，
 ```js
 resolve: {
     alias: {
-        '@': srcPath
+        '@': SRC_PATH
     }
 }
 ```
@@ -623,7 +619,7 @@ import getRouter from '@/router';
         "@/*": ["./src/*"]
       }
     },
-    "include": ["./src"]
+    "exclude": ["node_modules"]
 }
 ```
 
@@ -873,7 +869,9 @@ webpack.common.js rules 添加样式规则项，
 }
 ```
 
-package.json 添加兼容规则，
+添加兼容规则有两种方式：
+
+1. 在 package.json 中配置
 
 ```json
 "browserslist": [
@@ -883,6 +881,16 @@ package.json 添加兼容规则，
     "ff > 31",
     "ie >= 8"
 ]
+```
+
+2. 单独一个 .browserslistrc 文件
+
+```
+Android 4.1
+iOS 7.1
+Chrome > 31
+ff > 31
+ie >= 8
 ```
 
 src\pages\Home\styles.css 添加样式，
@@ -902,6 +910,16 @@ Home 页面使用样式，
 效果如图。
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20200922170336.png)
+
+**JS 文件中编写样式不能补全？**
+
+[文档 ](https://webpack.docschina.org/loaders/postcss-loader/#execute)
+
+使用  `postcss-js` 可解决，但是我的配置运行报错。
+
+也有人遇到 [同样的问题](https://github.com/postcss/postcss-js/issues/26) ，参考该 issue 改成 `module.exports` 导出没有报错，但是打印结果为 `{}`。
+
+
 
 参考：
 
@@ -1193,7 +1211,7 @@ webpack.common.js 增加 plugins，
 
 ```diff
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { srcPath, distPath, publicPath } = require('./paths');
+const { SRC_PATH, DIST_PATH, publicPath } = require('./paths');
 
 ...
 const commonConfig = {
@@ -1438,7 +1456,7 @@ const commonConfig = {
         new CopyWebpackPlugin({
             patterns: [{
                 from: path.join(publicPath, 'favicon.ico'),
-                to: path.join(distPath, 'favicon.ico')
+                to: path.join(DIST_PATH, 'favicon.ico')
             }]
         })
     ],
@@ -1510,7 +1528,7 @@ const isDev = process.env.NODE_ENV === 'development';
 webpack.prod.js 配置，
 
 ```js
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const commonConfig = require('./webpack.common');
@@ -1556,8 +1574,8 @@ const prodConfig = {
     plugins: [
         ...
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].css',
-            chunkFilename: '[name].[chunkhash].css'
+            filename: 'static/css/[name].[contenthash:8].css',
+            chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
         })
     ],
 };
@@ -1625,13 +1643,13 @@ webpack.prod.js optimization 增加，
 
 ```js
 const TerserJSPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const prodConfig = {
     ...
     optimization: [
         ...
-        minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsWebpackPlugin({})]
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
     ],
 };
 ```
@@ -1792,6 +1810,91 @@ plugins: [
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210407181651.png)
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210407182312.png)
+
+#### <a id="优化编译信息在控制台的显示效果">优化编译信息在控制台的显示效果</a>
+
+默认的显示效果看起来很杂乱，我们来优化一下。
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210514165832.png)
+
+安装 `npm i -D progress-bar-webpack-plugin react-dev-utils`
+
+新增 webpack\devServer.js，用来获取 IP；
+
+```js
+const interfaces = require('os').networkInterfaces(); // 在开发环境中获取局域网中的本机iP地址
+
+let ipAdress = '';
+for (const devName in interfaces) {
+  if (Object.prototype.hasOwnProperty.call(interfaces, devName)) {
+    const iface = interfaces[devName];
+    for (let i = 0; i < iface.length; i++) {
+      const alias = iface[i];
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+        ipAdress = alias.address;
+      }
+    }
+  }
+}
+
+module.exports = {
+  port: '8080',
+  ipAdress
+};
+```
+
+修改 webpack.dev.js；
+
+```js
+const chalk = require('react-dev-utils/chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const devServer = require('./devServer');
+
+plugins: [
+    new ProgressBarPlugin({
+          /* eslint-disable no-console */
+          format: ` Avtion [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
+          clear: false,
+          callback: () => {
+            console.log(' \n 成功启动服务！！！😊😊😊');
+            console.log(` \n Local:            ${chalk.green(`http://localhost:${devServer.port}/`)}`);
+            console.log(` On Your Network:  ${chalk.green(`http://${devServer.ipAdress}:${devServer.port}/`)}`);
+            console.log('\n\nNote that the development build is not optimized.');
+            console.log(`To create a production build, use ${chalk.yellow('npm run build')}.`);
+          }
+          /* eslint-enable no-console */
+        })
+	...
+],
+
+devServer: {
+	...
+	port: devServer.port,
+	clientLogLevel: 'silent', // 禁止浏览器控制台上输出热重载进度【这可能很繁琐】
+    noInfo: true, // 控制台禁止显示诸如 Webpack 捆绑包信息之类的消息。错误和警告仍将显示。
+}
+```
+
+修改 webpack.prod.js；
+
+```js
+const chalk = require('react-dev-utils/chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
+plugins: [
+    new ProgressBarPlugin({
+      format: `  build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
+      clear: false
+    })
+    ...
+]
+```
+
+最后把 package.json 中的  `--progress --color` 去掉。
+
+效果如图：
+
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210514171204.png)
 
 ## 参考
 
