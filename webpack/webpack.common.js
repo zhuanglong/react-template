@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LessPluginFunctions = require('less-plugin-functions');
+// const { getThemeVariables } = require('antd/dist/theme');
 
 const { SRC_PATH, DIST_PATH, PUBLIC_PATH } = require('./paths');
 
@@ -185,6 +186,10 @@ const commonConfig = {
                 lessOptions: {
                   modifyVars: {
                     // https://ant.design/docs/react/customize-theme-cn
+                    // ...getThemeVariables({
+                    //   dark: true, // 开启暗黑模式
+                    //   compact: true // 开启紧凑模式
+                    // }),
                     'primary-color': '#1DA57A'
                   },
                   javascriptEnabled: true // 在 less 中使用 JavaScript 表达式

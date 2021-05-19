@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import 'antd/lib/style/index.less';
 
 import getRouter from '@/router';
 
