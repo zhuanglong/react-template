@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import KeepAlive from 'react-activation';
 
 import NavBar from '@/components/NavBar';
 import toast from '@/components/Toast';
@@ -42,4 +43,4 @@ function Message() {
   );
 }
 
-export default Message;
+export default (props) => <KeepAlive name="Message" saveScrollPosition="screen"><Message {...props} /></KeepAlive>;

@@ -1,4 +1,5 @@
 import React from 'react';
+import KeepAlive from 'react-activation';
 import { SettingOutlined, RightOutlined } from '@ant-design/icons';
 
 import NavBar from '@/components/NavBar';
@@ -41,4 +42,4 @@ function My(props) {
   );
 }
 
-export default My;
+export default (props) => <KeepAlive name="My" saveScrollPosition="screen"><My {...props} /></KeepAlive>;
