@@ -5,14 +5,15 @@
   $lrPadding: px2rem(15);
 
   .#{$prefixCls} {
-    &.MuiAppBar-root {
-      z-index: 99;
-      overflow: hidden;
-    }
-
-    .MuiToolbar-root {
-      height: 100%;
-    }
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    color: $navBarTextColor;
+    background-color: $navBarBgColor;
 
     &-icon {
       font-size: px2rem(22);
@@ -23,10 +24,9 @@
     }
 
     &-title {
-      flex-grow: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      @extend .#{$prefixCls}-text;
+      font-weight: bold;
+      font-size: px2rem(22);
     }
 
     &-leftView,

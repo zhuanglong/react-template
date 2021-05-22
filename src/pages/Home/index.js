@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import KeepAlive from 'react-activation';
 
 import NavBar from '@/components/NavBar';
 import Slide from '@/components/Slide';
@@ -78,4 +79,4 @@ function Home(props) {
   );
 }
 
-export default Home;
+export default (props) => <KeepAlive saveScrollPosition="screen"><Home {...props} /></KeepAlive>;

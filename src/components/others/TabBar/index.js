@@ -10,7 +10,7 @@ function TabBar(props) {
   const { style, tabBarInsets, children } = props;
   return (
     <>
-      {tabBarInsets && <div style={{ height: TabBar.height }} />}
+      {tabBarInsets && <div style={{ margin: TabBar.height }} />}
       <div
         className={prefixCls}
         style={{ height: TabBar.height, ...style }}

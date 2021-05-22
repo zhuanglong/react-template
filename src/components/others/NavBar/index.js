@@ -1,40 +1,20 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
-import {
-  AppBar, Toolbar,
-  Typography,
-  IconButton,
-  Button
-} from '@material-ui/core';
-import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+import { LeftOutlined } from '@ant-design/icons';
 
 import { findTitleOfRoutes } from '@/router/routes';
 import './styles.scss';
 
 const prefixCls = 'sru-NavBar';
 
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2)
-  }
-}));
-
 function NavBar(props) {
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={prefixCls}
-        style={{ height: NavBar.height, ...props.style }}
-      >
-        <Toolbar>
-          <NavBarLeftView {...props} />
-          <NavBarMiddleView {...props} />
-          <NavBarRightView {...props} />
-        </Toolbar>
-      </AppBar>
+      <div style={{ height: NavBar.height, ...props.style }} className={prefixCls}>
+        <NavBarLeftView {...props} />
+        <NavBarMiddleView {...props} />
+        <NavBarRightView {...props} />
+      </div>
       {props.navBarInsets && <div style={{ height: NavBar.height }} /> }
     </>
   );
@@ -45,17 +25,15 @@ function NavBarLeftView(props) {
     showBack, leftView, leftViewStyle,
     onLeftView, onBack = () => props.history.goBack()
   } = props;
-  const classes = useStyles();
-  return showBack && (
-    <IconButton
-      edge="start"
-      className={classes.menuButton}
-      color="inherit"
-      aria-label="menu"
-      onClick={onBack}
-    >
-      <ArrowBackIcon />
-    </IconButton>
+  return (
+    <div style={leftViewStyle} className={`${prefixCls}-leftView`}>
+      {showBack && (
+        <LeftOutlined className={`${prefixCls}-leftView-icon`} onClick={onBack} />
+      )}
+      {typeof leftView === 'string'
+        ? leftView && <div className={`${prefixCls}-text`} onClick={onLeftView}>{leftView}</div>
+        : leftView}
+    </div>
   );
 }
 
@@ -66,18 +44,22 @@ function NavBarMiddleView(props) {
   // 如果没有设置 title 则默认使用路由 title
   title = title === undefined ? findTitleOfRoutes(props.location.pathname) : title;
   return (
-    <Typography variant="h6" className={`${prefixCls}-title`}>
-      {title}
-    </Typography>
+    <div style={middleViewStyle} className={middleViewPrefixCls}>
+      {typeof title === 'string' ? title && <div className={`${prefixCls}-title`}>{title}</div> : title}
+    </div>
   );
 }
 
 function NavBarRightView(props) {
   const rightViewPrefixCls = `${prefixCls}-rightView`;
   const { rightView, rightViewStyle, onRightView } = props;
-  return typeof rightView === 'string'
-    ? rightView && <Button color="inherit" onClick={onRightView}>{rightView}</Button>
-    : rightView;
+  return (
+    <div style={rightViewStyle} className={rightViewPrefixCls}>
+      {typeof rightView === 'string'
+        ? rightView && <div className={`${prefixCls}-text`} onClick={onRightView}>{rightView}</div>
+        : rightView}
+    </div>
+  );
 }
 
 NavBar.propTypes = {
