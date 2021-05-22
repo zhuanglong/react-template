@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import { BottomNavigation, BottomNavigationAction, Badge } from '@material-ui/core/';
 
 import './styles.scss';
 
@@ -11,42 +11,40 @@ function TabBar(props) {
   return (
     <>
       {tabBarInsets && <div style={{ height: TabBar.height }} />}
-      <div
-        className={prefixCls}
+      <BottomNavigation
         style={{ height: TabBar.height, ...style }}
+        className={prefixCls}
       >
         {children}
-      </div>
+      </BottomNavigation>
     </>
   );
 }
 
 function Item(props) {
-  const { title, selected, icon, onPress } = props;
+  const { title, actived, icon, badge, dot, onClick } = props;
   return (
-    <div
-      className={classnames(`${prefixCls}-item`, selected && `${prefixCls}-item-active`)}
-      onClick={onPress}
-    >
-      <div style={{ position: 'relative' }}>
-        {icon && <div className={`${prefixCls}-icon`}>{icon}</div>}
-        {icon && title && <div className={`${prefixCls}-spacer`} />}
-        {title && <div className={`${prefixCls}-title`}>{title}</div>}
-        <Badge {...props} />
-      </div>
-    </div>
+    <BottomNavigationAction
+      className={`${prefixCls}-item`}
+      classes={{
+        root: actived && 'Mui-selected',
+        label: actived && 'Mui-selected'
+      }}
+      icon={(
+        <Badge
+          max={99}
+          badgeContent={badge}
+          variant={dot && 'dot'}
+          color="error"
+        >
+          {icon}
+        </Badge>
+      )}
+      showLabel
+      onClick={onClick}
+      label={title}
+    />
   );
-}
-
-function Badge(props) {
-  const { badge, dot } = props;
-  let elem = null;
-  if (dot) {
-    elem = <div className={`${prefixCls}-badgeDot`} />;
-  } else {
-    elem = <div className={`${prefixCls}-badge`}>{badge}</div>;
-  }
-  return elem;
 }
 
 TabBar.propTypes = {
@@ -63,19 +61,19 @@ TabBar.defaultProps = {
 
 Item.propTypes = {
   title: PropTypes.string,
-  selected: PropTypes.bool,
+  actived: PropTypes.bool,
   icon: PropTypes.element,
-  onPress: PropTypes.func
+  onClick: PropTypes.func
 };
 
 Item.defaultProps = {
   title: '',
-  selected: false,
+  actived: false,
   icon: null,
-  onPress: () => null
+  onClick: () => null
 };
 
 TabBar.Item = Item;
-TabBar.height = hotcss.px2rem(75);
+TabBar.height = hotcss.px2rem(65);
 
 export default TabBar;

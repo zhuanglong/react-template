@@ -1,5 +1,9 @@
 import React from 'react';
-import { HomeOutlined, MessageOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  Home as HomeIcon,
+  Message as MessageIcon,
+  Person as PersonIcon
+} from '@material-ui/icons';
 
 import TabBar from '@/components/TabBar';
 
@@ -10,17 +14,17 @@ function MainLayout(props) {
   const tabBarlist = [{
     title: '首页',
     path: '/index/home',
-    icon: <HomeOutlined />,
+    icon: <HomeIcon />,
     badge: 'new'
   }, {
     title: '消息',
     path: '/index/message',
-    icon: <MessageOutlined />,
+    icon: <MessageIcon />,
     badge: 2
   }, {
     title: '我的',
     path: '/index/my',
-    icon: <UserOutlined />,
+    icon: <PersonIcon />,
     dot: true
   }];
 
@@ -41,8 +45,8 @@ function MainLayout(props) {
             icon={item.icon}
             badge={item.badge}
             dot={item.dot}
-            selected={item.path === pathname}
-            onPress={() => onTab(item.path)}
+            actived={item.path === pathname}
+            onClick={() => onTab(item.path)}
           />
         ))}
       </TabBar>
