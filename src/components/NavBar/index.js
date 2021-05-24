@@ -42,8 +42,7 @@ function NavBar(props) {
 
 function NavBarLeftView(props) {
   const {
-    showBack, leftView, leftViewStyle,
-    onLeftView, onBack = () => props.history.goBack()
+    showBack, onBack = () => props.history.goBack()
   } = props;
   const classes = useStyles();
   return showBack && (
@@ -60,8 +59,6 @@ function NavBarLeftView(props) {
 }
 
 function NavBarMiddleView(props) {
-  const middleViewPrefixCls = `${prefixCls}-middleView`;
-  const { middleViewStyle } = props;
   let { title } = props;
   // 如果没有设置 title 则默认使用路由 title
   title = title === undefined ? findTitleOfRoutes(props.location.pathname) : title;
@@ -73,8 +70,7 @@ function NavBarMiddleView(props) {
 }
 
 function NavBarRightView(props) {
-  const rightViewPrefixCls = `${prefixCls}-rightView`;
-  const { rightView, rightViewStyle, onRightView } = props;
+  const { rightView, onRightView } = props;
   return typeof rightView === 'string'
     ? rightView && <Button color="inherit" onClick={onRightView}>{rightView}</Button>
     : rightView;
@@ -86,22 +82,11 @@ NavBar.propTypes = {
 NavBar.defaultProps = {
   showBack: true,
   navBarInsets: true,
-  leftView: '',
   title: undefined,
   rightView: '',
   style: null,
-  leftViewStyle: null,
-  middleViewStyle: null,
-  rightViewStyle: null,
   onBack: undefined,
-  onLeftView: undefined,
   onRightView: undefined
-};
-
-NavBar.styles = {
-  text: `${prefixCls}-text`,
-  title: `${prefixCls}-title`,
-  icon: `${prefixCls}-icon`
 };
 
 NavBar.height = hotcss.px2rem(55);

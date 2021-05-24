@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
-import { Menu as MenuIcon } from '@material-ui/icons';
+import { MoreVert as MoreVertIcon } from '@material-ui/icons';
 
 import NavBar from '@/components/NavBar';
 import { getURLSearchParams } from '@/utils/tools';
@@ -19,7 +19,7 @@ function MenuView() {
         onClick={handleMenu}
         color="inherit"
       >
-        <MenuIcon />
+        <MoreVertIcon />
       </IconButton>
       <Menu
         id="menu-appbar"

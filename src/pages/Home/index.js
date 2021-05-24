@@ -44,7 +44,7 @@ function Home(props) {
   return (
     <>
       <NavBar
-        title={<div className={NavBar.styles.title}>首页</div>}
+        title="首页"
         showBack={false}
         navBarInsets={false}
         style={{
