@@ -12,9 +12,11 @@
     "lint:js--fix": "eslint --fix --ext .js src webpack",
     "lint:style": "stylelint src/**/*.{less,scss}",
     "lint:style--fix": "stylelint --fix src/**/*.{less,scss}",
+    "lint:styled": "stylelint src/**/*.js --config .stylelintrc-styled.js",
     "precommit": "lint-staged",
     "lint-staged:js": "eslint",
-    "lint-staged:style": "stylelint"
+    "lint-staged:style": "stylelint",
+    "lint-staged:styled": "stylelint --config .stylelintrc-styled.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +25,8 @@
     "axios": "^0.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -34,6 +37,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-styled-components": "^1.12.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.1.1",
     "cross-env": "^7.0.2",
@@ -55,15 +59,17 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^4.0.2",
     "postcss-preset-env": "^6.7.0",
-    "react-refresh": "^0.9.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "react-dev-utils": "^11.0.4",
+    "react-refresh": "^0.9.0",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
     "stylelint": "^13.7.2",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
     "terser-webpack-plugin": "^4.2.2",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
@@ -86,6 +92,7 @@
   },
   "lint-staged": {
     "(src|webpack)/**/*.js": "npm run lint-staged:js",
-    "src/**/*.{css,less,scss}": "npm run lint-staged:style"
+    "src/**/*.{less,scss}": "npm run lint-staged:style",
+    "src/**/*.js": "npm run lint-staged:styled"
   }
 }

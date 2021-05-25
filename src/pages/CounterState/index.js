@@ -1,5 +1,8 @@
 import React from 'react';
-import styles from './styles.less';
+import styled from 'styled-components';
+
+import TStyle from '@/common/TStyle';
+// import styles from './styles.less';
 
 class CounterState extends React.Component {
   constructor(props) {
@@ -11,17 +14,27 @@ class CounterState extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className={styles.title}>
+      <Root>
+        <div className="bgColor title">
           State 计数：
-          <span className={styles.count}>{this.state.count}</span>
+          <span className="count">{this.state.count}</span>
         </div>
         <button type="button" onClick={() => this.setState((state) => ({ count: state.count - 1 }))}>-</button>
         <button type="button" onClick={() => this.setState((state) => ({ count: state.count + 1 }))}>+</button>
         <button type="button" onClick={() => this.setState({ count: 0 })}>reset</button>
-      </div>
+      </Root>
     );
   }
 }
+
+const Root = styled(TStyle)`
+  .title {
+    display: flex;
+
+    .count {
+      color: red;
+    }
+  }
+`;
 
 export default CounterState;

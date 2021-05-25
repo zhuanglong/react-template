@@ -1,17 +1,30 @@
 import React from 'react';
-import styles from './styles.scss';
+import styled from 'styled-components';
+
+// import styles from './styles.scss';
 
 class About extends React.Component {
   render() {
     return (
-      <div>
-        <div className={styles.title}>
+      <Root>
+        <div className="title">
           Hello
-          <span className={styles.subTitle}> Sass</span>
+          <span className="subTitle"> Sass</span>
         </div>
-      </div>
+      </Root>
     );
   }
 }
+
+const Root = styled.div`
+  .title {
+    display: flex;
+    font-size: 18px;
+
+    .subTitle {
+      color: red;
+    }
+  }
+`;
 
 export default About;

@@ -1,102 +1,125 @@
-> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/react-template)。
+[项目源码](https://github.com/zhuanglong/react-template/tree/styled-components)
 
-[我的项目实例](https://github.com/zhuanglong/react-template/tree/react-refresh)
+## 使用
 
-什么是 React Fast Refresh？
+安装 `yarn add styled-components`。
 
-> 快速刷新（Fast Refresh）是 React 官方为 React Native 开发的模块热替换（HMR）方案，由于其核心实现与平台无关，同时也适用于 Web。
-
-[react-refresh github ](https://github.com/pmmmwh/react-refresh-webpack-plugin)
-
-## 删除 `react-hot-loader` 相关代码
-
-> 我的项目之前用的是 `react-hot-loader`，所以现在要把 `react-hot-loader` 相关代码删除。
-
-删除依赖库
-
-`npm uni @hot-loader/react-dom react-hot-loader`
-
-.babelrc，删除
-
-`"react-hot-loader/babel"`
-
-webpack\webpack.dev.js，删除
-
-```js
-resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom'
-    }
-  },
-```
-
-src\index.js，修改
+### 简单例子
 
 ```js
 import React from 'react';
-import ReactDom from 'react-dom';
+import styled from 'styled-components';
 
-import getRouter from '@/router';
-
-function renderWithHotReload(RootElement) {
-  ReactDom.render(
-    <div>
-      {RootElement}
-    </div>,
-    document.getElementById('app')
-  );
+class About extends React.Component {
+  render() {
+    return (
+      <Root>
+        <div className="title">
+          Hello
+          <span className="subTitle"> Sass</span>
+        </div>
+      </Root>
+    );
+  }
 }
 
-renderWithHotReload(getRouter());
-```
+const Root = styled.div`
+  .title {
+    display: flex;
+    font-size: 18px;
 
-## 开始 React Fast Refresh
-
-
-安装 `npm i -D @pmmmwh/react-refresh-webpack-plugin react-refresh`
-
-.babelrc，新增
-
-```
-"env": {
-    "development": {
-      "plugins": ["react-refresh/babel"]
+    .subTitle {
+      color: red;
     }
   }
+`;
 ```
 
-webpack\webpack.dev.js，新增
+### 样式类名添加前缀
+
+[文档](https://styled-components.com/docs/tooling#babel-plugin)
+
+安装 `yarn add -D babel-plugin-styled-components`。
+
+.babelrc
 
 ```js
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
-plugins: [
+"plugins": [
     ...
-    new ReactRefreshPlugin()
+    "babel-plugin-styled-components"
   ],
 ```
 
-**限制**
+添加后对比：
 
-有些情况下，维持状态并不是预期，所以为了可靠起见，Fast Refresh 遇到以下情况一概不保留状态（remount）：
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210525175447.png)
 
-- Class 类组件一律重刷（remount），状态会被重置，包括高阶组件返回的 Class 组件
-- 不纯组件模块，所编辑的模块除导出 React 组件外，还导出了其它模块
-- 匿名箭头函数如 export default () => <div />; 会导致状态丢失
-- 特殊的，还可以通过 // @refresh reset 指令（在源码文件中任意位置加上这行注释）强制重刷（remount），最大限度地保证可用性
+规则 `文件名__样式组件-sc-1pekthz-0`。
 
-**测试**
+### CSS 浏览器厂商前缀
 
-Class 组件
+**CSS 规则会自动添加浏览器厂商前缀，我们不必考虑它。**
 
-可以看到，修改 Class 组件并不能保存 state 状态
+经测试，改变 browserslist 规则并没有对 styled-components 生效，但是规则是有的，说明是 styled-components 内置了规则。 
 
-![](https://gitee.com/zloooong/image_store/raw/master/img/20210114145344.gif)
+在生产模式下，IE11 和 Edgede 的前缀对比：
 
-Hook 组件能保存 state 状态
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210525182747.png)
 
-![](https://gitee.com/zloooong/image_store/raw/master/img/20210114150223.gif)
+为什么只有 IE 添加了前缀？这是因为 styled-components 自动识别厂商添加前缀，IE 比较老，所以添加了前缀，Edge 较新，都能兼容新特性，所以没必要加前缀。
 
-## 参考
+### Stylelint
 
-- [一分钟用上热更新 React Fast Refresh（react-refresh）](https://zhuanlan.zhihu.com/p/172066527)
+[文档](https://styled-components.com/docs/tooling#stylelint)
+
+安装 `yarn add -D stylelint-config-styled-components stylelint-processor-styled-components`。
+
+> 因为我的项目已经安装了其他的 stylelint 配置，所以无需再安装，详细查看项目源码。
+
+新建 stylelint 配置文件 .stylelintrc-styled.js，内容如下：
+
+```js
+module.exports = {
+  // 继承规则集
+  extends: [
+    'stylelint-config-standard',
+    "stylelint-config-styled-components", // 用于 styled-components
+    'stylelint-config-rational-order'
+  ],
+  // 在 stylelint 处理流中加入处理函数
+  "processors": [
+    "stylelint-processor-styled-components" // 用于 styled-components
+  ],
+  // 自定义规则
+  rules: {
+    'no-duplicate-selectors': null, // 禁止样式表中的重复选择器
+    'declaration-empty-line-before': null, // 声明前要求或禁止空行
+    'at-rule-empty-line-before': null, // 规则前要求或禁止使用空行
+    'at-rule-no-unknown': null, // 禁止使用未知规则
+    'selector-pseudo-class-no-unknown': null, // 禁止未知的伪类选择器
+    'property-no-unknown': null // 禁止未知属性
+  }
+};
+```
+
+<font color="red">为什么要新建一份？</font>
+
+> 因为项目有用到 Less、Scss，所以为了兼容，复制了一份进行修改，添加 styled-components 的支持。
+
+在 package.json 中添加 lint 脚本：
+
+```json
+"lint:styled": "stylelint src/**/*.js --config .stylelintrc-styled.js"
+```
+
+执行 `npm run lint:styled` 检查。
+
+<font color="red">`-- fix` 格式化，官方说不支持。</font>
+
+> **NOTE**
+>
+> Beware that due to limitations on what is possible for Stylelint custom processors we cannot support the --fix option
+
+## 总结
+
+styled-components 是 CSS-in-JS 的最佳实现。虽然很早留意过这个库，但是一直没有尝试，今日一试发现还挺香的，而且支持 React Native。

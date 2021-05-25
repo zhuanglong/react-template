@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
+
+import TStyle from '@/common/TStyle';
 
 const CounterHook = () => {
   const [count, setCount] = useState(0);
@@ -24,16 +27,26 @@ const CounterHook = () => {
   }, []);
 
   return (
-    <div>
-      <div>
+    <Root>
+      <div className="bgColor title">
         Hook 计数：
-        <span>{count}</span>
+        <span className="count">{count}</span>
       </div>
       <button type="button" onClick={() => setCount(count - 1)}>-</button>
       <button type="button" onClick={() => setCount(count + 1)}>+</button>
       <button type="button" onClick={() => setCount(0)}>reset</button>
-    </div>
+    </Root>
   );
 };
+
+const Root = styled(TStyle)`
+  .title {
+    display: flex;
+
+    .count {
+      color: red;
+    }
+  }
+`;
 
 export default CounterHook;
