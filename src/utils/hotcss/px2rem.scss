@@ -1,5 +1,8 @@
+@use "sass:math";
+
 @function px2rem($px){
-	@return $px*320/$designWidth/20 + rem;
+  // @return $px*320/$designWidth/20 + rem;
+	@return math.div(math.div($px*320, $designWidth), 20) + rem;
 }
 
 $designWidth: 375;
