@@ -3,7 +3,6 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
 import Notification from 'rc-notification';
 import {
   InfoCircleOutlined,
@@ -11,28 +10,18 @@ import {
   CloseCircleOutlined,
   LoadingOutlined
 } from '@ant-design/icons';
-import 'react-toastify/dist/ReactToastify.minimal.css';
 
 import './styles.scss';
 
-const prefixCls = 'sru-Toast2';
+const prefixCls = 'sru-Toast-my';
 const messageKey = 'messageKey';
 let messageInstance = null;
-let toastId = null;
 let timer = null;
 
 let config = {
   duration: 2,
   mask: false
 };
-
-const Zoom2 = cssTransition({
-  enter: 'Toastify__zoom-enter',
-  exit: 'Toastify__zoom-exit',
-  appendPosition: false,
-  collapse: true,
-  collapseDuration: 300
-});
 
 function getRCNotificationInstance(mask, callback = () => null) {
   Notification.newInstance({
@@ -103,61 +92,15 @@ function notice(props) {
   });
 }
 
-export const ToastContainer2 = (
-  <>
-    <ToastContainer
-      className={prefixCls}
-      autoClose={2000}
-      hideProgressBar
-      draggable={false}
-      closeOnClick={false}
-      closeButton={false}
-      // pauseOnFocusLoss={false}
-      transition={Zoom}
-    />
-  </>
-);
-
-function Content(props) {
-  const { icon, text } = props;
-  const IconElement = {
-    info: InfoCircleOutlined,
-    success: CheckCircleOutlined,
-    fail: CloseCircleOutlined,
-    loading: LoadingOutlined
-  }[icon];
-
-  return (
-    <div className={`${prefixCls}-content`}>
-      {IconElement && <IconElement className={`${prefixCls}-icon`} /> }
-      {text && (
-        <div className={`${prefixCls}-text`}>
-          {text}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default {
   show(content, props) {
     const { duration, mask, onClose } = props || {};
-    // notice({
-    //   content,
-    //   duration,
-    //   mask,
-    //   onClose
-    // });
-    const render = <Content text={content} />;
-    if (toast.isActive(toastId)) {
-      toast.update(toastId, {
-        render
-      });
-    } else {
-      toastId = toast(render, {
-        className: "dsdsd"
-      });
-    }
+    notice({
+      content,
+      duration,
+      mask,
+      onClose
+    });
   },
 
   info(content, props) {
@@ -225,3 +168,9 @@ export default {
     };
   }
 };
+
+// 存在的问题
+// 1.
+// toast.loading();
+// toast.hide();
+// 这样关闭不了
