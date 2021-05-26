@@ -1,19 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import NavBar from '@/components/NavBar';
-import Slide from '@/components/Slide';
+import Carousel from '@/components/Carousel';
 import useScroll from '@/hooks/useScroll';
 import styles from './styles.scss';
 
 function Home(props) {
   const { top } = useScroll(document);
-  const [imgs] = useState([{
+
+  // 缓存属性，防止 useScroll 导致重新渲染
+  const imgs = useMemo(() => [{
     url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1393347426,1800905021&fm=26&gp=0.jpg'
   }, {
     url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2216046132,2701662030&fm=26&gp=0.jpg'
   }, {
     url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1049504560,1303436644&fm=26&gp=0.jpg'
-  }]);
+  }], []);
 
   const pushPage = () => {
     props.history.push('/product');
@@ -55,7 +57,7 @@ function Home(props) {
       />
       <div className={styles.container}>
         <div style={{ marginTop: hotcss.px2rem(20) }}>
-          <Slide imgs={imgs} initialSlide={2} onSwiper={onSwiper} />
+          <Carousel imgs={imgs} initialSlide={2} onSwiper={onSwiper} />
         </div>
         <div className={styles.funcBox}>
           {Array(3).fill(null).map((item, index) => (

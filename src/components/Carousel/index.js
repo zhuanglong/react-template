@@ -14,7 +14,7 @@ const prefixCls = 'sru-Slide';
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
-function Slide(props) {
+function Carousel(props) {
   const { imgs = [], ...rest } = props;
   return (
     <Swiper
@@ -37,4 +37,4 @@ function Slide(props) {
   );
 }
 
-export default memo(Slide);
+export default memo(Carousel);
