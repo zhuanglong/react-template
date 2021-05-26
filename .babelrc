@@ -5,7 +5,16 @@
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    [
+      "import",
+      {
+        "libraryName": "@ant-design/icons",
+        "libraryDirectory": "es/icons",
+        "camel2DashComponentName": false
+      },
+      "ant-design-icons"
+    ]
   ],
   "env": {
     "development": {
