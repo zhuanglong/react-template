@@ -1,0 +1,172 @@
+:global {
+  $prefixCls: 'sru-Toast2';
+
+  .Toastify__toast-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .Toastify__toast {
+      margin-bottom: 0;
+      padding: 0;
+      border: 0;
+
+      .Toastify__toast-body {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  // 动画 fade
+  .Toastify--animate {
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+  }
+
+  .Toastify__zoom-enter {
+    :local {
+      animation-name: Toastify__zoomIn;
+    }
+  }
+
+  .Toastify__zoom-exit {
+    :local {
+      animation-name: Toastify__zoomOut;
+    }
+  }
+
+  @keyframes Toastify__zoomIn {
+    from {
+      transform: scale3d(0.3, 0.3, 0.3);
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes Toastify__zoomOut {
+    from {
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale3d(0.3, 0.3, 0.3);
+      opacity: 0;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .#{$prefixCls} {
+    // > div {
+    //   max-width: 50%;
+    // }
+
+    &-mask {
+      pointer-events: auto;
+    }
+
+    &-nomask {
+      pointer-events: none;
+    }
+
+    &-content {
+      min-width: px2rem(60);
+      padding: px2rem(10);
+      text-align: center;
+      word-break: break-word;
+      background-color: rgba(58, 58, 58, 0.9);
+      border-radius: px2rem(3);
+      pointer-events: auto;
+    }
+
+    &-icon {
+      margin-bottom: px2rem(5);
+      color: #fff;
+      font-size: px2rem(46);
+    }
+
+    &-text {
+      color: #fff;
+      font-size: px2rem(18);
+    }
+
+    // 动画 fade
+    &-fade-appear {
+      opacity: 0;
+    }
+
+    &-fade-appear-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in;
+    }
+
+    &-fade-leave {
+      opacity: 1;
+    }
+
+    &-fade-leave-active {
+      opacity: 0;
+      transition: opacity 300ms ease-in;
+    }
+
+    // 动画 zoom
+    &-zoom-appear {
+      :local {
+        animation-name: zoomIn;
+        animation-duration: 300ms;
+        animation-fill-mode: both;
+      }
+    }
+
+    &-zoom-leave {
+      :local {
+        animation-name: zoomOut;
+        animation-duration: 300ms;
+        animation-fill-mode: both;
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomOut {
+      from {
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
