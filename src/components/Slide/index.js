@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/swiper.min.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'swiper/components/pagination/pagination.min.css';
 
 import './styles.scss';
