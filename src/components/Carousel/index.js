@@ -9,7 +9,7 @@ import 'swiper/components/pagination/pagination.min.css';
 
 import './styles.scss';
 
-const prefixCls = 'sru-Slide';
+const prefixCls = 'sru-Carousel';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);

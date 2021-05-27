@@ -1,6 +1,4 @@
-// Toast 简单封装
-// 推荐更强大的 https://github.com/fkhadra/react-toastify
-
+// 基于 rc-notification 封装 Toast
 import React from 'react';
 import classnames from 'classnames';
 import Notification from 'rc-notification';
@@ -19,15 +17,26 @@ let messageInstance = null;
 let timer = null;
 
 let config = {
-  duration: 2,
+  duration: 2000,
   mask: false
 };
+
+// 加个定时器是为了让动画先执行完毕再卸载实例
+function timerDestroy() {
+  timer = setTimeout(() => {
+    timer = null;
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
+    }
+  }, 300);
+}
 
 function getRCNotificationInstance(mask, callback = () => null) {
   Notification.newInstance({
     style: {}, // 清除默认样式
     prefixCls,
-    transitionName: 'sru-Toast-fade', // 'sru-Toast-zoom'
+    transitionName: `${prefixCls}-fade`, // `${prefixCls}-zoom`
     className: classnames({
       [`${prefixCls}-mask`]: mask,
       [`${prefixCls}-nomask`]: !mask
@@ -55,6 +64,7 @@ function notice(props) {
 
   if (timer) {
     clearTimeout(timer);
+    timer = null;
   }
 
   getRCNotificationInstance(mask, (notification) => {
@@ -67,7 +77,7 @@ function notice(props) {
 
     messageInstance.notice({
       key: messageKey,
-      duration,
+      duration: duration / 1000,
       content: (
         <>
           {IconElement && <IconElement className={`${prefixCls}-icon`} /> }
@@ -78,15 +88,10 @@ function notice(props) {
           )}
         </>
       ),
+      // 持续的切换不会执行到 onClose 回调，因为实例已经卸载
       onClose() {
         onClose();
-        timer = setTimeout(() => {
-          if (messageInstance) {
-            messageInstance.destroy();
-            messageInstance = null;
-            timer = null;
-          }
-        }, 300);
+        timerDestroy();
       }
     });
   });
@@ -150,13 +155,7 @@ export default {
   hide() {
     if (messageInstance) {
       messageInstance.removeNotice(messageKey);
-      timer = setTimeout(() => {
-        if (messageInstance) {
-          messageInstance.destroy();
-          messageInstance = null;
-          timer = null;
-        }
-      }, 300);
+      timerDestroy();
     }
   },
 
@@ -168,9 +167,3 @@ export default {
     };
   }
 };
-
-// 存在的问题
-// 1.
-// toast.loading();
-// toast.hide();
-// 这样关闭不了
