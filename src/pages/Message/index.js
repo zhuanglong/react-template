@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import NavBar from '@/components/NavBar';
 import toast from '@/components/Toast';
@@ -25,11 +25,13 @@ function Message() {
 
   return (
     <>
-      <NavBar
-        showBack={false}
-        rightView="清除未读"
-        onRightView={() => toast.show('已清除')}
-      />
+      {useMemo(() => ( // 这里的导航栏没有动态的 props，可以用 useMemo 减少不必要的渲染
+        <NavBar
+          showBack={false}
+          rightView="清除未读"
+          onRightView={() => toast.show('已清除')}
+        />
+      ), [])}
       <div className={styles.container}>
         {messageList.map((item, index) => (
           <div key={index} className={styles.item} onClick={() => go(item.id)}>
