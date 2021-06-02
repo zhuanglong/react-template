@@ -1,6 +1,6 @@
-> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/react-template)。
+> 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
 
-[我的项目实例](https://github.com/zhuanglong/react-template/tree/React.createContext)
+[项目地址](https://github.com/zhuanglong/react-template/tree/React.createContext)
 
 Context 通过组件树提供了一个传递数据的方法，从而避免在每一层手动传递 props 属性。主题、国际化等有状态共享的都可以用 Context 实现。
 
