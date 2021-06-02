@@ -1,6 +1,6 @@
 > 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
 
-[项目地址](https://github.com/zhuanglong/react-template/tree/styled-components)
+[项目地址](https://github.com/zhuanglong/react-template/tree/styled-components_demo)
 
 ## 使用
 
