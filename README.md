@@ -1,4 +1,6 @@
-[项目源码](https://github.com/zhuanglong/react-template/tree/h5_material-ui)
+> 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
+
+[项目地址](https://github.com/zhuanglong/react-template/tree/h5_material-ui)
 
 ## 使用 Material-UI
 
@@ -88,11 +90,9 @@ export default ThemeProviderPro;
 <ThemeProviderPro><App /></ThemeProviderPro>
 ```
 
-## 体验
+## 总结
 
 - 缺少常用组件，如 Toast、Pull(上拉加载下拉刷新)、SwipAction(滑动操作)，轮播图。
 
 - 一些弹框组件，比如 Dialog、Snackbar、Backdrop，需要维护状态来控制打开或关闭，没有像 AntD 那样提供 [静态方法](https://ant.design/components/message-cn/#API) 调用，AntD 还能在组建外调用，比如 Message 组件。
 - Material-UI 提倡 CSS-in-JS，组件库的样式都是写在 js 中，按需插入 `<head>` 标签中，所以就不能将样式打包进 `.css`。  [为什么要使用 Material-UI 的样式方案呢？](https://material-ui.com/zh/styles/basics/#why-use-material-uis-styling-solution)
-
-所以并不推荐使用 material-ui。
