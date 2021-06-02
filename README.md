@@ -1,6 +1,6 @@
-> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/react-template)。
+> 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
 
-[我的项目实例](https://github.com/zhuanglong/react-template/tree/mobx)
+[项目地址](https://github.com/zhuanglong/react-template/tree/mobx)
 
 ## 使用 mobx
 
