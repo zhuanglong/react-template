@@ -2,7 +2,7 @@
 
 旨在学习 Webpack 相关配置及插件的使用，个人自用的 React 脚手架，基于该脚手架继续扩展 React 周边技术（分支可见）。
 
-[源码](https://github.com/zhuanglong/react-template)
+[项目地址](https://github.com/zhuanglong/react-template)
 
 ## 目录
 
