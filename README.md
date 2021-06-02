@@ -1,6 +1,6 @@
 > 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
 
-[项目源码](https://github.com/zhuanglong/react-template/tree/h5)
+[项目地址](https://github.com/zhuanglong/react-template/tree/h5)
 
 ## 移动端 H5 模板
 
