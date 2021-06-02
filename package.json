@@ -87,6 +87,6 @@
   },
   "lint-staged": {
     "(src|webpack)/**/*.js": "npm run lint-staged:js",
-    "src/**/*.{css,less,scss}": "npm run lint-staged:style"
+    "src/**/*.{less,scss}": "npm run lint-staged:style"
   }
 }
