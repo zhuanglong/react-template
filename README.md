@@ -919,7 +919,7 @@ Home 页面使用样式，
 
 也有人遇到 [同样的问题](https://github.com/postcss/postcss-js/issues/26) ，参考该 issue 改成 `module.exports` 导出没有报错，但是打印结果为 `{}`。
 
-
+建议使用 [styled-components](https://github.com/styled-components/styled-components)。
 
 参考：
 
@@ -1479,7 +1479,7 @@ const commonConfig = {
         new webpack.DefinePlugin({
             // https://www.cnblogs.com/usebtf/p/9912413.html
             'process.env': {
-                PUBLIC_PATH: JSON.stringify('/')
+                PUBLIC_PATH: JSON.stringify('')
             }
         })
     ],
