@@ -1,38 +1,31 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import KeepAlive from 'react-activation';
 
 import NavBar from '@/components/NavBar';
-import Slide from '@/components/Slide';
+import Carousel from '@/components/Carousel';
 import useScroll from '@/hooks/useScroll';
 import styles from './styles.scss';
 
 function Home(props) {
   const { top } = useScroll(document);
-  const [imgs] = useState([{
+
+  // 缓存属性，防止 useScroll 导致重新渲染
+  const imgs = useMemo(() => [{
     url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1393347426,1800905021&fm=26&gp=0.jpg'
   }, {
     url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2216046132,2701662030&fm=26&gp=0.jpg'
   }, {
     url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1049504560,1303436644&fm=26&gp=0.jpg'
-  }]);
+  }], []);
 
   const pushPage = () => {
     props.history.push('/product');
   };
 
   // 渐变处理
-  const thatTop = String(top).split('.')[0];
-  let opacity = 0;
-  let height = hotcss.px2rem(35);
-  if (thatTop.length === 2) {
-    if (thatTop > '40') {
-      opacity = `0.${thatTop}`;
-      height = hotcss.px2rem(45);
-    }
-  } else if (thatTop.length > 2) {
-    opacity = 1;
-    height = NavBar.height;
-  }
+  const opacity = top / 45 - 1;
+  // eslint-disable-next-line no-nested-ternary
+  const computerOpacity = opacity <= 0 ? 0 : (opacity > 1 ? 1 : opacity);
 
   // 拿到实例
   const onSwiper = useCallback((instance) => {
@@ -48,15 +41,14 @@ function Home(props) {
         showBack={false}
         navBarInsets={false}
         style={{
-          opacity,
-          height,
-          pointerEvents: opacity === 0 ? 'none' : 'auto',
+          opacity: computerOpacity,
+          pointerEvents: computerOpacity === 0 ? 'none' : 'auto',
           transition: '0.3s'
         }}
       />
       <div className={styles.container}>
         <div style={{ marginTop: hotcss.px2rem(20) }}>
-          <Slide imgs={imgs} initialSlide={2} onSwiper={onSwiper} />
+          <Carousel imgs={imgs} initialSlide={2} onSwiper={onSwiper} />
         </div>
         <div className={styles.funcBox}>
           {Array(3).fill(null).map((item, index) => (

@@ -1,13 +1,16 @@
-> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/react-template)。
+> 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
 
-[我的项目实例](https://github.com/zhuanglong/react-template/tree/h5)
+[项目地址](https://github.com/zhuanglong/react-template/tree/h5)
 
-H5 模板
+## 移动端 H5 模板
 
-Todo
+![](https://gitee.com/zloooong/image_store/raw/master/img/20210527140651.gif)
 
+## 开发记录
+
+- [x] 组件 Toast
 - [x] webpack 配置优化
-- [ ] 国际化
+- [x] [国际化](https://github.com/zhuanglong/react-i18n-demo/tree/react-intl-demo)
 - [ ] 主题
 - [x] 组件按需加载异常处理
 - [x] 性能优化
@@ -17,8 +20,8 @@ Todo
 - [x] mock
 - [x] 在组件外部控制路由跳转
 - [x] 页面滚动导航栏渐变效果
-- [x] Swiper
-- [x] NavBar
-- [x] 页面标题
-- [x] TabBar
+- [x] 组件 Carousel
+- [x] 组件 NavBar
+- [x] 页面标题跟随路由更换
+- [x] 组件 TabBar
 - [x] 路由配置
