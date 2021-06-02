@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Router, Switch, Route, Redirect
 } from 'react-router-dom';
-import { AliveScope } from 'react-activation';
 
 import { tokenStorage } from '@/storage';
 import history from './history';
@@ -55,13 +54,11 @@ function RouteWithSubRoutes(props) {
 function getRouter() {
   return (
     <Router history={history}>
-      <AliveScope>
-        <Switch>
-          {routes.map((route, index) => (
-            <RouteWithSubRoutes key={index} {...route} />
-          ))}
-        </Switch>
-      </AliveScope>
+      <Switch>
+        {routes.map((route, index) => (
+          <RouteWithSubRoutes key={index} {...route} />
+        ))}
+      </Switch>
     </Router>
   );
 }

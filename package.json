@@ -25,9 +25,9 @@
     "prop-types": "^15.7.2",
     "rc-notification": "^4.5.5",
     "react": "^16.13.1",
-    "react-activation": "^0.9.3",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "react-toastify": "^7.0.4",
     "react-transition-group": "^4.4.1",
     "swiper": "^6.5.6"
   },

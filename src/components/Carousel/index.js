@@ -4,16 +4,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/swiper.min.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'swiper/components/pagination/pagination.min.css';
 
 import './styles.scss';
 
-const prefixCls = 'sru-Slide';
+const prefixCls = 'sru-Carousel';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
-function Slide(props) {
+function Carousel(props) {
   const { imgs = [], ...rest } = props;
   return (
     <Swiper
@@ -36,4 +37,4 @@ function Slide(props) {
   );
 }
 
-export default memo(Slide);
+export default memo(Carousel);

@@ -1,38 +1,37 @@
 :global {
-  $prefixCls: 'sru-Toast';
+  $prefixCls: 'sru-Toast-my';
 
   .#{$prefixCls} {
-    &.Toastify__toast-container {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-      .Toastify__toast {
-        position: absolute;
-        max-width: 50%;
-        max-height: 50%;
-        overflow-y: auto;
-      }
+    > div {
+      max-width: 50%;
     }
 
-    &.#{$prefixCls}-mask {
+    &-mask {
       pointer-events: auto;
     }
 
-    &-content {
+    &-nomask {
+      pointer-events: none;
+    }
+
+    &-notice-content {
       min-width: px2rem(60);
       padding: px2rem(10);
       text-align: center;
       word-break: break-word;
       background-color: rgba(58, 58, 58, 0.9);
       border-radius: px2rem(3);
+      pointer-events: auto;
     }
 
     &-icon {
@@ -47,44 +46,26 @@
     }
 
     // 动画 fade
-    .fadeIn {
-      :local {
-        animation-name: fadeIn;
-        animation-duration: 300ms;
-        animation-fill-mode: both;
-      }
+    &-fade-appear {
+      opacity: 0;
     }
 
-    .fadeOut {
-      :local {
-        animation-name: fadeOut;
-        animation-duration: 300ms;
-        animation-fill-mode: both;
-      }
+    &-fade-appear-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+    &-fade-leave {
+      opacity: 1;
     }
 
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-      }
-
-      to {
-        opacity: 0;
-      }
+    &-fade-leave-active {
+      opacity: 0;
+      transition: opacity 300ms ease-in;
     }
 
     // 动画 zoom
-    .zoomIn {
+    &-zoom-appear {
       :local {
         animation-name: zoomIn;
         animation-duration: 300ms;
@@ -92,7 +73,7 @@
       }
     }
 
-    .zoomOut {
+    &-zoom-leave {
       :local {
         animation-name: zoomOut;
         animation-duration: 300ms;

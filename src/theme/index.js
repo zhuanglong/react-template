@@ -19,6 +19,18 @@ const theme = createMuiTheme({
     background: {
       default: '#fff'
     }
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          backgroundColor: '#f4f5f5'
+        },
+        body: {
+          backgroundColor: 'unset'
+        }
+      }
+    }
   }
 }, zhCN);
 
