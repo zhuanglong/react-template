@@ -1,6 +1,6 @@
-> 本教程基于 [从零搭建 React 项目开发环境](https://github.com/zhuanglong/react-template)。
+> 基于个人搭建的脚手架 [react-template](https://github.com/zhuanglong/react-template) 开发。
 
-[我的项目实例](https://github.com/zhuanglong/react-template/tree/hook)
+[项目地址](https://github.com/zhuanglong/react-template/tree/hook)
 
 Hook 是 React 16.8 版本之后添加的新属性。Hook 就是 React 提供的内置函数，这些函数可以让 Function Component 和 Class Component 一样拥有组件状态以及处理副作用。
 
@@ -88,11 +88,7 @@ useEffect 的第一个参数接收一个函数，用来处理副作用。第二�
 
 useRef 可用来判断组件的挂载和组件的更新状态。
 
-
 ## 参考
 
-- [React Hooks 用法大全](https://www.cnblogs.com/owenma/p/12035619.html)
-
 - [React With Reudx Hooks详解](https://juejin.im/post/6888529255244759047)
-
-- [超详细React Hook实践指南](https://juejin.im/post/6850418117534253069)
+- https://juejin.cn/post/6950063294270930980#heading-22
