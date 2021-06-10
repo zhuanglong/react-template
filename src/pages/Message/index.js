@@ -3,14 +3,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 import NavBar from '@/components/NavBar';
 import toast from '@/components/Toast';
 import history from '@/router/history';
-import * as messageApi from '@/services/message';
+import * as services from '@/services';
 import styles from './styles.scss';
 
 function Message() {
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
-    messageApi.getMessageList().then((res) => {
+    services.getMessageList().then((res) => {
       if (res.code === 0) {
         setMessageList(res.data);
       } else {

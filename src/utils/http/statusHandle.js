@@ -3,14 +3,14 @@ import toast from '@/components/Toast';
 
 export function showLoading(config = {}) {
   // 不传递默认开启 loading
-  if (!config.hideLoading) {
+  if (!config.noLoading) {
     console.log('show loading');
     toast.loading();
   }
 }
 
 export function hideLoading(config = {}) {
-  if (!config.hideLoading) {
+  if (!config.noLoading) {
     console.log('hide loading');
     toast.hide();
   }

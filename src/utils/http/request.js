@@ -1,12 +1,13 @@
 /* eslint-disable no-alert */
 import axios from 'axios';
 
+import appConfig from '@/utils/appConfig';
 import history from '@/router/history';
 import { tokenStorage } from '@/storage';
 import { showLoading, hideLoading, matchHttpStatusCode } from './statusHandle';
 
 const instance = axios.create({
-  baseURL: '/', // 如果使用了代理，请设置成'/'
+  baseURL: appConfig.baseURL, // 如果使用了代理，请设置成'/'
   withCredentials: true,
   timeout: 5000
 });

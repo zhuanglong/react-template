@@ -1,16 +1,14 @@
 import React from 'react';
 
-import * as userApi from '@/services/user';
+import * as services from '@/services';
 import { tokenStorage } from '@/storage';
 import styles from './styles.scss';
 
 function Login(props) {
   const onLogin = () => {
-    userApi.login({
-      data: {
-        phone: '13166668888',
-        password: '123xxx321'
-      }
+    services.login({
+      phone: '13166668888',
+      password: '123xxx321'
     }).then((res) => {
       if (res.code === 0) {
         tokenStorage.set(res.data.token);
