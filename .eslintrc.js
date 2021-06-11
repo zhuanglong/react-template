@@ -29,6 +29,8 @@ module.exports = {
 
   // 自定义规则
   rules: {
+    'no-unused-expressions': 0, // 禁止未使用的表达式
+    'no-underscore-dangle': 0, // 不允许在标识符中使用悬垂下划线
     'no-restricted-syntax': 0, // 禁止使用 for in
     'arrow-body-style': 0,
     'no-param-reassign': 0,

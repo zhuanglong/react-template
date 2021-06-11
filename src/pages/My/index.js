@@ -19,6 +19,21 @@ function My(props) {
     props.history.push('/profile');
   };
 
+  // 取消请求示例
+  // let requestTask;
+  // const getCityjson = () => {
+  //   services.getCityjson({
+
+  //   }, (task) => {
+  //     requestTask = task;
+  //   }).then((res) => {
+  //     alert(res.query);
+  //   });
+  //   setTimeout(() => {
+  //     requestTask && requestTask.abort();
+  //   }, 300);
+  // };
+
   const getCityjson = () => {
     services.getCityjson().then((res) => {
       alert(res.query);

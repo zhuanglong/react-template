@@ -1,4 +1,18 @@
+import axios from 'axios';
+
 import request from '@/utils/http/request';
+
+// 取消请求返参函数
+function axiosCancelToken(executor) {
+  if (typeof executor === 'function') {
+    return {
+      cancelToken: new axios.CancelToken((abort) => {
+        executor({ abort });
+      })
+    };
+  }
+  return null;
+}
 
 // 登录
 export function login(data) {
@@ -37,12 +51,13 @@ export function getMessageList(data) {
 }
 
 // IP
-export function getCityjson(data) {
+export function getCityjson(data, cancelToken) {
   return request({
     // url: 'https://pv.sohu.com/cityjson',
-    url: 'http://ip-api.com/jsons',
+    url: 'http://ip-api.com/json',
     method: 'POST',
     data,
-    noLoading: true
+    // noLoading: true,
+    ...axiosCancelToken(cancelToken)
   });
 }

@@ -49,6 +49,8 @@ instance.interceptors.response.use(
     if (error.response) {
       // 请求已发出，但是不在 2xx 的范围
       alert(matchHttpStatusCode(error.response.status));
+    } else if (error.__CANCEL__) {
+      // 请求任务中断
     } else {
       // 断网或代码异常
       alert('网络异常');

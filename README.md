@@ -8,6 +8,7 @@
 
 ## 开发记录
 
+- [x] http 请求可取消
 - [x] 组件 Toast
 - [x] webpack 配置优化
 - [x] [国际化](https://github.com/zhuanglong/react-i18n-demo/tree/react-intl-demo)
