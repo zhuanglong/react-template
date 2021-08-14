@@ -1895,8 +1895,3 @@ plugins: [
 效果如图：
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210514171204.png)
-
-## 参考
-
-- [从零搭建React全家桶框架教程](https://github.com/brickspert/blog/issues/1)
-- [从0到1开始学习webpack](https://github.com/yangfan-coder/webpack-tutorial)
