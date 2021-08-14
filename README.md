@@ -64,7 +64,7 @@ const Root = styled.div`
 
 经测试，改变 browserslist 规则并没有对 styled-components 生效，但是规则是有的，说明是 styled-components 内置了规则。 
 
-在生产模式下，IE11 和 Edgede 的前缀对比：
+在生产模式下，IE11 和 Edge 的前缀对比：
 
 ![](https://gitee.com/zloooong/image_store/raw/master/img/20210525182747.png)
 
